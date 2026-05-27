@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PerfumAR - Colección</title>
+<!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&amp;family=Hanken+Grotesk:wght@300;400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --bs-body-bg: #f9f9f9;
+            --bs-body-color: #1a1c1c;
+            --primary-black: #000000;
+            --secondary-gray: #5d5f5f;
+            --outline-color: #cfc4c5;
+            --sidebar-width: 280px;
+        }
+
+        body {
+            font-family: 'Hanken Grotesk', sans-serif;
+            background-color: var(--bs-body-bg);
+            color: var(--bs-body-color);
+        }
+
+        h1, h2, h3, h4, .display-lg, .headline-md, .title-sm {
+            font-family: 'Bodoni Moda', serif;
+        }
+
+        .label-caps {
+            font-family: 'Hanken Grotesk', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background-color: #f9f9f9;
+            border-right: 1px solid var(--outline-color);
+            padding: 32px 16px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar .brand-title {
+            font-size: 48px;
+            margin-bottom: 0;
+        }
+
+        .sidebar .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px;
+            color: var(--secondary-gray);
+            opacity: 0.6;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            color: var(--primary-black);
+            opacity: 1;
+        }
+
+        .sidebar .nav-link.active {
+            border-right: 2px solid var(--primary-black);
+            font-weight: 700;
+        }
+
+        /* Main Content Adjustments */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            min-height: 100vh;
+        }
+
+        .top-navbar {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            background: rgba(249, 249, 249, 0.9);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--outline-color);
+            padding: 16px 32px;
+        }
+
+        /* Card Customization */
+        .card-fragrance {
+            border: 1px solid var(--outline-color);
+            border-radius: 0;
+            background: #f9f9f9;
+            transition: border-color 0.5s ease;
+            height: 100%;
+        }
+
+        .card-fragrance:hover {
+            border-color: var(--primary-black);
+        }
+
+        .card-fragrance .card-img-container {
+            height: 400px;
+            overflow: hidden;
+            position: relative;
+            background: #eeeeee;
+        }
+
+        .card-fragrance .card-img-top {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(0.5);
+            transition: all 0.7s ease;
+        }
+
+        .card-fragrance:hover .card-img-top {
+            filter: grayscale(0);
+            transform: scale(1.05);
+        }
+
+        .maceration-badge {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(4px);
+            padding: 4px 12px;
+            border: 1px solid var(--outline-color);
+            font-size: 9px;
+            letter-spacing: 0.2em;
+        }
+
+        /* Search Input */
+        .search-container .form-control {
+            border-radius: 0;
+            background-color: #eeeeee;
+            border-color: var(--outline-color);
+            padding-left: 40px;
+            font-size: 14px;
+        }
+
+        .search-container .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--secondary-gray);
+            font-size: 18px;
+        }
+
+        /* Buttons */
+        .btn-primary-custom {
+            background-color: var(--primary-black);
+            color: #ffffff;
+            border: none;
+            border-radius: 0;
+            padding: 8px 16px;
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: opacity 0.2s;
+        }
+
+        .btn-primary-custom:hover {
+            opacity: 0.7;
+            color: #ffffff;
+        }
+
+        .btn-outline-custom {
+            border: 1px solid rgba(255,255,255,0.3);
+            color: #ffffff;
+            background: transparent;
+            border-radius: 0;
+            width: 100%;
+            padding: 12px;
+            font-size: 11px;
+            letter-spacing: 0.15em;
+        }
+
+        .btn-outline-custom:hover {
+            background: #ffffff;
+            color: var(--primary-black);
+        }
+
+        /* Intensity dots */
+        .intensity-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-left: 4px;
+        }
+        .intensity-dot.filled { background-color: var(--primary-black); }
+        .intensity-dot.empty { background-color: var(--outline-color); }
+
+        /* Featured Section */
+        .featured-box {
+            border: 1px solid var(--outline-color);
+            background: #f9f9f9;
+        }
+
+        .manifesto-box {
+            background-color: var(--primary-black);
+            color: #ffffff;
+        }
+
+        .tag-badge {
+            border: 1px solid var(--outline-color);
+            padding: 4px 12px;
+            font-size: 10px;
+            letter-spacing: 0.15em;
+        }
+    </style>
+</head>
+<body>
+<aside class="sidebar">
+<div class="mb-5">
+<h1 class="brand-title">PerfumAR</h1>
+<p class="text-muted small mb-0">Curated Collection</p>
+</div>
+<div class="search-container position-relative mb-4">
+<span class="material-symbols-outlined search-icon">search</span>
+<input class="form-control" placeholder="Search Collection" type="text"/>
+</div>
+<nav class="nav flex-column flex-grow-1">
+<a class="nav-link active" href="#">
+<span class="material-symbols-outlined">select_all</span>
+<span class="label-caps">All Fragrances</span>
+</a>
+<a class="nav-link" href="#">
+<span class="material-symbols-outlined">bakery_dining</span>
+<span class="label-caps">Citrus</span>
+</a>
+<a class="nav-link" href="#">
+<span class="material-symbols-outlined">forest</span>
+<span class="label-caps">Woody</span>
+</a>
+<a class="nav-link" href="#">
+<span class="material-symbols-outlined">local_florist</span>
+<span class="label-caps">Floral</span>
+</a>
+<a class="nav-link" href="#">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="label-caps">Oriental</span>
+</a>
+</nav>
+<div class="mt-auto pt-3 border-top" style="border-color: rgba(0,0,0,0.05) !important;">
+<a class="nav-link mb-1" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="label-caps">Settings</span>
+</a>
+<a class="nav-link" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="label-caps">Support</span>
+</a>
+</div>
+</aside>
+<main class="main-content">
+<header class="top-navbar d-flex justify-content-between align-items-center">
+<div>
+<span class="h4 mb-0" style="font-family: 'Bodoni Moda';">-</span>
+</div>
+<div class="d-flex align-items-center gap-4">
+<a href="nuevo-perfume" class="btn btn-dark btn-lg">+ Nuevo Perfume</a>
+<div class="d-flex gap-3">
+<button class="btn p-0 border-0 text-secondary"><span class="material-symbols-outlined">notifications</span></button>
+<button class="btn p-0 border-0 text-secondary"><span class="material-symbols-outlined">person</span></button>
+</div>
+</div>
+</header>
+<section class="p-4 p-lg-5">
+<div class="d-flex justify-content-between align-items-baseline mb-5">
+<h2 class="display-5">Colección de Fragancias</h2>
+<span class="text-muted small">12 items en archivo</span>
+</div>
+<div class="row g-4 mb-5">
+<!-- Card 1 -->
+<div class="col-sm-6 col-lg-4 col-xl-3">
+<a href="especificacion" class="text-decoration-none text-reset">
+<div class="card card-fragrance">
+<div class="card-img-container">
+<img alt="Luxury perfume bottle" class="card-img-top" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMQEpdy7dTwcTvMvelJYf8ZO4nJAolGmlG6IyjJaw75ffa0XHev3Gm4HRYSX6Y1QYeTSbXesTM2UlCQc-4vd1rr3qxijVAjYAyrAdtE82dQc7oViipy7nq-xuZpYgpBgv_KHkVfFKy0z2mn8DitQuWku5zJ6gELieFUgy9YJYYT6eUcEsvR5Odr4TR8h0e90ODZr7-q9oR7zLfcTUqN8vmLju2RmRU6t4eIHizc_gYD80OLTDB77SbH4KuRetDiSnTKxscIlVoTQjZ"/>
+<div class="maceration-badge d-flex align-items-center gap-2">
+<span class="material-symbols-outlined" style="font-size: 14px;">hourglass_empty</span>
+<span class="label-caps" style="font-size: 9px;">Proceso de maceración</span>
+</div>
+</div>
+<div class="card-body d-flex flex-column">
+<p class="label-caps text-muted mb-1">OUD &amp; BERGAMOT</p>
+<h3 class="h5" style="font-family: 'Bodoni Moda';">Nocturnal Drift</h3>
+<div class="mt-auto pt-2 border-top d-flex justify-content-between align-items-center" style="border-color: rgba(0,0,0,0.05) !important;">
+<span class="small">Intensidad</span>
+<div class="d-flex">
+<span class="intensity-dot filled"></span>
+<span class="intensity-dot filled"></span>
+<span class="intensity-dot filled"></span>
+<span class="intensity-dot empty"></span>
+<span class="intensity-dot empty"></span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Card 2 -->
+<div class="col-sm-6 col-lg-4 col-xl-3">
+<div class="card card-fragrance">
+<div class="card-img-container">
+<img alt="Minimalist fragrance" class="card-img-top" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWEmX0yx2NNruk2u5abMs6Z0QKPdQFCZJB50NZo7aA6C9Xwrxs1mquJflXcJXf6eXgewQ9VuqN0tHIDs70Od5MP6Rrf6NNz_jHiUHco-Q4EX6kokRPH2Sc3v4JXkCDghHuF0bWWuB2qotCcesXPXru5BRAgUPVJwKFWAVHtBiy6KfglhJ1tiLN8UEGsRV8kTXXkelQytLDjvn9uatM9cX8Yy8O1UPdnA40IkCCozGRBKrhNXnyP1M0fhau_8VjC8lBer1rYas0I5kn"/>
+</div>
+<div class="card-body">
+<p class="label-caps text-muted mb-1">FLORAL ALDEHYDIC</p>
+<h3 class="h5" style="font-family: 'Bodoni Moda';">Velvet Petals</h3>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="col-sm-6 col-lg-4 col-xl-3">
+<div class="card card-fragrance">
+<div class="card-img-container">
+<img alt="Deep woody scent" class="card-img-top" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoAIiiUuAGudkR9e95EXb_TA0gtLu0ps_pueTBg4uEPWhWDwDGOJkJI7-R0KhEKlr8GrxqkVbOcOxBLJufr50ENiM48uDMaZu6DHoEdO7iG9V6srjTipgOvjTercvmPw7gFidjXCuBIrAdmir_CK8OncMOaS1gRLk--UZVs-0p4iGdz4A_Kn0mQvUcV3KtNlFe1C44IHnsFHAietg70hLl815B7JS1g47qx15tKwV7CfK1p5bYAg6nPVXLZNdZcuGdeP9l4SzGemm5"/>
+</div>
+<div class="card-body">
+<p class="label-caps text-muted mb-1">WOODY SPICY</p>
+<h3 class="h5" style="font-family: 'Bodoni Moda';">Sandalwood Smoke</h3>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="col-sm-6 col-lg-4 col-xl-3">
+<div class="card card-fragrance">
+<div class="card-img-container">
+<img alt="Citrus fresh perfume" class="card-img-top" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuYfZ7RoAnrMOFeKnVfqgoMu4YkWobGx2_L6IsHNqBu6kL6GHzrt0tMQeE-nGiLkbwV9gz59PPSZYkK_4pV28DWP-M6XjoDg5vYBq-7VWNduKxb8IfJTPOaqbtbZ_zpX8XU_RNdXeBbdA6HrQXUtK9FpXd0YlSX9jjf00pKPQ0tNqZd0Dy4pfBxPEp0fQliBffI9J0NE9f8xgfRnuH63lsEkLS63Qem_j40ErqKPvgQL-9XPHDWqIczv5rStxeDqaZGL6s4U1H-6Aa"/>
+</div>
+<div class="card-body">
+<p class="label-caps text-muted mb-1">CITRUS AQUATIC</p>
+<h3 class="h5" style="font-family: 'Bodoni Moda';">Lumière d'Agrumes</h3>
+</div>
+</div>
+</div>
+</div>
+<div class="row g-4 mt-5">
+<div class="col-lg-8">
+<div class="featured-box p-4 p-md-5 h-100 d-flex flex-column flex-md-row gap-4">
+<div class="flex-shrink-0" style="width: 200px; height: 200px;">
+<img alt="Scent mist detail" class="w-100 h-100 object-fit-cover border" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALiwX1Q4mQ6yK0ecJ63wve5cFtle8sYqUWReq9ptmGXYnPoATJaGRirZCAoEflRqGSTfxZ6F04RfFmYq0egJPxZ1XZA9BdJcL3_vLKdT8qtJrLYUl4s5CxgvC-ACkHSBJPFQrYP086SVo2b-xclJ9KZGP_q0fZSWExUuk9Papbpm_DEp0UaXypNGk5xsmXOuQCLTOVeX-mtfQkPGdXI3G8dJIdkA8eMVcztKNNYTH53SV7bT9zUlTgXm04-fx1pGL50N6Jk-o_qe84"/>
+</div>
+<div class="d-flex flex-column justify-content-center">
+<p class="label-caps text-muted mb-1">FRAGANCIA DESTACADA</p>
+<h3 class="display-6 mb-3">Amber Eternal</h3>
+<p class="text-muted mb-4" style="line-height: 1.6;">Una exploración profunda de las notas resinosas, Amber Eternal equilibra la calidez del benjuí con la frescura inesperada del cardamomo. Una pieza central para cualquier archivo serio.</p>
+<div class="d-flex gap-2">
+<span class="tag-badge label-caps">INCIENSO</span>
+<span class="tag-badge label-caps">VAINILLA</span>
+<span class="tag-badge label-caps">ÁMBAR</span>
+</div>
+</div>
+</div>
+</div>
+<div class="col-lg-4">
+<div class="manifesto-box p-4 p-md-5 h-100 d-flex flex-column justify-content-between">
+<div>
+<p class="label-caps text-white-50 mb-2">NOTAS DEL ARCHIVISTA</p>
+<p class="h4 text-white fst-italic">"El perfume es el arte que hace hablar a la memoria."</p>
+</div>
+<button class="btn btn-outline-custom mt-4">LEER MANIFIESTO</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body></html>

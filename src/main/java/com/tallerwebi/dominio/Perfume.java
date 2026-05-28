@@ -1,10 +1,6 @@
 package com.tallerwebi.dominio;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class Perfume {
@@ -17,6 +13,7 @@ public class Perfume {
   private String marca;
   private String urlAfiliado;
 
+  @JoinColumn(name = "familia_id")
   @ManyToOne
   private FamiliaOlfativa familia;
 

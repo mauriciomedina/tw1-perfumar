@@ -3,6 +3,7 @@ package com.tallerwebi.presentacion;
 import com.tallerwebi.dominio.ServicioColeccion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,5 +40,13 @@ public class ControladorPerfume {
 
     // Redirigimos al dashboard principal
     return new ModelAndView("redirect:/home");
+  }
+
+  @RequestMapping("/listar-perfumes")
+  public ModelAndView listarPerfumes() {
+    ModelMap modelo = new ModelMap();
+    modelo.put("mensaje", "nuevo perfume");
+    modelo.put("perfumes", servicioColeccion.listar());
+    return new ModelAndView("listar-perfumes", modelo);
   }
 }

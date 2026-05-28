@@ -24,9 +24,3 @@ hs_err_pid*
 
 # Reportes de codigo limpio y cobertura de pruebas
 .calidad-de-codigo/
-
-# Archivos que quiero ignorar
-DockerfileSQL
-docker-compose.yml
-HibernateConfig.java
-ReiniciarDB.java

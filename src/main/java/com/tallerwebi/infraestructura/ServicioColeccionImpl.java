@@ -6,6 +6,7 @@ import com.tallerwebi.dominio.RepositorioColeccion;
 import com.tallerwebi.dominio.ServicioColeccion;
 import com.tallerwebi.presentacion.DatosPerfume;
 import java.time.LocalDate;
+import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,5 +54,10 @@ public class ServicioColeccionImpl implements ServicioColeccion {
 
     // Guardamos el registro en la tabla intermedia de inventario
     repositorioColeccion.guardarColeccion(itemColeccion);
+  }
+
+  @Override
+  public List<Perfume> listar() {
+    return this.repositorioColeccion.listar();
   }
 }

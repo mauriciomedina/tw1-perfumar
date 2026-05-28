@@ -1,4 +1,4 @@
-package com.tallerwebi.config;
+package com.tallerwebi.infraestructura.config;
 
 import java.util.Properties;
 import javax.sql.DataSource;
@@ -11,35 +11,15 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-public class HibernateConfig {
+public class HibernateInfraestructuraTestConfig {
 
   @Bean
   public DataSource dataSource() {
     DriverManagerDataSource dataSource = new DriverManagerDataSource();
-
-    String dbHost = System.getenv("DB_HOST");
-    String dbPort = System.getenv("DB_PORT");
-    String dbName = System.getenv("DB_NAME");
-    String dbUser = System.getenv("DB_USER");
-    String dbPassword = System.getenv("DB_PASSWORD");
-
-    if (dbHost == null) dbHost = "localhost";
-    if (dbPort == null) dbPort = "3308";
-    if (dbName == null) dbName = "tallerwebi";
-    if (dbUser == null) dbUser = "user";
-    if (dbPassword == null) dbPassword = "user";
-
-    String url = String.format(
-      "jdbc:mysql://%s:%s/%s?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true",
-      dbHost,
-      dbPort,
-      dbName
-    );
-
-    dataSource.setUrl(url);
-    dataSource.setUsername(dbUser);
-    dataSource.setPassword(dbPassword);
-    dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+    dataSource.setDriverClassName("org.hsqldb.jdbcDriver");
+    dataSource.setUrl("jdbc:hsqldb:mem:db_");
+    dataSource.setUsername("sa");
+    dataSource.setPassword("");
     return dataSource;
   }
 
@@ -59,13 +39,10 @@ public class HibernateConfig {
 
   private Properties hibernateProperties() {
     Properties properties = new Properties();
-    properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL57Dialect");
+    properties.setProperty("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
     properties.setProperty("hibernate.show_sql", "true");
     properties.setProperty("hibernate.format_sql", "true");
     properties.setProperty("hibernate.hbm2ddl.auto", "create");
-    properties.setProperty("hibernate.connection.characterEncoding", "utf8");
-    properties.setProperty("hibernate.connection.CharSet", "utf8");
-    properties.setProperty("hibernate.connection.useUnicode", "true");
     return properties;
   }
 }

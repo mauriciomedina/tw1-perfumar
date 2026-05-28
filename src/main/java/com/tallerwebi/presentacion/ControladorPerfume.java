@@ -39,7 +39,7 @@ public class ControladorPerfume {
     servicioColeccion.guardar(datosPerfume);
 
     // Redirigimos al dashboard principal
-    return new ModelAndView("redirect:/listar-perfumes");
+    return new ModelAndView("redirect:/home");
   }
 
   @RequestMapping("/listar-perfumes")

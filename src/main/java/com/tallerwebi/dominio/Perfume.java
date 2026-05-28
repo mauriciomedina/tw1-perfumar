@@ -1,9 +1,6 @@
 package com.tallerwebi.dominio;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Perfume {
@@ -13,7 +10,12 @@ public class Perfume {
   private Long id;
 
   private String nombre;
-  private String tipo;
+  private String marca;
+  private String urlAfiliado;
+
+  @JoinColumn(name = "familia_id")
+  @ManyToOne
+  private FamiliaOlfativa familia;
 
   public Long getId() {
     return id;
@@ -31,11 +33,27 @@ public class Perfume {
     this.nombre = nombre;
   }
 
-  public String getTipo() {
-    return tipo;
+  public String getMarca() {
+    return marca;
   }
 
-  public void setTipo(String tipo) {
-    this.tipo = tipo;
+  public void setMarca(String marca) {
+    this.marca = marca;
+  }
+
+  public String getUrlAfiliado() {
+    return urlAfiliado;
+  }
+
+  public void setUrlAfiliado(String urlAfiliado) {
+    this.urlAfiliado = urlAfiliado;
+  }
+
+  public FamiliaOlfativa getFamilia() {
+    return familia;
+  }
+
+  public void setFamilia(FamiliaOlfativa familia) {
+    this.familia = familia;
   }
 }

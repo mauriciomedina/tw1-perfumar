@@ -10,18 +10,37 @@ import org.junit.jupiter.api.Test;
 public class EntidadesTest {
 
   @Test
-  public void queSePuedanAsignarYObtenerDatosDePerfumeYColeccion() {
-    // 1. Probamos la entidad Perfume
+  public void queSePuedaAsignarYObtenerDatosDeFamiliaOlfativa() {
+    FamiliaOlfativa familia = new FamiliaOlfativa();
+    familia.setId(1L);
+    familia.setNombre("Amaderada");
+
+    assertEquals(1L, familia.getId());
+    assertThat(familia.getNombre(), equalToIgnoringCase("Amaderada"));
+  }
+
+  @Test
+  public void queSePuedaAsignarYObtenerDatosDePerfume() {
+    FamiliaOlfativa familia = new FamiliaOlfativa();
+    familia.setId(1L);
+
     Perfume perfume = new Perfume();
     perfume.setId(1L);
     perfume.setNombre("Fahrenheit");
     perfume.setMarca("Dior");
+    perfume.setFamilia(familia);
 
     assertEquals(1L, perfume.getId());
     assertThat(perfume.getNombre(), equalToIgnoringCase("Fahrenheit"));
     assertThat(perfume.getMarca(), equalToIgnoringCase("Dior"));
+    assertNotNull(perfume.getFamilia());
+  }
 
-    // 2. Probamos la entidad Coleccion
+  @Test
+  public void queSePuedaAsignarYObtenerDatosDeColeccion() {
+    Perfume perfume = new Perfume();
+    perfume.setId(1L);
+
     Coleccion coleccion = new Coleccion();
     coleccion.setId(1L);
     coleccion.setPerfume(perfume);
@@ -32,5 +51,21 @@ public class EntidadesTest {
     assertNotNull(coleccion.getPerfume());
     assertTrue(coleccion.getEnMaceracion());
     assertEquals(LocalDate.parse("2024-01-01"), coleccion.getFechaInicioMaceracion());
+  }
+
+  @Test
+  public void queSePuedaAsignarYObtenerDatosDeUsuario() {
+    Usuario usuario = new Usuario();
+    usuario.setId(1L);
+    usuario.setEmail("test@unlam.edu.ar");
+    usuario.setPassword("1234");
+    usuario.setRol("ADMIN");
+    usuario.setActivo(true);
+
+    assertEquals(1L, usuario.getId());
+    assertThat(usuario.getEmail(), equalToIgnoringCase("test@unlam.edu.ar"));
+    assertThat(usuario.getPassword(), equalToIgnoringCase("1234"));
+    assertThat(usuario.getRol(), equalToIgnoringCase("ADMIN"));
+    assertTrue(usuario.getActivo());
   }
 }

@@ -5,8 +5,6 @@ import static org.hamcrest.text.IsEqualIgnoringCase.equalToIgnoringCase;
 import static org.mockito.Mockito.*;
 
 import com.tallerwebi.dominio.ServicioColeccion;
-import com.tallerwebi.presentacion.ControladorPerfume;
-import com.tallerwebi.presentacion.DatosPerfume;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class ControladorPerfumeTest {
 
   private ControladorPerfume controladorPerfume;
-  private ServicioColeccion servicioColeccionMock; // Nuestro actor de doble de riesgo
+  private ServicioColeccion servicioColeccionMock;
 
   @BeforeEach
   public void init() {

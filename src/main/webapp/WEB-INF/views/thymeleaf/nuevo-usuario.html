@@ -4,51 +4,112 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <title>Taller Web I</title>
-
-  <!-- Boostrap core css -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-
-  <!-- custom style -->
+  <title>PerfumAR</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400..900;1,400..900&amp;family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;display=swap"
+    rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" th:href="@{/css/main.css}" />
 
 </head>
 
 <body>
+  <!-- Header -->
+  <nav class="navbar navbar-expand-md sticky-top">
+    <div class="container-fluid px-lg-4">
 
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="#">UNLAM</a>
+      <div class="col-12 d-flex justify-content-center">
+        <a class="brand-logo" href="#">PerfumAR<br></a>
+      </div>
+
+    </div>
   </nav>
-
-  <main role="main" class="container">
-
+  <!-- Main Registration Section -->
+  <main class="flex-grow-1 d-flex align-items-center position-relative py-5">
+    <img alt="" class="atmospheric-bg"
+      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCY_zPKbX1-ct5iAblGiQT9_Ig0wZRFX81Ue8Qc_zI3cjI26Y94l0M60v2ZGTEAS6v8CZ5NM6DPPTWN1nXNY4PiKidbgeoL9OHj4PLr4DzwkBuhdVduJ_LDWRN4Ycz-ve-W2hnEkbPP0f9e0k8AgZ6g1clf_b-Mk0V_vXiMexueG1XP2lwMLl2vJlCCjWEZtQpIMfF47Hh3wx9HP5i9XWVIk61dqpx3pjvegvuKSOcyIXF5a8YbWQhaBf7ynQYj7Gyuqz1jpslN3yQ">
     <div class="container">
-      <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+      <div class="registration-card">
+        <div class="text-center mb-5">
+          <h2 class="font-display h1 mb-2">Únete a PerfumAR</h2>
+          <p class="form-label-caps m-0 text-secondary" style="font-size: 12px;">Comienza tu viaje curado</p>
+        </div>
         <form action="#" th:action="@{/registrarme}" method="POST" th:object="${usuario}">
-          <h3 class="form-signin-heading">Nuevo Usuario</h3>
-          <hr class="colorgraph"><br>
-
-          <input th:field="*{email}" id="email" class="form-control" required />
-          <input th:field="*{password}" type="password" id="password" class="form-control" required />
-
-          <button id="btn-registrarme" class="btn btn-lg btn-primary btn-block" Type="Submit">Registrarme</button>
-          <p th:if="${error != null}" class="alert alert-danger" th:text="'Error ' + ${error}">
+          <div class="mb-4">
+            <label class="form-label-caps">Nombre de Usuario</label>
+            <input class="form-control input-minimal" placeholder="Enter your username" type="text">
+          </div>
+          <div class="mb-4">
+            <label class="form-label-caps">Correo Electrónico</label>
+            <input class="form-control input-minimal" placeholder="email@essencearchive.com" type="email"
+              th:field="*{email}" id="email" required>
+          </div>
+          <div class="row g-4 mb-4">
+            <div class="col-md-6">
+              <label class="form-label-caps">Contraseña</label>
+              <input class="form-control input-minimal" placeholder="••••••••" type="password" th:field="*{password}"
+                id="password" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label-caps">Confirmar Contraseña</label>
+              <input class="form-control input-minimal" placeholder="••••••••" type="password">
+            </div>
+          </div>
+          <div class="mb-4">
+            <label class="form-label-caps">Ciudad</label>
+            <input class="form-control input-minimal" placeholder="Your current location" type="text">
+          </div>
+          <button class="btn btn-luxury mb-4" type="submit" id="btn-registrarme">CREAR CUENTA</button>
+          <p th:if="${error != null}" class="alert alert-danger" th:text="'Error: ' + ${error}">
           </p>
         </form>
-
+        <div class="text-center">
+          <p class="font-body-lg text-secondary m-0">
+            ¿Ya eres miembro?
+            <a class="font-label-caps text-dark ms-2 text-decoration-none border-bottom border-dark pb-1"
+              id="btn-register" href="login">INICIA SESIÓN</a>
+          </p>
+        </div>
       </div>
     </div>
-
   </main>
-  <!-- /.container -->
+  <!-- Footer -->
+  <footer>
+    <div class="container-fluid px-lg-4">
+      <div class="row align-items-center">
+        <div class="col-md-6 text-center text-md-start mb-4 mb-md-0">
 
-  <!-- Boostrap core js -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-    crossorigin="anonymous"></script>
+          <p class="form-label-caps m-0">© 2026 PerfumAR. All rights reserved.</p>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <div class="d-flex flex-column flex-md-row justify-content-md-end gap-3 gap-md-4">
 
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const card = document.querySelector('.registration-card');
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      card.style.transition = 'opacity 1s ease, transform 1s cubic-bezier(0.16, 1, 0.3, 1)';
+
+      setTimeout(() => {
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      }, 100);
+    });
+  </script>
 </body>
 
 </html>

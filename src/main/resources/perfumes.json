@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "nombre": "Sauvage",
+    "marca": "Dior",
+    "familiaOlfativa": "Fougère",
+    "descripcion": "Una composición rotundamente fresca, dictada por un nombre que suena como un manifiesto.",
+    "notas": "Bergamota de Calabria, Pimienta de Sichuan, Ambroxan",
+    "imagenUrl": "/img/perfumes/sauvage.jpg"
+  },
+  {
+    "id": 2,
+    "nombre": "Fahrenheit",
+    "marca": "Dior",
+    "familiaOlfativa": "Amaderada",
+    "descripcion": "Un perfume caracterizado por un encuentro de extremos, con notas florales y de cuero.",
+    "notas": "Violeta, Cuero, Mandarina, Cedro",
+    "imagenUrl": "/img/perfumes/fahrenheit.jpg"
+  },
+  {
+    "id": 3,
+    "nombre": "Bleu de Chanel",
+    "marca": "Chanel",
+    "familiaOlfativa": "Amaderada",
+    "descripcion": "Elogio de la libertad masculina en un perfume amaderado aromático de estela cautivadora.",
+    "notas": "Toronja, Menta, Incienso, Jengibre",
+    "imagenUrl": "/img/perfumes/bleu-chanel.jpg"
+  },
+  {
+    "id": 4,
+    "nombre": "Acqua di Giò",
+    "marca": "Giorgio Armani",
+    "familiaOlfativa": "Cítrica",
+    "descripcion": "Fragancia mítica, fresca y acuática que evoca la brisa del mar Mediterráneo.",
+    "notas": "Notas Marinas, Bergamota, Jazmín, Caqui",
+    "imagenUrl": "/img/perfumes/acqua-gio.jpg"
+  },
+  {
+    "id": 5,
+    "nombre": "1 Million",
+    "marca": "Paco Rabanne",
+    "familiaOlfativa": "Oriental",
+    "descripcion": "El perfume del éxito. Una fragancia atrevida con notas de cuero y oro.",
+    "notas": "Mandarina sangrienta, Canela, Cuero, Ámbar",
+    "imagenUrl": "/img/perfumes/one-million.jpg"
+  },
+  {
+    "id": 6,
+    "nombre": "Eros",
+    "marca": "Versace",
+    "familiaOlfativa": "Fougère",
+    "descripcion": "Fragancia para un hombre fuerte, apasionado y dueño de sí mismo, inspirada en la mitología griega.",
+    "notas": "Menta, Manzana Verde, Tonka, Vainilla",
+    "imagenUrl": "/img/perfumes/eros.jpg"
+  },
+  {
+    "id": 7,
+    "nombre": "Good Girl",
+    "marca": "Carolina Herrera",
+    "familiaOlfativa": "Oriental",
+    "descripcion": "Una fragancia audaz y sofisticada, inspirada en la visión de la dualidad de la mujer moderna.",
+    "notas": "Almendra, Café, Nardo, Habá Tonka, Cacao",
+    "imagenUrl": "/img/perfumes/good-girl.jpg"
+  },
+  {
+    "id": 8,
+    "nombre": "Le Male",
+    "marca": "Jean Paul Gaultier",
+    "familiaOlfativa": "Oriental",
+    "descripcion": "Tan viril como sexy, rinde homenaje a la figura mítica que siempre ha inspirado al diseñador: el marinero.",
+    "notas": "Lavanda, Menta, Canela, Vainilla",
+    "imagenUrl": "/img/perfumes/le-male.jpg"
+  },
+  {
+    "id": 9,
+    "nombre": "Invictus",
+    "marca": "Paco Rabanne",
+    "familiaOlfativa": "Amaderada",
+    "descripcion": "El aroma de la victoria, la esencia de los héroes. Una descarga de frescura extrema y calidez amaderada.",
+    "notas": "Toronja, Notas Marinas, Hoja de Laurel, Madera de Guayaco",
+    "imagenUrl": "/img/perfumes/invictus.jpg"
+  },
+  {
+    "id": 10,
+    "nombre": "Black Orchid",
+    "marca": "Tom Ford",
+    "familiaOlfativa": "Oriental",
+    "descripcion": "Una fragancia lujosa y sensual de notas oscuras con una atractiva poción de orquídeas negras y especias.",
+    "notas": "Trufa Negra, Orquídea Negra, Parchelí, Ciruela",
+    "imagenUrl": "/img/perfumes/black-orchid.jpg"
+  },
+  {
+    "id": 11,
+    "nombre": "Aventus",
+    "marca": "Creed",
+    "familiaOlfativa": "Frutal",
+    "descripcion": "Una fragancia excepcional que celebra la fuerza, el poder y el éxito, inspirada en la vida de un emperador.",
+    "notas": "Piña, Bergamota, Abedul, Almizcle",
+    "imagenUrl": "/img/perfumes/aventus.jpg"
+  },
+  {
+    "id": 12,
+    "nombre": "Y Eau de Parfum",
+    "marca": "Yves Saint Laurent",
+    "familiaOlfativa": "Fougère",
+    "descripcion": "Una interpretación intensa de la icónica camiseta blanca y la chaqueta negra de YSL.",
+    "notas": "Manzana, Jengibre, Salvia, Madera de Ámbar",
+    "imagenUrl": "/img/perfumes/ysl-y.jpg"
+  },
+  {
+    "id": 13,
+    "nombre": "Armani Code",
+    "marca": "Giorgio Armani",
+    "familiaOlfativa": "Oriental",
+    "descripcion": "Una fragancia sofisticada y seductora para un hombre carismático.",
+    "notas": "Limón, Flor de Olivo, Habá Tonka, Cuero",
+    "imagenUrl": "/img/perfumes/armani-code.jpg"
+  },
+  {
+    "id": 14,
+    "nombre": "La Nuit de L'Homme",
+    "marca": "Yves Saint Laurent",
+    "familiaOlfativa": "Oriental",
+    "descripcion": "Una historia de seducción, intensidad y audaz sensualidad en una noche urbana.",
+    "notas": "Cardamomo, Bergamota, Cedro, Alcaravea",
+    "imagenUrl": "/img/perfumes/la-nuit.jpg"
+  },
+  {
+    "id": 15,
+    "nombre": "The One For Men",
+    "marca": "Dolce & Gabbana",
+    "familiaOlfativa": "Oriental",
+    "descripcion": "Una fragancia elegante, sensual, decididamente moderna pero también un clásico único.",
+    "notas": "Cilantro, Albahaca, Jengibre, Tabaco",
+    "imagenUrl": "/img/perfumes/the-one.jpg"
+  },
+  {
+    "id": 16,
+    "nombre": "Light Blue",
+    "marca": "Dolce & Gabbana",
+    "familiaOlfativa": "Cítrica",
+    "descripcion": "La alegría de vivir la vida idílica del mar Mediterráneo plasmada en una esencia fresca.",
+    "notas": "Limón de Sicilia, Manzana, Bambú, Almizcle",
+    "imagenUrl": "/img/perfumes/light-blue.jpg"
+  },
+  {
+    "id": 17,
+    "nombre": "Bad Boy",
+    "marca": "Carolina Herrera",
+    "familiaOlfativa": "Oriental",
+    "descripcion": "Una expresión fragante de la dualidad del hombre contemporáneo, audaz y sensible.",
+    "notas": "Pimienta Blanca, Pimienta Negra, Bergamota, Cacao",
+    "imagenUrl": "/img/perfumes/bad-boy.jpg"
+  },
+  {
+    "id": 18,
+    "nombre": "Ultra Male",
+    "marca": "Jean Paul Gaultier",
+    "familiaOlfativa": "Oriental",
+    "descripcion": "El marinero pícaro con el que se va a pique el corazón. Una batalla olfativa entre poder y gourmandise.",
+    "notas": "Pera, Menta, Canela, Vainilla Negra",
+    "imagenUrl": "/img/perfumes/ultra-male.jpg"
+  },
+  {
+    "id": 19,
+    "nombre": "Dylan Blue",
+    "marca": "Versace",
+    "familiaOlfativa": "Fougère",
+    "descripcion": "Una fragancia intensamente masculina que encapsula los aromas sensuales del Mediterráneo.",
+    "notas": "Notas Acuáticas, Bergamota, Hojas de Higuera, Papiro",
+    "imagenUrl": "/img/perfumes/dylan-blue.jpg"
+  },
+  {
+    "id": 20,
+    "nombre": "Oud Wood",
+    "marca": "Tom Ford",
+    "familiaOlfativa": "Amaderada",
+    "descripcion": "Una de las maderas más raras, preciosas y caras del arsenal de un perfumista, a menudo quemada en los templos.",
+    "notas": "Madera de Oud, Palo de Rosa, Cardamomo, Sándalo",
+    "imagenUrl": "/img/perfumes/oud-wood.jpg"
+  }
+]

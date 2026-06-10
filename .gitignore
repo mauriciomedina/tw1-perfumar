@@ -24,3 +24,7 @@ hs_err_pid*
 
 # Reportes de codigo limpio y cobertura de pruebas
 .calidad-de-codigo/
+
+# Cambios locales
+.env
+pom.xml

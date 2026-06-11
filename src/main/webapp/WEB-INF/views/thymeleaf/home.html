@@ -12,214 +12,155 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" th:href="@{/css/main.css}" />
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+  <script type="module" th:src="@{/js/clima.js}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
-<aside class="sidebar">
-  <div class="mb-5">
-    <h1 class="brand-title">PerfumAR</h1>
-    <p class="text-muted small mb-0">Colección Exclusiva</p>
-  </div>
-  <div class="search-container position-relative mb-4">
-    <span class="material-symbols-outlined search-icon">search</span>
-    <input class="form-control" placeholder="Buscar fragancia..." type="text"/>
-  </div>
-  <nav class="nav flex-column flex-grow-1">
-    <a class="nav-link active" href="#">
-      <span class="material-symbols-outlined">select_all</span>
-      <span class="label-caps">Todas las Fragancias</span>
-    </a>
-    <a class="nav-link" href="#">
-      <span class="material-symbols-outlined">bakery_dining</span>
-      <span class="label-caps">Cítricas</span>
-    </a>
-    <a class="nav-link" href="#">
-      <span class="material-symbols-outlined">forest</span>
-      <span class="label-caps">Amaderadas</span>
-    </a>
-    <a class="nav-link" href="#">
-      <span class="material-symbols-outlined">local_florist</span>
-      <span class="label-caps">Florales</span>
-    </a>
-    <a class="nav-link" href="#">
-      <span class="material-symbols-outlined">auto_awesome</span>
-      <span class="label-caps">Orientales</span>
-    </a>
-  </nav>
-  <div class="mt-auto pt-3 border-top" style="border-color: rgba(0,0,0,0.05) !important;">
-    <a class="nav-link mb-1" href="#">
-      <span class="material-symbols-outlined">settings</span>
-      <span class="label-caps">Configuración</span>
-    </a>
-    <a class="nav-link" href="#">
-      <span class="material-symbols-outlined">help_outline</span>
-      <span class="label-caps">Ayuda</span>
-    </a>
-  </div>
-</aside>
-<main class="main-content">
-  <header class="top-navbar d-flex justify-content-between align-items-center">
-    <div>
-      <span class="h4 mb-0" style="font-family: 'Bodoni Moda';">-</span>
+
+  <aside class="sidebar">
+    <div class="mb-5">
+      <h1 class="brand-title">PerfumAR</h1>
+      <p class="text-muted small mb-0">Colección Exclusiva</p>
     </div>
     <div class="search-container position-relative mb-4">
       <span class="material-symbols-outlined search-icon">search</span>
-      <input class="form-control" placeholder="Search Collection" type="text" />
+      <input class="form-control" placeholder="Buscar fragancia..." type="text" />
     </div>
     <nav class="nav flex-column flex-grow-1">
       <a class="nav-link active" href="#">
         <span class="material-symbols-outlined">select_all</span>
-        <span class="label-caps">All Fragrances</span>
+        <span class="label-caps">Todas las Fragancias</span>
       </a>
       <a class="nav-link" href="#">
         <span class="material-symbols-outlined">bakery_dining</span>
-        <span class="label-caps">Citrus</span>
+        <span class="label-caps">Cítricas</span>
       </a>
       <a class="nav-link" href="#">
         <span class="material-symbols-outlined">forest</span>
-        <span class="label-caps">Woody</span>
+        <span class="label-caps">Amaderadas</span>
       </a>
       <a class="nav-link" href="#">
         <span class="material-symbols-outlined">local_florist</span>
-        <span class="label-caps">Floral</span>
+        <span class="label-caps">Florales</span>
       </a>
       <a class="nav-link" href="#">
         <span class="material-symbols-outlined">auto_awesome</span>
-        <span class="label-caps">Oriental</span>
+        <span class="label-caps">Orientales</span>
       </a>
     </nav>
     <div class="mt-auto pt-3 border-top" style="border-color: rgba(0,0,0,0.05) !important;">
       <a class="nav-link mb-1" href="#">
         <span class="material-symbols-outlined">settings</span>
-        <span class="label-caps">Settings</span>
+        <span class="label-caps">Configuración</span>
       </a>
       <a class="nav-link" href="#">
         <span class="material-symbols-outlined">help_outline</span>
-        <span class="label-caps">Support</span>
+        <span class="label-caps">Ayuda</span>
       </a>
     </div>
   </aside>
-  <main class="main-content">
-    <header class="header-nav">
-      <div class="d-flex align-items-center gap-4">
-        <div class="d-flex align-items-center gap-2 text-muted">
-          <span class="material-symbols-outlined fs-6">light_mode</span>
-          <span id="currentWeather" class="label-caps" style="font-size: 10px;">Elije tu ciudad</span>
-        </div>
-            <input type="text" id="cityInput" placeholder="Ciudad">
-            <input type="text" id="countryInput" placeholder="Pais">
-            <button id="getWeatherBtn">Buscar</button>
-            <div id="weather-info"></div>
-        <div class="search-container">
-          <span class="material-symbols-outlined text-muted">search</span>
-          <input class="search-input" placeholder="Search Collection" type="text">
-        </div>
+
+  <header class="header-nav">
+    <div class="d-flex align-items-center gap-4">
+      <div class="d-flex align-items-center gap-2 text-muted">
+        <span class="material-symbols-outlined fs-6">light_mode</span>
+        <span id="currentWeather" class="label-caps" style="font-size: 10px;">Elije tu ciudad</span>
+      </div>
+      <input type="text" id="cityInput" placeholder="Ciudad">
+      <input type="text" id="countryInput" placeholder="Pais">
+      <button id="getWeatherBtn">Buscar</button>
+      <div id="weather-info"></div>
+      <div class="search-container">
+        <span class="material-symbols-outlined text-muted">search</span>
+        <input class="search-input" placeholder="Search Collection" type="text">
+      </div>
+    </div>
+    <div class="d-flex align-items-center gap-4">
+      <a class="btn btn-link text-decoration-none text-dark p-0 label-caps" href="nuevo-perfume">+ Nuevo Perfume</a>
+      <a class="btn btn-link text-decoration-none text-dark p-0 label-caps" href="listar-perfumes">Listado</a>
+      <div class="d-flex align-items-center gap-3">
+        <button class="btn btn-link text-dark p-0">
+          <span class="material-symbols-outlined">notifications</span>
+        </button>
+        <img alt="User" class="profile-img"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-hCBPLDM6m57yvuLe1u5ciOv0x9VbZoULYc6VvS2TtT4iVqeE9Xg-f7-vh2TLEFauUY7ODhttOKI-_RGUjJS1vPcMoteTz9xMDN-ZDsQiYaiV8LDryBpLllQzB-UJO7U-SHGEhKl5Cj2J4EnDoOKsps4YcJk1T62ceEph54Ia6rKSS-Og-E3IjQAUZFB8S-tUoeXOGasnseoqd6vNFoCHa2OThY7lReGnc4FY5jDBzuluNJ9Wxj-rouq7rsng9CmTyvJF6FhULgjV">
       </div>
     </div>
   </header>
-  <section class="p-4 p-lg-5">
-    <div class="d-flex justify-content-between align-items-baseline mb-5">
-      <h2 class="display-5">Catálogo de Fragancias</h2>
-      <span class="text-muted small">20 items en archivo</span>
-    </div>
-    <!-- Perfumes-->
-    <div id="galeria-perfumes" class="row g-4 mb-5"></div>
-    <div class="row g-4 mt-5">
-      <div class="col-lg-8">
-        <div class="featured-box p-4 p-md-5 h-100 d-flex flex-column flex-md-row gap-4">
-          <div class="flex-shrink-0" style="width: 200px; height: 200px;">
-            <img alt="Scent mist detail" class="w-100 h-100 object-fit-cover border" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALiwX1Q4mQ6yK0ecJ63wve5cFtle8sYqUWReq9ptmGXYnPoATJaGRirZCAoEflRqGSTfxZ6F04RfFmYq0egJPxZ1XZA9BdJcL3_vLKdT8qtJrLYUl4s5CxgvC-ACkHSBJPFQrYP086SVo2b-xclJ9KZGP_q0fZSWExUuk9Papbpm_DEp0UaXypNGk5xsmXOuQCLTOVeX-mtfQkPGdXI3G8dJIdkA8eMVcztKNNYTH53SV7bT9zUlTgXm04-fx1pGL50N6Jk-o_qe84"/>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="manifesto-box p-4 p-md-5 h-100 d-flex flex-column justify-content-between">
-            <div>
-              <p class="label-caps text-white-50 mb-2">NOTAS DEL ARCHIVISTA</p>
-              <p class="h4 text-white fst-italic">"El perfume es el arte que hace hablar a la memoria."</p>
-            </div>
-            <button class="btn btn-outline-custom mt-4">LEER MANIFIESTO</button>
-          </div>
-        </div>
+
+  <main class="main-content">
+
+    <section class="p-4 p-lg-5">
+      <div class="d-flex justify-content-between align-items-baseline mb-5">
+        <h2 class="display-5">Catálogo de Fragancias</h2>
+        <span class="text-muted small">20 items en archivo</span>
       </div>
+      <!-- Perfumes-->
+      <div id="galeria-perfumes" class="row g-4 mb-5"></div>
     </section>
 
   </main>
-  <script type="module" th:src="@{/js/clima.js}"></script>
-  <!-- Bootstrap JS Bundle -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    fetch('/spring/api/perfumes') 
+      .then(respuesta => respuesta.json())
+      .then(perfumes => {
+        // Ubicamos la caja principal (el div con clase 'row' que preparamos recién)
+        const contenedor = document.getElementById('galeria-perfumes');
+        
+        // Limpiamos el contenedor por si había algo antes
+        contenedor.innerHTML = '';
+
+        // Recorremos los perfumes de la API
+        perfumes.forEach(perfume => {
+          
+          // Creamos la columna de Bootstrap para que mantenga el diseño responsive
+          const columna = document.createElement('div');
+          columna.className = "col-sm-6 col-lg-4 col-xl-3"; 
+
+          // Inyectamos TU diseño exacto, pero con los datos del JSON
+          columna.innerHTML = `
+            <a href="/spring/especificacion?id=${perfume.id}" class="text-decoration-none text-reset">
+              <div class="card card-fragrance h-100" style="border: none; cursor: pointer; background: transparent;">
+                
+                <div class="card-img-container" style="position: relative;">
+                  <img alt="${perfume.nombre}" class="card-img-top" src="${perfume.imagenUrl}" style="width: 100%; background: transparent; padding: 8px;">
+                  
+                  <span class="label-caps" style="position: absolute; top: 10px; left: 10px; background: white; padding: 2px 8px; font-size: 10px; font-weight: bold; letter-spacing: 1px;">
+                    ${perfume.marca.toUpperCase()}
+                  </span>
+                </div>
+                
+                <div class="card-body d-flex flex-column px-0 mt-2">
+                  <p class="label-caps text-muted mb-1" style="font-size: 0.75rem; letter-spacing: 2px;">
+                    ${perfume.familiaOlfativa.toUpperCase()}
+                  </p>
+                  
+                  <h3 class="h5" style="font-family: 'Bodoni Moda', serif;">${perfume.nombre}</h3>
+                  
+                  <div class="mt-auto pt-2 border-top d-flex justify-content-between align-items-center" style="border-color: rgba(0,0,0,0.05) !important;">
+                    <span class="small" style="color: gray;">Intensidad</span>
+                    <div class="d-flex">
+                      <span class="intensity-dot" style="height: 8px; width: 8px; background: #000; border-radius: 50%; display: inline-block; margin-left: 4px;"></span>
+                      <span class="intensity-dot" style="height: 8px; width: 8px; background: #000; border-radius: 50%; display: inline-block; margin-left: 4px;"></span>
+                      <span class="intensity-dot" style="height: 8px; width: 8px; border: 1px solid #000; border-radius: 50%; display: inline-block; margin-left: 4px;"></span>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            </a>
+          `;
+
+          // Añadimos la columna armada a la grilla principal
+          contenedor.appendChild(columna);
+        });
+      })
+      .catch(error => console.error('Error cargando el catálogo:', error));
+  </script>
+
 </body>
 
 </html>
-      <div class="col-lg-4">
-        <div class="manifesto-box p-4 p-md-5 h-100 d-flex flex-column justify-content-between">
-          <div>
-            <p class="label-caps text-white-50 mb-2">NOTAS DEL ARCHIVISTA</p>
-            <p class="h4 text-white fst-italic">"El perfume es el arte que hace hablar a la memoria."</p>
-          </div>
-          <button class="btn btn-outline-custom mt-4">LEER MANIFIESTO</button>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
-<!-- Bootstrap JS Bundle -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  fetch('/spring/api/perfumes') 
-    .then(respuesta => respuesta.json())
-    .then(perfumes => {
-      // Ubicamos la caja principal (el div con clase 'row' que preparamos recién)
-      const contenedor = document.getElementById('galeria-perfumes');
-      
-      // Limpiamos el contenedor por si había algo antes
-      contenedor.innerHTML = '';
-
-      // Recorremos los perfumes de la API
-      perfumes.forEach(perfume => {
-        
-        // Creamos la columna de Bootstrap para que mantenga el diseño responsive
-        const columna = document.createElement('div');
-        columna.className = "col-sm-6 col-lg-4 col-xl-3"; 
-
-        // Inyectamos TU diseño exacto, pero con los datos del JSON
-        columna.innerHTML = `
-          <a href="/spring/especificacion?id=${perfume.id}" class="text-decoration-none text-reset">
-            <div class="card card-fragrance h-100" style="border: none; cursor: pointer; background: transparent;">
-              
-              <div class="card-img-container" style="position: relative;">
-                <img alt="${perfume.nombre}" class="card-img-top" src="${perfume.imagenUrl}" style="width: 100%; background: transparent; padding: 8px;">
-                
-                <span class="label-caps" style="position: absolute; top: 10px; left: 10px; background: white; padding: 2px 8px; font-size: 10px; font-weight: bold; letter-spacing: 1px;">
-                  ${perfume.marca.toUpperCase()}
-                </span>
-              </div>
-              
-              <div class="card-body d-flex flex-column px-0 mt-2">
-                <p class="label-caps text-muted mb-1" style="font-size: 0.75rem; letter-spacing: 2px;">
-                  ${perfume.familiaOlfativa.toUpperCase()}
-                </p>
-                
-                <h3 class="h5" style="font-family: 'Bodoni Moda', serif;">${perfume.nombre}</h3>
-                
-                <div class="mt-auto pt-2 border-top d-flex justify-content-between align-items-center" style="border-color: rgba(0,0,0,0.05) !important;">
-                  <span class="small" style="color: gray;">Intensidad</span>
-                  <div class="d-flex">
-                    <span class="intensity-dot" style="height: 8px; width: 8px; background: #000; border-radius: 50%; display: inline-block; margin-left: 4px;"></span>
-                    <span class="intensity-dot" style="height: 8px; width: 8px; background: #000; border-radius: 50%; display: inline-block; margin-left: 4px;"></span>
-                    <span class="intensity-dot" style="height: 8px; width: 8px; border: 1px solid #000; border-radius: 50%; display: inline-block; margin-left: 4px;"></span>
-                  </div>
-                </div>
-              </div>
-              
-            </div>
-          </a>
-        `;
-
-        // Añadimos la columna armada a la grilla principal
-        contenedor.appendChild(columna);
-      });
-    })
-    .catch(error => console.error('Error cargando el catálogo:', error));
-</script>
-</body></html>

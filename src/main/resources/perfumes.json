@@ -6,7 +6,7 @@
     "familiaOlfativa": "Fougère",
     "descripcion": "Una composición rotundamente fresca, dictada por un nombre que suena como un manifiesto.",
     "notas": "Bergamota de Calabria, Pimienta de Sichuan, Ambroxan",
-   "imagenUrl": "/spring/img/sauvage.jpg"
+   "imagenUrl": "/spring/img/sauvage.png"
   },
   {
     "id": 2,
@@ -15,7 +15,7 @@
     "familiaOlfativa": "Amaderada",
     "descripcion": "Un perfume caracterizado por un encuentro de extremos, con notas florales y de cuero.",
     "notas": "Violeta, Cuero, Mandarina, Cedro",
-    "imagenUrl": "/spring/img/fahrenheit.jpg"
+    "imagenUrl": "/spring/img/fahrenheit.png"
   },
   {
     "id": 3,
@@ -24,7 +24,7 @@
     "familiaOlfativa": "Amaderada",
     "descripcion": "Elogio de la libertad masculina en un perfume amaderado aromático de estela cautivadora.",
     "notas": "Toronja, Menta, Incienso, Jengibre",
-    "imagenUrl": "/spring/img/bleu-chanel.jpg"
+    "imagenUrl": "/spring/img/bleu-chanel.png"
   },
   {
     "id": 4,
@@ -33,7 +33,7 @@
     "familiaOlfativa": "Cítrica",
     "descripcion": "Fragancia mítica, fresca y acuática que evoca la brisa del mar Mediterráneo.",
     "notas": "Notas Marinas, Bergamota, Jazmín, Caqui",
-    "imagenUrl": "/spring/img/acqua-gio.jpg"
+    "imagenUrl": "/spring/img/acqua-gio.png"
   },
   {
     "id": 5,
@@ -42,7 +42,7 @@
     "familiaOlfativa": "Oriental",
     "descripcion": "El perfume del éxito. Una fragancia atrevida con notas de cuero y oro.",
     "notas": "Mandarina sangrienta, Canela, Cuero, Ámbar",
-    "imagenUrl": "/spring/img/one-million.jpg"
+    "imagenUrl": "/spring/img/one-million.png"
   },
   {
     "id": 6,
@@ -60,7 +60,7 @@
     "familiaOlfativa": "Oriental",
     "descripcion": "Una fragancia audaz y sofisticada, inspirada en la visión de la dualidad de la mujer moderna.",
     "notas": "Almendra, Café, Nardo, Habá Tonka, Cacao",
-    "imagenUrl": "/spring/img/good-girl.jpg"
+    "imagenUrl": "/spring/img/good-girl.png"
   },
   {
     "id": 8,
@@ -150,7 +150,7 @@
     "familiaOlfativa": "Oriental",
     "descripcion": "Una expresión fragante de la dualidad del hombre contemporáneo, audaz y sensible.",
     "notas": "Pimienta Blanca, Pimienta Negra, Bergamota, Cacao",
-    "imagenUrl": "/spring/img/bad-boy.jpg"
+    "imagenUrl": "/spring/img/bad-boy.jfif"
   },
   {
     "id": 18,

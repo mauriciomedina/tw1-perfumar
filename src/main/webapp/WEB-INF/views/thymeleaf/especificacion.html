@@ -1,206 +1,268 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>PerfumAR | Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>PerfumAR - Especificación</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400..900;1,400..900&amp;family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;display=swap"
-        rel="stylesheet">
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet">
+      href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Hanken+Grotesk:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" th:href="@{/css/main.css}" />
-    <style data-stitch-cursor=""></style>
-    <style data-stitch-scroll-lock=""></style>
-</head>
-
-<body>
-    <aside class="sidebar">
-        <div class="mb-5 px-3">
-            <h1 class="display-5 fw-normal mb-0" style="font-family: &quot;Bodoni Moda&quot;;">PerfumAR</h1>
-            <p class="text-muted small opacity-75" style="font-size: 14px;">Curated Collection</p>
-        </div>
-        <nav class="flex-grow-1">
-            <a class="nav-link-custom active" href="#">
-                <span class="material-symbols-outlined">select_all</span>
-                <span class="">All Fragrances</span>
-            </a>
-
-            <a class="nav-link-custom" href="#">
-                <span class="material-symbols-outlined">forest</span>
-                <span class="">Woody</span>
-            </a>
-            <a class="nav-link-custom" href="#">
-                <span class="material-symbols-outlined">local_florist</span>
-                <span class="">Floral</span>
-            </a>
-            <a class="nav-link-custom" href="#">
-                <span class="material-symbols-outlined">auto_awesome</span>
-                <span class="">Oriental</span>
-            </a>
-        </nav>
-        <div class="pt-4 border-top">
-            <button class="nav-link-custom border-0 bg-transparent w-100 text-start">
-                <span class="material-symbols-outlined">settings</span>
-                <span class="">Settings</span>
-            </button>
-            <button class="nav-link-custom border-0 bg-transparent w-100 text-start">
-                <span class="material-symbols-outlined">help_outline</span>
-                <span class="">Support</span>
-            </button>
-        </div>
-    </aside>
-    <main class="main-content">
-        <header class="header-nav">
-            <div class="d-flex align-items-center gap-4">
-                <div class="d-flex align-items-center gap-2 text-muted">
-                    <span class="material-symbols-outlined fs-6">light_mode</span>
-                    <span class="label-caps" style="font-size: 10px;">Ramos Mejía, 28°C</span>
-                </div>
-                <div class="search-container">
-                    <span class="material-symbols-outlined text-muted">search</span>
-                    <input class="search-input" placeholder="Search Collection" type="text">
-                </div>
-            </div>
-            <div class="d-flex align-items-center gap-4">
-                <button class="btn btn-link text-decoration-none text-dark p-0 label-caps">+ Nuevo Perfume</button>
-                <div class="d-flex align-items-center gap-3">
-                    <button class="btn btn-link text-dark p-0">
-                        <span class="material-symbols-outlined">notifications</span>
-                    </button>
-                    <img alt="User" class="profile-img"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-hCBPLDM6m57yvuLe1u5ciOv0x9VbZoULYc6VvS2TtT4iVqeE9Xg-f7-vh2TLEFauUY7ODhttOKI-_RGUjJS1vPcMoteTz9xMDN-ZDsQiYaiV8LDryBpLllQzB-UJO7U-SHGEhKl5Cj2J4EnDoOKsps4YcJk1T62ceEph54Ia6rKSS-Og-E3IjQAUZFB8S-tUoeXOGasnseoqd6vNFoCHa2OThY7lReGnc4FY5jDBzuluNJ9Wxj-rouq7rsng9CmTyvJF6FhULgjV">
-                </div>
-            </div>
-        </header>
-        <div class="container-fluid p-5">
-            <div class="row g-5">
-                <!-- Center Column -->
-                <div class="col-lg-8">
-                    <div class="hero-card mb-5">
-                        <div class="hero-content">
-                            <span class="label-caps text-muted mb-4 opacity-75">Scent of the moment</span>
-                            <h2 class="display-3 mb-4">L'Eau de Bergamote</h2>
-                            <p class="text-muted mb-5 pe-lg-5" style="font-size: 16px; line-height: 1.6;">
-                                A light, citrus choice for a sunny day in Ramos Mejía. Notes of hand-picked Italian
-                                bergamot
-                                balanced with a whisper of white musk.
-                            </p>
-                            <button class="btn btn-luxury w-fit">Apply today</button>
-                        </div>
-                        <div class="hero-image-wrapper d-none d-md-block">
-                            <img alt="Perfume bottle"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAk6ADLsntkAt3V2x18qKGBoQEGcS0ufba7iWiCdfU_RQygjzFm4Jq43UnHFiQw4_nHeJbGJMPVpaOw89tgdJNy-3Fk46x0nMNNJ6O08zszHrbdqU8LRa6YZ6yHqi3TL50piw_gdCpQveGs9DhjF_1LB0ESyETspaRW0qIBorQnA6FKRwC87JJCH2ZVX_xIR5waN3Tgr55NXw0KqvM_1gF176nTRcQsFLHJFqq1ddmIkSKsaYQuqN2lLipXc9s2LRkqgLC-1TOXUsYp"
-                                class="">
-                        </div>
-                    </div>
-                    <div class="row g-4">
-                        <div class="col-md-4">
-                            <div class="stat-card">
-                                <span class="label-caps text-muted">Total Archive</span>
-                                <div class="d-flex justify-content-between align-items-baseline mt-3">
-                                    <h3 class="mb-0">142</h3>
-                                    <small class="text-muted">+3 this month</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="stat-card">
-                                <span class="label-caps text-muted">Usage Rate</span>
-                                <div class="d-flex justify-content-between align-items-baseline mt-3">
-                                    <h3 class="mb-0">84%</h3>
-                                    <small class="text-muted">Active rotation</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="stat-card">
-                                <span class="label-caps text-muted">Market Value</span>
-                                <div class="d-flex justify-content-between align-items-baseline mt-3">
-                                    <h3 class="mb-0">$12.4k</h3>
-                                    <small class="text-muted">USD</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Right Column -->
-                <div class="col-lg-4">
-                    <div class="d-flex justify-content-between align-items-end mb-4">
-                        <h3 class="h4 mb-0">Maceration Alerts</h3>
-                        <span class="material-symbols-outlined text-muted fs-5">more_horiz</span>
-                    </div>
-                    <div class="maceration-alerts mb-5">
-                        <!-- Item 1 -->
-                        <div class="maceration-card">
-                            <div class="d-flex justify-content-between mb-3">
-                                <div>
-                                    <h4 class="label-caps mb-1">Oud Noir Reserve</h4>
-                                    <p class="text-muted m-0" style="font-size: 10px;">Batch #4421</p>
-                                </div>
-                                <span class="label-caps" style="font-size: 10px;">82%</span>
-                            </div>
-                            <div class="progress progress-thin">
-                                <div class="progress-bar" style="width: 82%"></div>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <span style="font-size: 10px; color: var(--secondary-color);" class="">Est. 12 days
-                                    left</span>
-                                <span class="material-symbols-outlined" style="font-size: 14px;">timer</span>
-                            </div>
-                        </div>
-                        <!-- Item 2 -->
-                        <div class="maceration-card">
-                            <div class="d-flex justify-content-between mb-3">
-                                <div>
-                                    <h4 class="label-caps mb-1">Santal White</h4>
-                                    <p class="text-muted m-0" style="font-size: 10px;">Batch #4425</p>
-                                </div>
-                                <span class="label-caps" style="font-size: 10px;">45%</span>
-                            </div>
-                            <div class="progress progress-thin">
-                                <div class="progress-bar" style="width: 45%"></div>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <span style="font-size: 10px; color: var(--secondary-color);" class="">Est. 28 days
-                                    left</span>
-                                <span class="material-symbols-outlined" style="font-size: 14px;">timer</span>
-                            </div>
-                        </div>
-                        <!-- Item 3 -->
-                        <div class="maceration-card">
-                            <div class="d-flex justify-content-between mb-3">
-                                <div>
-                                    <h4 class="label-caps mb-1">Neroli Bloom</h4>
-                                    <p class="text-muted m-0" style="font-size: 10px;">Batch #4430</p>
-                                </div>
-                                <span class="label-caps" style="font-size: 10px;">15%</span>
-                            </div>
-                            <div class="progress progress-thin">
-                                <div class="progress-bar" style="width: 15%"></div>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <span style="font-size: 10px; color: var(--secondary-color);" class="">Est. 44 days
-                                    left</span>
-                                <span class="material-symbols-outlined" style="font-size: 14px;">timer</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tip-box mt-auto">
-                        <p class="label-caps mb-2" style="font-size: 10px;">Shelf Maturation Tip</p>
-                        <p class="text-muted font-italic px-3 mb-0" style="font-size: 12px; font-style: italic;">
-                            "Store in a cool, dark place away from direct sunlight for optimal development."
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
+    <script type="module" th:src="@{/js/clima.js}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
 
-</body>
+  <body>
+    <aside class="sidebar">
+      <div class="mb-5">
+        <h1 class="brand-title">PerfumAR</h1>
+        <p class="text-muted small mb-0">Colección Exclusiva</p>
+      </div>
+      <div class="search-container position-relative mb-4">
+        <span class="material-symbols-outlined search-icon">search</span>
+        <input
+          class="form-control"
+          placeholder="Buscar fragancia..."
+          type="text"
+        />
+      </div>
+      <nav class="nav flex-column flex-grow-1">
+        <a class="nav-link active" href="#">
+          <span class="material-symbols-outlined">select_all</span>
+          <span class="label-caps">Todas las Fragancias</span>
+        </a>
+        <a class="nav-link" href="#">
+          <span class="material-symbols-outlined">bakery_dining</span>
+          <span class="label-caps">Cítricas</span>
+        </a>
+        <a class="nav-link" href="#">
+          <span class="material-symbols-outlined">forest</span>
+          <span class="label-caps">Amaderadas</span>
+        </a>
+        <a class="nav-link" href="#">
+          <span class="material-symbols-outlined">local_florist</span>
+          <span class="label-caps">Florales</span>
+        </a>
+        <a class="nav-link" href="#">
+          <span class="material-symbols-outlined">auto_awesome</span>
+          <span class="label-caps">Orientales</span>
+        </a>
+      </nav>
+      <div
+        class="mt-auto pt-3 border-top"
+        style="border-color: rgba(0, 0, 0, 0.05) !important"
+      >
+        <a class="nav-link mb-1" href="#">
+          <span class="material-symbols-outlined">settings</span>
+          <span class="label-caps">Configuración</span>
+        </a>
+        <a class="nav-link" href="#">
+          <span class="material-symbols-outlined">help_outline</span>
+          <span class="label-caps">Ayuda</span>
+        </a>
+      </div>
+    </aside>
 
+    <main class="main-content">
+      <header class="header-nav">
+        <div class="d-flex align-items-center gap-4">
+          <div class="d-flex align-items-center gap-2 text-muted">
+            <span class="material-symbols-outlined fs-6">light_mode</span>
+            <span id="currentWeather" class="label-caps" style="font-size: 10px"
+              >Elije tu ciudad</span
+            >
+          </div>
+          <input type="text" id="cityInput" placeholder="Ciudad" />
+          <input type="text" id="countryInput" placeholder="Pais" />
+          <button id="getWeatherBtn">Buscar</button>
+          <div id="weather-info"></div>
+          <div class="search-container">
+            <span class="material-symbols-outlined text-muted">search</span>
+            <input
+              class="search-input"
+              placeholder="Search Collection"
+              type="text"
+            />
+          </div>
+        </div>
+        <div class="d-flex align-items-center gap-4">
+          <a
+            class="btn btn-link text-decoration-none text-dark p-0 label-caps"
+            href="nuevo-perfume"
+            >+ Nuevo Perfume</a
+          >
+          <a
+            class="btn btn-link text-decoration-none text-dark p-0 label-caps"
+            href="listar-perfumes"
+            >Listado</a
+          >
+          <div class="d-flex align-items-center gap-3">
+            <button class="btn btn-link text-dark p-0">
+              <span class="material-symbols-outlined">notifications</span>
+            </button>
+            <img
+              alt="User"
+              class="profile-img"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-hCBPLDM6m57yvuLe1u5ciOv0x9VbZoULYc6VvS2TtT4iVqeE9Xg-f7-vh2TLEFauUY7ODhttOKI-_RGUjJS1vPcMoteTz9xMDN-ZDsQiYaiV8LDryBpLllQzB-UJO7U-SHGEhKl5Cj2J4EnDoOKsps4YcJk1T62ceEph54Ia6rKSS-Og-E3IjQAUZFB8S-tUoeXOGasnseoqd6vNFoCHa2OThY7lReGnc4FY5jDBzuluNJ9Wxj-rouq7rsng9CmTyvJF6FhULgjV"
+            />
+          </div>
+        </div>
+      </header>
+
+      <div class="container-fluid p-5">
+        <div class="row g-5">
+            <div class="col-lg-8">
+                <div class="hero-card mb-5">
+                    <div class="hero-content">
+                        <span id="perfume-marca" class="label-caps text-muted mb-4 opacity-75">Cargando marca...</span>
+                        <h2 id="perfume-nombre" class="display-3 mb-4">Cargando fragancia...</h2>
+                        <p id="perfume-familia" class="text-muted mb-5 pe-lg-5" style="font-size: 16px; line-height: 1.6;">
+                            Buscando detalles en la base de datos...
+                        </p>
+                        <button class="btn btn-luxury w-fit">Añadir a la colección</button>
+                    </div>
+                    <div class="hero-image-wrapper d-none d-md-block">
+                        <img id="perfume-imagen" alt="Botella de perfume" src="" class="img-fluid" style="max-height: 400px; object-fit: cover;">
+                    </div>
+                </div>
+                
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="stat-card">
+                            <span class="label-caps text-muted">Total en Archivo</span>
+                            <div class="d-flex justify-content-between align-items-baseline mt-3">
+                                <h3 class="mb-0">142</h3>
+                                <small class="text-muted">+3 este mes</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-card">
+                            <span class="label-caps text-muted">Tasa de Uso</span>
+                            <div class="d-flex justify-content-between align-items-baseline mt-3">
+                                <h3 class="mb-0">84%</h3>
+                                <small class="text-muted">Rotación activa</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-card">
+                            <span class="label-caps text-muted">Valor de Mercado</span>
+                            <div class="d-flex justify-content-between align-items-baseline mt-3">
+                                <h3 class="mb-0">$12.4k</h3>
+                                <small class="text-muted">USD</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="d-flex justify-content-between align-items-end mb-4">
+                    <h3 class="h4 mb-0">Alertas de Maceración</h3>
+                    <span class="material-symbols-outlined text-muted fs-5">more_horiz</span>
+                </div>
+                <div class="maceration-alerts mb-5">
+                    <div class="maceration-card">
+                        <div class="d-flex justify-content-between mb-3">
+                            <div>
+                                <h4 class="label-caps mb-1">Oud Noir Reserve</h4>
+                                <p class="text-muted m-0" style="font-size: 10px;">Lote #4421</p>
+                            </div>
+                            <span class="label-caps" style="font-size: 10px;">82%</span>
+                        </div>
+                        <div class="progress progress-thin">
+                            <div class="progress-bar" style="width: 82%"></div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span style="font-size: 10px; color: var(--secondary-color);">Aprox. 12 días rest.</span>
+                            <span class="material-symbols-outlined" style="font-size: 14px;">timer</span>
+                        </div>
+                    </div>
+                    <div class="maceration-card">
+                        <div class="d-flex justify-content-between mb-3">
+                            <div>
+                                <h4 class="label-caps mb-1">Santal White</h4>
+                                <p class="text-muted m-0" style="font-size: 10px;">Lote #4425</p>
+                            </div>
+                            <span class="label-caps" style="font-size: 10px;">45%</span>
+                        </div>
+                        <div class="progress progress-thin">
+                            <div class="progress-bar" style="width: 45%"></div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span style="font-size: 10px; color: var(--secondary-color);">Aprox. 28 días rest.</span>
+                            <span class="material-symbols-outlined" style="font-size: 14px;">timer</span>
+                        </div>
+                    </div>
+                    <div class="maceration-card">
+                        <div class="d-flex justify-content-between mb-3">
+                            <div>
+                                <h4 class="label-caps mb-1">Neroli Bloom</h4>
+                                <p class="text-muted m-0" style="font-size: 10px;">Lote #4430</p>
+                            </div>
+                            <span class="label-caps" style="font-size: 10px;">15%</span>
+                        </div>
+                        <div class="progress progress-thin">
+                            <div class="progress-bar" style="width: 15%"></div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span style="font-size: 10px; color: var(--secondary-color);">Aprox. 44 días rest.</span>
+                            <span class="material-symbols-outlined" style="font-size: 14px;">timer</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tip-box mt-auto">
+                    <p class="label-caps mb-2" style="font-size: 10px;">Tip de Maduración</p>
+                    <p class="text-muted font-italic px-3 mb-0" style="font-size: 12px; font-style: italic;">
+                        "Guardar en un lugar fresco y oscuro, lejos de la luz solar directa, para un desarrollo óptimo del perfume."
+                    </p>
+                </div>
+            </div>
+        </div>
+      </div>
+    </main>
+
+<script>
+        const parametros = new URLSearchParams(window.location.search);
+        const idPerfume = parametros.get('id');
+
+        if (idPerfume) {
+            // Buscamos TODOS los perfumes al endpoint que ya te funciona
+            fetch('/spring/api/perfumes') 
+                .then(respuesta => respuesta.json())
+                .then(perfumes => {
+                    // JavaScript busca en la lista el perfume que coincida con el ID de la URL
+                    const perfume = perfumes.find(p => p.id == idPerfume);
+
+                    if (perfume) {
+                        // Si lo encuentra, inyecta los datos
+                        document.getElementById('perfume-nombre').textContent = perfume.nombre;
+                        document.getElementById('perfume-marca').textContent = perfume.marca.toUpperCase();
+                        document.getElementById('perfume-familia').textContent = `Una exclusiva fragancia de la familia ${perfume.familiaOlfativa.toLowerCase()}, ideal para tu colección personal.`;
+                        document.getElementById('perfume-imagen').src = perfume.imagenUrl;
+                    } else {
+                        throw new Error("No se encontró el perfume");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error trayendo el perfume:', error);
+                    document.getElementById('perfume-nombre').textContent = "Error al cargar";
+                    document.getElementById('perfume-familia').textContent = "No pudimos cargar los datos de esta fragancia.";
+                });
+        } else {
+            document.getElementById('perfume-nombre').textContent = "Perfume no encontrado";
+            document.getElementById('perfume-familia').textContent = "Seleccioná un perfume desde el catálogo.";
+        }
+    </script>
+  </body>
 </html>

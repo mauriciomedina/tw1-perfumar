@@ -3,7 +3,7 @@
     "id": 1,
     "nombre": "Sauvage",
     "marca": "Dior",
-    "familiaOlfativa": "Fougère",
+    "familiaOlfativa": "Helecho",
     "descripcion": "Una composición rotundamente fresca, dictada por un nombre que suena como un manifiesto.",
     "notas": "Bergamota de Calabria, Pimienta de Sichuan, Ambroxan",
    "imagenUrl": "/spring/img/sauvage.png"
@@ -48,7 +48,7 @@
     "id": 6,
     "nombre": "Eros",
     "marca": "Versace",
-    "familiaOlfativa": "Fougère",
+    "familiaOlfativa": "Helecho",
     "descripcion": "Fragancia para un hombre fuerte, apasionado y dueño de sí mismo, inspirada en la mitología griega.",
     "notas": "Menta, Manzana Verde, Tonka, Vainilla",
     "imagenUrl": "/spring/img/eros.jpg"
@@ -102,7 +102,7 @@
     "id": 12,
     "nombre": "Y Eau de Parfum",
     "marca": "Yves Saint Laurent",
-    "familiaOlfativa": "Fougère",
+    "familiaOlfativa": "Helecho",
     "descripcion": "Una interpretación intensa de la icónica camiseta blanca y la chaqueta negra de YSL.",
     "notas": "Manzana, Jengibre, Salvia, Madera de Ámbar",
     "imagenUrl": "/spring/img/ysl-y.jpg"
@@ -165,7 +165,7 @@
     "id": 19,
     "nombre": "Dylan Blue",
     "marca": "Versace",
-    "familiaOlfativa": "Fougère",
+    "familiaOlfativa": "Helecho",
     "descripcion": "Una fragancia intensamente masculina que encapsula los aromas sensuales del Mediterráneo.",
     "notas": "Notas Acuáticas, Bergamota, Hojas de Higuera, Papiro",
     "imagenUrl": "/spring/img/dylan-blue.jpg"

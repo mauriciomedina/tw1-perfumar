@@ -1,0 +1,88 @@
+class Sidebar extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <aside class="sidebar">
+        <div class="mb-5">
+          <h1 class="brand-title">PerfumAR</h1>
+          <p class="text-muted small mb-0">Colecci&oacute;n Exclusiva</p>
+        </div>
+        <div class="search-container position-relative mb-4">
+          <span class="material-symbols-outlined search-icon">search</span>
+          <input class="form-control" placeholder="Buscar fragancia..." type="text" />
+        </div>
+        <nav class="nav flex-column flex-grow-1">
+          <a class="nav-link filtro-btn active" href="#" data-familia="TODAS">
+            <span class="material-symbols-outlined">select_all</span>
+            <span class="label-caps">Todas las Fragancias</span>
+          </a>
+          <a class="nav-link filtro-btn" href="#" data-familia="CITRIC">
+            <span class="material-symbols-outlined">bakery_dining</span>
+            <span class="label-caps">C&iacute;tricas</span>
+          </a>
+          <a class="nav-link filtro-btn" href="#" data-familia="AMADERADA">
+            <span class="material-symbols-outlined">forest</span>
+            <span class="label-caps">Amaderadas</span>
+          </a>
+          <a class="nav-link filtro-btn" href="#" data-familia="FRUTAL">
+            <span class="material-symbols-outlined">nutrition</span>
+            <span class="label-caps">Frutales</span>
+          </a>
+          <a class="nav-link filtro-btn" href="#" data-familia="HELECHO">
+            <span class="material-symbols-outlined">spa</span>
+            <span class="label-caps">Helecho</span>
+          </a>
+          <a class="nav-link filtro-btn" href="#" data-familia="ORIENTAL">
+            <span class="material-symbols-outlined">auto_awesome</span>
+            <span class="label-caps">Orientales</span>
+          </a>
+        </nav>
+        <div class="mt-auto pt-3 border-top" style="border-color: rgba(0, 0, 0, 0.05) !important">
+          <a class="nav-link mb-1" href="#">
+            <span class="material-symbols-outlined">settings</span>
+            <span class="label-caps">Configuraci&oacute;n</span>
+          </a>
+          <a class="nav-link" href="#">
+            <span class="material-symbols-outlined">help_outline</span>
+            <span class="label-caps">Ayuda</span>
+          </a>
+        </div>
+      </aside>
+    `;
+
+    // AGREGAMOS LOS DETECTORES DE CLICS DENTRO DEL COMPONENTE
+    this.querySelectorAll('.filtro-btn').forEach(boton => {
+      boton.addEventListener('click', (event) => {
+        event.preventDefault();
+
+        // 1. Cambiamos visualmente el botón activo
+        this.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
+        boton.classList.add('active');
+
+        const familiaBuscada = boton.getAttribute('data-familia');
+
+        // 2. ¿Existe la galería en esta pestaña?
+        if (document.getElementById('galeria-perfumes')) {
+          // Si existe (estamos en el Home), disparamos un evento global avisando el cambio
+          window.dispatchEvent(new CustomEvent('filtrar-perfumes', { detail: familiaBuscada }));
+        } else {
+          // Si NO existe (estamos en especificación u otra pestaña), redirigimos al home pasando el filtro por la URL
+          window.location.href = `/spring/home?familia=${familiaBuscada}`;
+        }
+      });
+    });
+
+    // CONTROL DE RUTA: Si entramos a la página con un filtro en la URL, marcamos activo el botón correcto
+    const parametros = new URLSearchParams(window.location.search);
+    const familiaUrl = parametros.get('familia');
+    if (familiaUrl) {
+      this.querySelectorAll('.filtro-btn').forEach(b => {
+        if (b.getAttribute('data-familia') === familiaUrl) {
+          this.querySelectorAll('.filtro-btn').forEach(btn => btn.classList.remove('active'));
+          b.classList.add('active');
+        }
+      });
+    }
+  }
+}
+
+customElements.define('mi-sidebar', Sidebar);

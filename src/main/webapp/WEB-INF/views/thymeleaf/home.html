@@ -1,108 +1,98 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>PerfumAR - Colección</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&amp;family=Hanken+Grotesk:wght@300;400;600&amp;display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" th:href="@{/css/main.css}" />
-    <script type="module" th:src="@{/js/clima.js}"></script>
-    <script th:src="@{/js/components/sidebar.js}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  </head>
 
-  <body>
-    <mi-sidebar></mi-sidebar>
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>PerfumAR - Colección</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&amp;family=Hanken+Grotesk:wght@300;400;600&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" th:href="@{/css/main.css}" />
+  <script type="module" th:src="@{/js/clima.js}"></script>
+  <script th:src="@{/js/components/sidebar.js}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
 
-    <main class="main-content">
-      <header class="header-nav">
-        <div class="d-flex align-items-center gap-4">
-          <div class="d-flex align-items-center gap-2 text-muted">
-            <span class="material-symbols-outlined fs-6">light_mode</span>
-            <span id="currentWeather" class="label-caps" style="font-size: 10px"
-              >Elije tu ciudad</span
-            >
-          </div>
-          <input type="text" id="cityInput" placeholder="Ciudad" />
-          <input type="text" id="countryInput" placeholder="Pais" />
-          <button id="getWeatherBtn">Buscar</button>
-          <div id="weather-info"></div>
-          <div class="search-container">
-            <span class="material-symbols-outlined text-muted">search</span>
-            <input
-              class="search-input"
-              placeholder="Search Collection"
-              type="text"
-            />
-          </div>
-        </div>
-        <div class="d-flex align-items-center gap-4">
-          <a
-            class="btn btn-link text-decoration-none text-dark p-0 label-caps"
-            href="nuevo-perfume"
-            >+ Nuevo Perfume</a
-          >
-          <a
-            class="btn btn-link text-decoration-none text-dark p-0 label-caps"
-            href="listar-perfumes"
-            >Listado</a
-          >
-          <div class="d-flex align-items-center gap-3">
-            <button class="btn btn-link text-dark p-0">
-              <span class="material-symbols-outlined">notifications</span>
-            </button>
-            <img
-              alt="User"
-              class="profile-img"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-hCBPLDM6m57yvuLe1u5ciOv0x9VbZoULYc6VvS2TtT4iVqeE9Xg-f7-vh2TLEFauUY7ODhttOKI-_RGUjJS1vPcMoteTz9xMDN-ZDsQiYaiV8LDryBpLllQzB-UJO7U-SHGEhKl5Cj2J4EnDoOKsps4YcJk1T62ceEph54Ia6rKSS-Og-E3IjQAUZFB8S-tUoeXOGasnseoqd6vNFoCHa2OThY7lReGnc4FY5jDBzuluNJ9Wxj-rouq7rsng9CmTyvJF6FhULgjV"
-            />
-          </div>
-        </div>
-      </header>
+<body>
+  <mi-sidebar></mi-sidebar>
 
-      <section class="p-4 p-lg-5">
-        <div class="d-flex justify-content-between align-items-baseline mb-5">
-          <h2 class="display-5">Catálogo de Fragancias</h2>
-          <span id="contador-perfumes" class="text-muted small">Cargando catálogo...</span>
+  <main class="main-content">
+    <header class="header-nav">
+      <div class="d-flex align-items-center gap-4">
+        <div class="d-flex align-items-center gap-2 text-muted">
+          <span class="material-symbols-outlined fs-6">light_mode</span>
+          <span id="currentWeather" class="label-caps" style="font-size: 10px">Elije tu ciudad</span>
         </div>
-        <!-- Perfumes-->
-        <div id="galeria-perfumes" class="row g-4 mb-5"></div>
-      </section>
-    </main>
+        <input type="text" id="cityInput" placeholder="Ciudad" />
+        <input type="text" id="countryInput" placeholder="Pais" />
+        <button id="getWeatherBtn">Buscar</button>
+        <div id="weather-info"></div>
+        <div class="search-container">
+          <span class="material-symbols-outlined text-muted">search</span>
+          <input class="search-input" placeholder="Search Collection" type="text" />
+        </div>
+      </div>
+      <div class="d-flex align-items-center gap-4">
+        <a class="btn btn-link text-decoration-none text-dark p-0 label-caps" href="nuevo-perfume">+ Nuevo Perfume</a>
+        <a class="btn btn-link text-decoration-none text-dark p-0 label-caps" href="listar-perfumes">Listado</a>
+        <div class="d-flex align-items-center gap-3">
+          <button class="btn btn-link text-dark p-0">
+            <span class="material-symbols-outlined">notifications</span>
+          </button>
+          <img alt="User" class="profile-img"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-hCBPLDM6m57yvuLe1u5ciOv0x9VbZoULYc6VvS2TtT4iVqeE9Xg-f7-vh2TLEFauUY7ODhttOKI-_RGUjJS1vPcMoteTz9xMDN-ZDsQiYaiV8LDryBpLllQzB-UJO7U-SHGEhKl5Cj2J4EnDoOKsps4YcJk1T62ceEph54Ia6rKSS-Og-E3IjQAUZFB8S-tUoeXOGasnseoqd6vNFoCHa2OThY7lReGnc4FY5jDBzuluNJ9Wxj-rouq7rsng9CmTyvJF6FhULgjV" />
+        </div>
+      </div>
+    </header>
+
+    <section class="p-4 p-lg-5">
+      <div class="mb-5 pb-3 border-bottom d-flex justify-content-between align-items-end">
+        <div>
+          <h2 class="mb-1" style="font-family: 'Bodoni Moda', serif; font-size: 2.5rem; color: #1a1a1a;">
+            Catálogo de Fragancias
+          </h2>
+          <p class="text-muted mb-0" style="font-size: 0.95rem; letter-spacing: 0.5px;">
+            Explorá nuestra colección exclusiva de aromas de diseñador.
+          </p>
+        </div>
+        <div class="text-end mb-1">
+          <span id="contador-perfumes" class="text-muted label-caps"
+            style="font-size: 0.75rem; letter-spacing: 2px; font-weight: 600;">
+            CARGANDO CATÁLOGO...
+          </span>
+        </div>
+      </div>
+      <!-- Perfumes-->
+      <div id="galeria-perfumes" class="row g-4 mb-5"></div>
+    </section>
+  </main>
 
   <script>
-      let perfumesGlobales = [];
+    let perfumesGlobales = [];
 
-      function renderizarGaleria(listaPerfumes) {
-        document.getElementById("contador-perfumes").textContent = `${listaPerfumes.length} items en archivo`;
-      
-        const contenedor = document.getElementById("galeria-perfumes");
-        contenedor.innerHTML = ""; 
+    function renderizarGaleria(listaPerfumes) {
+      document.getElementById("contador-perfumes").textContent =
+        `${listaPerfumes.length} FRAGANCIAS`;
 
-        
+      const contenedor = document.getElementById("galeria-perfumes");
+      contenedor.innerHTML = "";
 
-        if (listaPerfumes.length === 0) {
-            contenedor.innerHTML = `<p class="text-muted mt-4">No hay fragancias disponibles en esta categoría.</p>`;
-            return;
-        }
+      if (listaPerfumes.length === 0) {
+        contenedor.innerHTML = `<p class="text-muted mt-4">No hay fragancias disponibles en esta categoría.</p>`;
+        return;
+      }
 
-        //se crea la lista de perfumes
-        listaPerfumes.forEach((perfume) => {
-          const columna = document.createElement("div");
-          columna.className = "col-sm-6 col-lg-4 col-xl-3 mb-4";
+      //se crea la lista de perfumes
+      listaPerfumes.forEach((perfume) => {
+        const columna = document.createElement("div");
+        columna.className = "col-sm-6 col-lg-4 col-xl-3 mb-4";
 
-          columna.innerHTML = `
+        columna.innerHTML = `
             <a href="/spring/especificacion?id=${perfume.id}" class="text-decoration-none text-reset h-100 d-block">
               <div class="card card-fragrance h-100 d-flex flex-column" style="border: none; cursor: pointer; background: transparent;">
               <div class="card-img-container" style="position: relative; width: 100%; aspect-ratio: 2/3; overflow: hidden; background-color: #f4f4f4;">
@@ -128,49 +118,56 @@
               </div>
             </a>
           `;
-          contenedor.appendChild(columna);
-        });
-      }
-
-      // Función aislada que aplica el filtro sobre el array
-      function aplicarFiltro(familiaBuscada) {
-        if (familiaBuscada === 'TODAS' || !familiaBuscada) {
-            renderizarGaleria(perfumesGlobales);
-        } else {
-            const normalizarTexto = (texto) => {
-                return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase().trim();
-            };
-
-            const perfumesFiltrados = perfumesGlobales.filter(p => {
-                const familiaDelPerfume = normalizarTexto(p.familiaOlfativa);
-                const familiaBoton = normalizarTexto(familiaBuscada);
-                return familiaDelPerfume.includes(familiaBoton) || familiaBoton.includes(familiaDelPerfume);
-            });
-            renderizarGaleria(perfumesFiltrados);
-        }
-      }
-
-  
-      fetch("/spring/api/perfumes")
-        .then((respuesta) => respuesta.json())
-        .then((perfumes) => {
-          perfumesGlobales = perfumes; 
-    
-          const parametros = new URLSearchParams(window.location.search);
-          const familiaUrl = parametros.get('familia');
-          
-          if (familiaUrl) {
-              aplicarFiltro(familiaUrl);//para aplicar filtro tiene que renderizar los perfumes de la galeria especifica
-          } else {
-              renderizarGaleria(perfumesGlobales); //sino renderiza todos
-          }
-        })
-        .catch((error) => console.error("Error cargando el catálogo:", error));
-
-      // ESCUCHAMOS EL EVENTO DEL SIDEBAR: Cuando el componente avisa que se tocó un botón, filtramos
-      window.addEventListener('filtrar-perfumes', function(event) {
-          aplicarFiltro(event.detail);
+        contenedor.appendChild(columna);
       });
-    </script>
-  </body>
+    }
+
+    // Función aislada que aplica el filtro sobre el array
+    function aplicarFiltro(familiaBuscada) {
+      if (familiaBuscada === "TODAS" || !familiaBuscada) {
+        renderizarGaleria(perfumesGlobales);
+      } else {
+        const normalizarTexto = (texto) => {
+          return texto
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .toUpperCase()
+            .trim();
+        };
+
+        const perfumesFiltrados = perfumesGlobales.filter((p) => {
+          const familiaDelPerfume = normalizarTexto(p.familiaOlfativa);
+          const familiaBoton = normalizarTexto(familiaBuscada);
+          return (
+            familiaDelPerfume.includes(familiaBoton) ||
+            familiaBoton.includes(familiaDelPerfume)
+          );
+        });
+        renderizarGaleria(perfumesFiltrados);
+      }
+    }
+
+    fetch("/spring/api/perfumes")
+      .then((respuesta) => respuesta.json())
+      .then((perfumes) => {
+        perfumesGlobales = perfumes;
+
+        const parametros = new URLSearchParams(window.location.search);
+        const familiaUrl = parametros.get("familia");
+
+        if (familiaUrl) {
+          aplicarFiltro(familiaUrl); //para aplicar filtro tiene que renderizar los perfumes de la galeria especifica
+        } else {
+          renderizarGaleria(perfumesGlobales); //sino renderiza todos
+        }
+      })
+      .catch((error) => console.error("Error cargando el catálogo:", error));
+
+    // ESCUCHAMOS EL EVENTO DEL SIDEBAR: Cuando el componente avisa que se tocó un botón, filtramos
+    window.addEventListener("filtrar-perfumes", function (event) {
+      aplicarFiltro(event.detail);
+    });
+  </script>
+</body>
+
 </html>

@@ -74,7 +74,7 @@
       <section class="p-4 p-lg-5">
         <div class="d-flex justify-content-between align-items-baseline mb-5">
           <h2 class="display-5">Catálogo de Fragancias</h2>
-          <span class="text-muted small">20 items en archivo</span>
+          <span id="contador-perfumes" class="text-muted small">Cargando catálogo...</span>
         </div>
         <!-- Perfumes-->
         <div id="galeria-perfumes" class="row g-4 mb-5"></div>
@@ -85,8 +85,12 @@
       let perfumesGlobales = [];
 
       function renderizarGaleria(listaPerfumes) {
+        document.getElementById("contador-perfumes").textContent = `${listaPerfumes.length} items en archivo`;
+      
         const contenedor = document.getElementById("galeria-perfumes");
         contenedor.innerHTML = ""; 
+
+        
 
         if (listaPerfumes.length === 0) {
             contenedor.innerHTML = `<p class="text-muted mt-4">No hay fragancias disponibles en esta categoría.</p>`;

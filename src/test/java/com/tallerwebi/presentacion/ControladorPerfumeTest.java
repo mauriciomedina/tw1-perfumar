@@ -27,10 +27,12 @@ public class ControladorPerfumeTest {
   @Test
   public void queAlNavegarALaEspecificacionMeLleveALaVistaEspecificacion() {
     // Ejecución
-    ModelAndView modelAndView = controladorPerfume.irAEspecificacion();
+    // Cambialo por esto:
+    Long idDePrueba = 1L;
+    ModelAndView mav = controladorPerfume.mostrarEspecificacion(idDePrueba);
 
     // Validación
-    assertThat(modelAndView.getViewName(), equalToIgnoringCase("especificacion"));
+    assertThat(mav.getViewName(), equalToIgnoringCase("especificacion"));
   }
 
   // --- TEST 2: Navegación a Formulario ---

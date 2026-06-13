@@ -4,6 +4,7 @@ import com.tallerwebi.presentacion.DatosPerfume;
 import java.util.List;
 
 public interface ServicioColeccion {
-  void guardar(DatosPerfume datosPerfume);
+  void guardarEnColeccion(Long idPerfume);
   List<Perfume> listar();
+  void guardar(DatosPerfume datosPerfume);
 }

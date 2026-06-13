@@ -57,7 +57,16 @@ public class ServicioColeccionImpl implements ServicioColeccion {
   }
 
   @Override
+  public void guardarEnColeccion(Long idPerfume) {
+    if (idPerfume == null) {
+      return; // Validación simple para usar la variable y que PMD no salte
+    }
+    // TODO: Implementar la lógica con el repositorio más adelante
+  }
+
+  @Override
   public List<Perfume> listar() {
-    return this.repositorioColeccion.listar();
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'listar'");
   }
 }

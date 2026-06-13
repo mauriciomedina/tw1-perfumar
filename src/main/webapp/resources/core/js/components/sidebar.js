@@ -3,7 +3,9 @@ class Sidebar extends HTMLElement {
     this.innerHTML = `
       <aside class="sidebar">
         <div class="mb-5">
-          <h1 class="brand-title">PerfumAR</h1>
+          <a href="/spring/home" class="text-decoration-none text-reset">
+            <h1 class="brand-title" style="cursor: pointer;">PerfumAR</h1>
+          </a>
           <p class="text-muted small mb-0">Colecci&oacute;n Exclusiva</p>
         </div>
         <div class="search-container position-relative mb-4">
@@ -50,22 +52,22 @@ class Sidebar extends HTMLElement {
     `;
 
     // AGREGAMOS LOS DETECTORES DE CLICS DENTRO DEL COMPONENTE
-    this.querySelectorAll('.filtro-btn').forEach(boton => {
-      boton.addEventListener('click', (event) => {
+    this.querySelectorAll(".filtro-btn").forEach(boton => {
+      boton.addEventListener("click", (event) => {
         event.preventDefault();
 
         // 1. Cambiamos visualmente el botón activo
-        this.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
-        boton.classList.add('active');
+        this.querySelectorAll(".filtro-btn").forEach(b => b.classList.remove("active"));
+        boton.classList.add("active");
 
-        const familiaBuscada = boton.getAttribute('data-familia');
+        const familiaBuscada = boton.getAttribute("data-familia");
 
         // 2. ¿Existe la galería en esta pestaña?
-        if (document.getElementById('galeria-perfumes')) {
+        if (document.getElementById("galeria-perfumes")) {
           // Si existe (estamos en el Home), disparamos un evento global avisando el cambio
-          window.dispatchEvent(new CustomEvent('filtrar-perfumes', { detail: familiaBuscada }));
+          window.dispatchEvent(new CustomEvent("filtrar-perfumes", { detail: familiaBuscada }));
         } else {
-          // Si NO existe (estamos en especificación u otra pestaña), redirigimos al home pasando el filtro por la URL
+          // Si NO existe (estamos en especificación u otra pestaña), redirigimos al home
           window.location.href = `/spring/home?familia=${familiaBuscada}`;
         }
       });
@@ -73,16 +75,17 @@ class Sidebar extends HTMLElement {
 
     // CONTROL DE RUTA: Si entramos a la página con un filtro en la URL, marcamos activo el botón correcto
     const parametros = new URLSearchParams(window.location.search);
-    const familiaUrl = parametros.get('familia');
+    const familiaUrl = parametros.get("familia");
+    
     if (familiaUrl) {
-      this.querySelectorAll('.filtro-btn').forEach(b => {
-        if (b.getAttribute('data-familia') === familiaUrl) {
-          this.querySelectorAll('.filtro-btn').forEach(btn => btn.classList.remove('active'));
-          b.classList.add('active');
+      this.querySelectorAll(".filtro-btn").forEach(b => {
+        if (b.getAttribute("data-familia") === familiaUrl) {
+          this.querySelectorAll(".filtro-btn").forEach(btn => btn.classList.remove("active"));
+          b.classList.add("active");
         }
       });
     }
   }
 }
 
-customElements.define('mi-sidebar', Sidebar);
+customElements.define("mi-sidebar", Sidebar);

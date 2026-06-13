@@ -93,6 +93,7 @@
             return;
         }
 
+        //se crea la lista de perfumes
         listaPerfumes.forEach((perfume) => {
           const columna = document.createElement("div");
           columna.className = "col-sm-6 col-lg-4 col-xl-3 mb-4";
@@ -145,20 +146,19 @@
         }
       }
 
-      // Carga inicial
+  
       fetch("/spring/api/perfumes")
         .then((respuesta) => respuesta.json())
         .then((perfumes) => {
           perfumesGlobales = perfumes; 
-          
-          // Chequeamos si venimos redirigidos desde especificación con una categoría en la URL
+    
           const parametros = new URLSearchParams(window.location.search);
           const familiaUrl = parametros.get('familia');
           
           if (familiaUrl) {
-              aplicarFiltro(familiaUrl);
+              aplicarFiltro(familiaUrl);//para aplicar filtro tiene que renderizar los perfumes de la galeria especifica
           } else {
-              renderizarGaleria(perfumesGlobales); 
+              renderizarGaleria(perfumesGlobales); //sino renderiza todos
           }
         })
         .catch((error) => console.error("Error cargando el catálogo:", error));

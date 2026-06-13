@@ -51,29 +51,27 @@ class Sidebar extends HTMLElement {
       </aside>
     `;
 
-    // AGREGAMOS LOS DETECTORES DE CLICS DENTRO DEL COMPONENTE
+    // DETECTORES DE CLICS
     this.querySelectorAll(".filtro-btn").forEach(boton => {
       boton.addEventListener("click", (event) => {
         event.preventDefault();
 
-        // 1. Cambiamos visualmente el botón activo
+        // saca el activo al anterior y se lo asigna al nuevo activo
         this.querySelectorAll(".filtro-btn").forEach(b => b.classList.remove("active"));
         boton.classList.add("active");
 
+        //filtra los perfumes
         const familiaBuscada = boton.getAttribute("data-familia");
 
-        // 2. ¿Existe la galería en esta pestaña?
         if (document.getElementById("galeria-perfumes")) {
-          // Si existe (estamos en el Home), disparamos un evento global avisando el cambio
           window.dispatchEvent(new CustomEvent("filtrar-perfumes", { detail: familiaBuscada }));
         } else {
-          // Si NO existe (estamos en especificación u otra pestaña), redirigimos al home
           window.location.href = `/spring/home?familia=${familiaBuscada}`;
         }
       });
     });
 
-    // CONTROL DE RUTA: Si entramos a la página con un filtro en la URL, marcamos activo el botón correcto
+    // CONTROL DE RUTA, si venis de otra pagina te trae denuevo
     const parametros = new URLSearchParams(window.location.search);
     const familiaUrl = parametros.get("familia");
     

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>PerfumAR</title>
+  <title>Perfil</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link
     href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&amp;family=Hanken+Grotesk:wght@300;400;600&amp;display=swap"
@@ -26,6 +26,7 @@
     <header class="header-nav">
       <div class="d-flex align-items-center gap-4">
         <div class="d-flex align-items-center gap-2 text-muted">
+          <span class="material-symbols-outlined fs-6">light_mode</span>
           <span id="currentWeather" class="label-caps" style="font-size: 10px">Elije tu ciudad</span>
         </div>
         <input type="text" id="cityInput" placeholder="Ciudad" />
@@ -43,31 +44,40 @@
           <button class="btn btn-link text-dark p-0">
             <span class="material-symbols-outlined">notifications</span>
           </button>
-          <a class="btn btn-link text-decoration-none text-dark p-0 label-caps" href="perfil.html">Perfil</a>
+          <img alt="User" class="profile-img"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-hCBPLDM6m57yvuLe1u5ciOv0x9VbZoULYc6VvS2TtT4iVqeE9Xg-f7-vh2TLEFauUY7ODhttOKI-_RGUjJS1vPcMoteTz9xMDN-ZDsQiYaiV8LDryBpLllQzB-UJO7U-SHGEhKl5Cj2J4EnDoOKsps4YcJk1T62ceEph54Ia6rKSS-Og-E3IjQAUZFB8S-tUoeXOGasnseoqd6vNFoCHa2OThY7lReGnc4FY5jDBzuluNJ9Wxj-rouq7rsng9CmTyvJF6FhULgjV" />
         </div>
       </div>
     </header>
 
-    <section class="p-4 p-lg-5">
-      <div class="mb-5 pb-3 border-bottom d-flex justify-content-between align-items-end">
-        <div>
-          <h2 class="mb-1" style="font-family: 'Bodoni Moda', serif; font-size: 2.5rem; color: #1a1a1a;">
-            Catálogo de Fragancias
-          </h2>
-          <p class="text-muted mb-0" style="font-size: 0.95rem; letter-spacing: 0.5px;">
-            Explorá nuestra colección exclusiva de aromas de diseñador.
-          </p>
-        </div>
-        <div class="text-end mb-1">
-          <span id="contador-perfumes" class="text-muted label-caps"
-            style="font-size: 0.75rem; letter-spacing: 2px; font-weight: 600;">
-            CARGANDO CATÁLOGO...
-          </span>
-        </div>
-      </div>
-      <!-- Perfumes-->
-      <div id="galeria-perfumes" class="row g-4 mb-5"></div>
-    </section>
+        <section class="row m-3">
+            <div class="col-12">
+                <h1 class="font-display display-lg mb-4">Cuenta Personal</h1>
+                <div class="border-top pt-5">
+                    <!-- Vertical Cascade (Stack) of info -->
+                    <div class="mb-5">
+                        <span class="label-caps d-block mb-2 text-muted" style="font-size: 10px;">Nombre del Usuario</span>
+                        <p class="font-display headline-md mb-0">Julianne V. Archi</p>
+                    </div>
+                    <div class="mb-5">
+                        <span class="label-caps d-block mb-2 text-muted" style="font-size: 10px;">Correo Electrónico</span>
+                        <p class="font-display title-sm mb-0">v.archi@essence.com</p>
+                    </div>
+                    <div class="mb-5">
+                        <span class="label-caps d-block mb-2 text-muted" style="font-size: 10px;">Ciudad</span>
+                        <p class="font-display title-sm mb-0">Barcelona</p>
+                    </div>
+                    <div class="mb-5">
+                        <span class="label-caps d-block mb-2 text-muted" style="font-size: 10px;">País</span>
+                        <p class="font-display title-sm mb-0">España</p>
+                    </div>
+                    <div class="mt-4">
+                        <button class="btn btn-brand">Editar Perfil</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
   </main>
 
   <script>

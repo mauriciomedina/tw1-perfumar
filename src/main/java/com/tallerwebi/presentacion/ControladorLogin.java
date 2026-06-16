@@ -80,4 +80,9 @@ public class ControladorLogin {
   public ModelAndView inicio() {
     return new ModelAndView("redirect:/login");
   }
+
+  @RequestMapping(path = "/perfil", method = RequestMethod.GET)
+  public ModelAndView irAPerfil() {
+    return new ModelAndView("perfil");
+  }
 }

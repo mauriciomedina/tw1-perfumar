@@ -5,7 +5,6 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-
 import com.tallerwebi.infraestructura.RepositorioUsuarioImpl;
 import org.hibernate.Criteria;
 import org.hibernate.Session;

@@ -23,16 +23,13 @@ public class ServicioColeccionTest {
     servicioColeccion = new ServicioColeccionImpl(repositorioMock);
   }
 
-
   @Test
   public void queSePuedaGuardarUnPerfumeConMaceracionYFecha() {
-
     DatosPerfume datos = new DatosPerfume();
     datos.setNombre("Bleecker Street");
     datos.setMarca("Bond No. 9");
     datos.setEnMaceracion(true);
     datos.setFechaInicio("2024-10-25");
-
 
     servicioColeccion.guardar(datos);
 
@@ -40,19 +37,15 @@ public class ServicioColeccionTest {
     verify(repositorioMock, times(1)).guardarColeccion(any(Coleccion.class));
   }
 
-
   @Test
   public void queAlGuardarUnPerfumeSinMaceracionSeManejenLosNulosCorrectamente() {
-
     DatosPerfume datos = new DatosPerfume();
     datos.setNombre("Aventus");
     datos.setMarca("Creed");
-    datos.setEnMaceracion(null); 
-    datos.setFechaInicio(""); 
-
+    datos.setEnMaceracion(null);
+    datos.setFechaInicio("");
 
     servicioColeccion.guardar(datos);
-
 
     verify(repositorioMock, times(1)).guardarPerfume(any(Perfume.class));
     verify(repositorioMock, times(1)).guardarColeccion(any(Coleccion.class));

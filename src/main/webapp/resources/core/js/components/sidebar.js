@@ -8,10 +8,6 @@ class Sidebar extends HTMLElement {
           </a>
           <p class="text-muted small mb-0">Colecci&oacute;n Exclusiva</p>
         </div>
-        <div class="search-container position-relative mb-4">
-          <span class="material-symbols-outlined search-icon">search</span>
-          <input class="form-control" placeholder="Buscar fragancia..." type="text" />
-        </div>
         <nav class="nav flex-column flex-grow-1">
           <a class="nav-link filtro-btn active" href="#" data-familia="TODAS">
             <span class="material-symbols-outlined">select_all</span>

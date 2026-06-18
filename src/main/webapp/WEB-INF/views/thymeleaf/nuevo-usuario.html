@@ -40,7 +40,8 @@
         <form action="#" th:action="@{/registrarme}" method="POST" th:object="${usuario}">
           <div class="mb-4">
             <label class="form-label-caps">Nombre de Usuario</label>
-            <input class="form-control input-minimal" placeholder="Enter your username" type="text">
+            <input class="form-control input-minimal" placeholder="Enter your username" type="text"
+              th:field="*{nombre}" id="nombre" required>
           </div>
           <div class="mb-4">
             <label class="form-label-caps">Correo Electrónico</label>
@@ -58,9 +59,17 @@
               <input class="form-control input-minimal" placeholder="••••••••" type="password">
             </div>
           </div>
-          <div class="mb-4">
-            <label class="form-label-caps">Ciudad</label>
-            <input class="form-control input-minimal" placeholder="Your current location" type="text">
+          <div class="row g-4 mb-4">
+            <div class="col-md-6">
+              <label class="form-label-caps">Ciudad</label>
+              <input class="form-control input-minimal" placeholder="Buenos Aires" type="text"
+                th:field="*{ciudad}" id="ciudad" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label-caps">País (código)</label>
+              <input class="form-control input-minimal" placeholder="AR" type="text"
+                th:field="*{pais}" id="pais" required>
+            </div>
           </div>
           <button class="btn btn-luxury mb-4" type="submit" id="btn-registrarme">CREAR CUENTA</button>
           <p th:if="${error != null}" class="alert alert-danger" th:text="'Error: ' + ${error}">

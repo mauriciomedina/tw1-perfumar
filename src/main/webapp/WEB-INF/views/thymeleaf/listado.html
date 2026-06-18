@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>PerfumAR - Colección</title>
+    <title>Mi colección</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link
         href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&amp;family=Hanken+Grotesk:wght@300;400;600&amp;display=swap"
@@ -16,55 +16,34 @@
     <script type="module" th:src="@{/js/clima.js}"></script>
     <script th:src="@{/js/components/sidebar.js}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <style>
-        .label-caps {
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-
-        .empty-state {
-            padding: 80px 20px;
-            text-align: center;
-            background: #fdfdfd;
-            border: 1px dashed #e0e0e0;
-            border-radius: 12px;
-        }
-    </style>
 </head>
 
 <body>
-    <mi-sidebar></mi-sidebar>
 
+    <mi-sidebar></mi-sidebar>
 
     <main class="main-content">
         <header class="header-nav">
             <div class="d-flex align-items-center gap-4">
                 <div class="d-flex align-items-center gap-2 text-muted">
-                    <span class="material-symbols-outlined fs-6">light_mode</span>
                     <span id="currentWeather" class="label-caps" style="font-size: 10px">Elije tu ciudad</span>
                 </div>
-                <input type="text" id="cityInput" placeholder="Ciudad" />
-                <input type="text" id="countryInput" placeholder="Pais" />
-                <button id="getWeatherBtn">Buscar</button>
+                <input type="text" id="cityInput" placeholder="Ciudad" th:value="${session.CIUDAD}" hidden />
+                <input type="text" id="countryInput" placeholder="Pais" th:value="${session.PAIS}" hidden />
+                <button id="getWeatherBtn" hidden>Buscar</button>
                 <div id="weather-info"></div>
-                <div class="search-container">
+                <!-- <div class="search-container">
                     <span class="material-symbols-outlined text-muted">search</span>
                     <input class="search-input" placeholder="Search Collection" type="text" />
-                </div>
+                </div> -->
             </div>
             <div class="d-flex align-items-center gap-4">
-                <a class="btn btn-link text-decoration-none text-dark p-0 label-caps" href="nuevo-perfume">+ Nuevo
-                    Perfume</a>
                 <a class="btn btn-link text-decoration-none text-dark p-0 label-caps" href="listar-perfumes">Listado</a>
                 <div class="d-flex align-items-center gap-3">
                     <button class="btn btn-link text-dark p-0">
                         <span class="material-symbols-outlined">notifications</span>
                     </button>
-                    <img alt="User" class="profile-img"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-hCBPLDM6m57yvuLe1u5ciOv0x9VbZoULYc6VvS2TtT4iVqeE9Xg-f7-vh2TLEFauUY7ODhttOKI-_RGUjJS1vPcMoteTz9xMDN-ZDsQiYaiV8LDryBpLllQzB-UJO7U-SHGEhKl5Cj2J4EnDoOKsps4YcJk1T62ceEph54Ia6rKSS-Og-E3IjQAUZFB8S-tUoeXOGasnseoqd6vNFoCHa2OThY7lReGnc4FY5jDBzuluNJ9Wxj-rouq7rsng9CmTyvJF6FhULgjV" />
+                    <a class="btn btn-link text-decoration-none text-dark p-0 label-caps" href="perfil.html">Perfil</a>
                 </div>
             </div>
         </header>

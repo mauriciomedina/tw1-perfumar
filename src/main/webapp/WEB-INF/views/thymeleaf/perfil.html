@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>PerfumAR</title>
+  <title>Perfil</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link
     href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&amp;family=Hanken+Grotesk:wght@300;400;600&amp;display=swap"
@@ -16,7 +16,7 @@
   <script type="module" th:src="@{/js/clima.js}"></script>
   <script th:src="@{/js/components/sidebar.js}"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
+  
 </head>
 
 <body>
@@ -32,10 +32,10 @@
         <input type="text" id="countryInput" placeholder="Pais" th:value="${session.PAIS}" hidden />
         <button id="getWeatherBtn" hidden>Buscar</button>
         <div id="weather-info"></div>
-        <div class="search-container">
-          <span id="buscador" class="material-symbols-outlined text-muted">search</span>
-          <input class="search-input" id="inputBuscador" placeholder="Buscar perfume" type="text" />
-        </div>
+        <!-- <div class="search-container">
+          <span class="material-symbols-outlined text-muted">search</span>
+          <input class="search-input" placeholder="Search Collection" type="text" />
+        </div> -->
       </div>
       <div class="d-flex align-items-center gap-4">
         <a class="btn btn-link text-decoration-none text-dark p-0 label-caps" href="listado.html">Listado</a>
@@ -43,31 +43,42 @@
           <button class="btn btn-link text-dark p-0">
             <span class="material-symbols-outlined">notifications</span>
           </button>
-          <a class="btn btn-link text-decoration-none text-dark p-0 label-caps" href="perfil.html">Perfil</a>
+          <a class="btn btn-link text-decoration-none text-dark p-0 label-caps" th:href="@{/logout}">Cerrar sesión</a>
         </div>
       </div>
     </header>
 
-    <section class="p-4 p-lg-5">
-      <div class="mb-5 pb-3 border-bottom d-flex justify-content-between align-items-end">
-        <div>
-          <h2 class="mb-1" style="font-family: 'Bodoni Moda', serif; font-size: 2.5rem; color: #1a1a1a;">
-            Catálogo de Fragancias
-          </h2>
-          <p class="text-muted mb-0" style="font-size: 0.95rem; letter-spacing: 0.5px;">
-            Explorá nuestra colección exclusiva de aromas de diseñador.
-          </p>
-        </div>
-        <div class="text-end mb-1">
-          <span id="contador-perfumes" class="text-muted label-caps"
-            style="font-size: 0.75rem; letter-spacing: 2px; font-weight: 600;">
-            CARGANDO CATÁLOGO...
-          </span>
-        </div>
-      </div>
-      <!-- Perfumes-->
-      <div id="galeria-perfumes" class="row g-4 mb-5"></div>
-    </section>
+        <section class="row m-3">
+            <div class="col-12">
+                <h1 class="font-display display-lg mb-4">Cuenta Personal</h1>
+                <form th:action="@{/actualizar-perfil}" method="POST" th:object="${usuario}">
+                    <div class="border-top pt-5">
+                        <div class="mb-5">
+                            <label class="label-caps d-block mb-2 text-muted" style="font-size: 10px;">Nombre del Usuario</label>
+                            <input class="form-control input-minimal" type="text" th:field="*{nombre}" placeholder="Tu nombre" />
+                        </div>
+                        <div class="mb-5">
+                            <label class="label-caps d-block mb-2 text-muted" style="font-size: 10px;">Correo Electrónico</label>
+                            <input class="form-control input-minimal" type="email" th:field="*{email}" placeholder="tu@email.com" />
+                        </div>
+                        <div class="row mb-5">
+                            <div class="col-md-6">
+                                <label class="label-caps d-block mb-2 text-muted" style="font-size: 10px;">Ciudad</label>
+                                <input class="form-control input-minimal" type="text" th:field="*{ciudad}" placeholder="Buenos Aires" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="label-caps d-block mb-2 text-muted" style="font-size: 10px;">País (código)</label>
+                                <input class="form-control input-minimal" type="text" th:field="*{pais}" placeholder="AR" />
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <button class="btn btn-brand" type="submit">Guardar Cambios</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
   </main>
 
   <script>
@@ -165,26 +176,6 @@
     window.addEventListener("filtrar-perfumes", function (event) {
       aplicarFiltro(event.detail);
     });
-
-    function buscarPerfume() {
-      const termino = document.getElementById("inputBuscador").value.trim();
-      const url =
-        termino === ""
-          ? "/spring/api/perfumes"
-          : `/spring/api/perfumes?nombre=${encodeURIComponent(termino)}`;
-      fetch(url)
-        .then((r) => r.json())
-        .then((perfumes) => renderizarGaleria(perfumes))
-        .catch((err) => console.error("Error en búsqueda:", err));
-    }
-
-    document.getElementById("inputBuscador").addEventListener("keydown", function (event) {
-      if (event.key === "Enter") {
-        buscarPerfume();
-      }
-    });
-
-    document.getElementById("btnBuscar").addEventListener("click", buscarPerfume);
   </script>
 </body>
 

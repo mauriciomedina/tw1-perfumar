@@ -622,4 +622,21 @@ footer {
   margin: 2.5rem 0;
 }
 
+.btn-brand {
+  background-color: var(--primary-black);
+  color: #ffffff;
+  border-radius: 0;
+  padding: 12px 32px;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: none;
+  transition: opacity 0.3s;
+}
+
+.btn-brand:hover {
+  opacity: 0.9;
+  color: #000000;
+  border: #000000;
+}
 /*perfume img*/

@@ -15,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ControladorLogin {
 
+  private static final String ATTR_USUARIO = "usuario";
+
   private ServicioLogin servicioLogin;
 
   @Autowired
@@ -40,6 +42,11 @@ public class ControladorLogin {
     );
     if (usuarioBuscado != null) {
       request.getSession().setAttribute("ROL", usuarioBuscado.getRol());
+      request.getSession().setAttribute("USUARIO_ID", usuarioBuscado.getId());
+      request.getSession().setAttribute("NOMBRE", usuarioBuscado.getNombre());
+      request.getSession().setAttribute("EMAIL", usuarioBuscado.getEmail());
+      request.getSession().setAttribute("CIUDAD", usuarioBuscado.getCiudad());
+      request.getSession().setAttribute("PAIS", usuarioBuscado.getPais());
       return new ModelAndView("redirect:/home");
     } else {
       /* Se instancia el ModelMap solo cuando es necesario (en el flujo de error) para evitar anomalías en el flujo de datos (DU-anomaly de PMD) */
@@ -50,7 +57,7 @@ public class ControladorLogin {
   }
 
   @RequestMapping(path = "/registrarme", method = RequestMethod.POST)
-  public ModelAndView registrarme(@ModelAttribute("usuario") Usuario usuario) {
+  public ModelAndView registrarme(@ModelAttribute(ATTR_USUARIO) Usuario usuario) {
     ModelMap model = new ModelMap();
     try {
       servicioLogin.registrar(usuario);
@@ -67,7 +74,7 @@ public class ControladorLogin {
   @RequestMapping(path = "/nuevo-usuario", method = RequestMethod.GET)
   public ModelAndView nuevoUsuario() {
     ModelMap model = new ModelMap();
-    model.put("usuario", new Usuario());
+    model.put(ATTR_USUARIO, new Usuario());
     return new ModelAndView("nuevo-usuario", model);
   }
 
@@ -79,5 +86,38 @@ public class ControladorLogin {
   @RequestMapping(path = "/", method = RequestMethod.GET)
   public ModelAndView inicio() {
     return new ModelAndView("redirect:/login");
+  }
+
+  @RequestMapping(path = "/perfil", method = RequestMethod.GET)
+  public ModelAndView irAPerfil(HttpServletRequest request) {
+    Usuario usuario = new Usuario();
+    usuario.setNombre((String) request.getSession().getAttribute("NOMBRE"));
+    usuario.setEmail((String) request.getSession().getAttribute("EMAIL"));
+    usuario.setCiudad((String) request.getSession().getAttribute("CIUDAD"));
+    usuario.setPais((String) request.getSession().getAttribute("PAIS"));
+    ModelMap model = new ModelMap();
+    model.put(ATTR_USUARIO, usuario);
+    return new ModelAndView("perfil", model);
+  }
+
+  @RequestMapping(path = "/logout", method = RequestMethod.GET)
+  public ModelAndView cerrarSesion(HttpServletRequest request) {
+    request.getSession().invalidate();
+    return new ModelAndView("redirect:/login");
+  }
+
+  @RequestMapping(path = "/actualizar-perfil", method = RequestMethod.POST)
+  public ModelAndView actualizarPerfil(
+    @ModelAttribute(ATTR_USUARIO) Usuario usuario,
+    HttpServletRequest request
+  ) {
+    Long idUsuario = (Long) request.getSession().getAttribute("USUARIO_ID");
+    usuario.setId(idUsuario);
+    servicioLogin.actualizar(usuario);
+    request.getSession().setAttribute("NOMBRE", usuario.getNombre());
+    request.getSession().setAttribute("EMAIL", usuario.getEmail());
+    request.getSession().setAttribute("CIUDAD", usuario.getCiudad());
+    request.getSession().setAttribute("PAIS", usuario.getPais());
+    return new ModelAndView("redirect:/perfil");
   }
 }

@@ -61,7 +61,7 @@
                                 style="font-size: 16px; line-height: 1.6;">
                                 Buscando detalles en la base de datos...
                             </p>
-                            <form th:action="@{/coleccion/agregar}" method="POST" class="w-100">
+                            <form th:action="@{/agregar-a-coleccion(id=${perfume.id})}" method="POST" class="w-100">
                                 <input type="hidden" name="idPerfume" th:value="${perfume.id}" />
 
                                 <button type="submit" class="btn btn-dark w-100 py-3 text-uppercase"

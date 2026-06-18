@@ -11,7 +11,7 @@ public class Perfume {
 
   private String nombre;
   private String marca;
-  private String urlAfiliado;
+  private String imagenUrl;
 
   @JoinColumn(name = "familia_id")
   @ManyToOne
@@ -41,12 +41,12 @@ public class Perfume {
     this.marca = marca;
   }
 
-  public String getUrlAfiliado() {
-    return urlAfiliado;
+  public String getImagenUrl() {
+    return imagenUrl;
   }
 
-  public void setUrlAfiliado(String urlAfiliado) {
-    this.urlAfiliado = urlAfiliado;
+  public void setImagenUrl(String imagenUrl) {
+    this.imagenUrl = imagenUrl;
   }
 
   public FamiliaOlfativa getFamilia() {

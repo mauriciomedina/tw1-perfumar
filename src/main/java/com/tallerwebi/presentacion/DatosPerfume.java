@@ -6,9 +6,8 @@ public class DatosPerfume {
   private String marca;
   private Long idFamilia;
   private Boolean enMaceracion;
-  private String fechaInicio; // Viaja como String desde el input date HTML
+  private String fechaInicio;
 
-  // Getters y Setters
   public String getNombre() {
     return nombre;
   }

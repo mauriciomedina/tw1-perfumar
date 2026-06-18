@@ -90,9 +90,8 @@
                                 </div>
 
                                 <div class="card-body px-0 mt-3 d-flex flex-column flex-grow-1">
-                                    <p class="text-muted mb-1"
-                                        style="font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase;"
-                                        th:text="${perfume.familiaOlfativa}">FAMILIA</p>
+                                   <span th:text="${perfume.familia?.nombre}">Familia</span>
+                                   
                                     <h3 class="h5 mb-3" style="font-family: 'Bodoni Moda', serif;"
                                         th:text="${perfume.nombre}">Nombre Perfume</h3>
                                 </div>

@@ -21,7 +21,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
   @Override
   @Transactional
   public void onApplicationEvent(ContextRefreshedEvent event) {
-    // Verificamos si el catálogo ya está cargado para no duplicar datos
+    // Verifica si el catálogo ya está cargado para no duplicar datos
     if (repositorioColeccion.listar().isEmpty()) {
       crearPerfume("Sauvage", "Dior", "/spring/img/sauvage.png");
       crearPerfume("Fahrenheit", "Dior", "/spring/img/fahrenheit.png");
@@ -46,7 +46,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
     }
   }
 
-  // Método auxiliar elegante para mantener el código modular y limpio
+
   private void crearPerfume(String nombre, String marca, String imagenUrl) {
     Perfume perfume = new Perfume();
     perfume.setNombre(nombre);

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="utf-8" />
@@ -53,28 +53,31 @@
         <section class="row m-3">
             <div class="col-12">
                 <h1 class="font-display display-lg mb-4">Cuenta Personal</h1>
-                <div class="border-top pt-5">
-                    <!-- Vertical Cascade (Stack) of info -->
-                    <div class="mb-5">
-                        <span class="label-caps d-block mb-2 text-muted" style="font-size: 10px;">Nombre del Usuario</span>
-                        <p class="font-display headline-md mb-0">Julianne V. Archi</p>
+                <form th:action="@{/actualizar-perfil}" method="POST" th:object="${usuario}">
+                    <div class="border-top pt-5">
+                        <div class="mb-5">
+                            <label class="label-caps d-block mb-2 text-muted" style="font-size: 10px;">Nombre del Usuario</label>
+                            <input class="form-control input-minimal" type="text" th:field="*{nombre}" placeholder="Tu nombre" />
+                        </div>
+                        <div class="mb-5">
+                            <label class="label-caps d-block mb-2 text-muted" style="font-size: 10px;">Correo Electrónico</label>
+                            <input class="form-control input-minimal" type="email" th:field="*{email}" placeholder="tu@email.com" />
+                        </div>
+                        <div class="row mb-5">
+                            <div class="col-md-6">
+                                <label class="label-caps d-block mb-2 text-muted" style="font-size: 10px;">Ciudad</label>
+                                <input class="form-control input-minimal" type="text" th:field="*{ciudad}" placeholder="Buenos Aires" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="label-caps d-block mb-2 text-muted" style="font-size: 10px;">País (código)</label>
+                                <input class="form-control input-minimal" type="text" th:field="*{pais}" placeholder="AR" />
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <button class="btn btn-brand" type="submit">Guardar Cambios</button>
+                        </div>
                     </div>
-                    <div class="mb-5">
-                        <span class="label-caps d-block mb-2 text-muted" style="font-size: 10px;">Correo Electrónico</span>
-                        <p class="font-display title-sm mb-0">v.archi@essence.com</p>
-                    </div>
-                    <div class="mb-5">
-                        <span class="label-caps d-block mb-2 text-muted" style="font-size: 10px;">Ciudad</span>
-                        <p class="font-display title-sm mb-0">Barcelona</p>
-                    </div>
-                    <div class="mb-5">
-                        <span class="label-caps d-block mb-2 text-muted" style="font-size: 10px;">País</span>
-                        <p class="font-display title-sm mb-0">España</p>
-                    </div>
-                    <div class="mt-4">
-                        <button class="btn btn-brand">Editar Perfil</button>
-                    </div>
-                </div>
+                </form>
             </div>
         </section>
 

@@ -32,4 +32,13 @@ public class ServicioLoginImpl implements ServicioLogin {
     }
     repositorioUsuario.guardar(usuario);
   }
+
+  @Override
+  public void actualizar(Usuario datosNuevos) {
+    Usuario existente = repositorioUsuario.buscarPorId(datosNuevos.getId());
+    existente.setNombre(datosNuevos.getNombre());
+    existente.setEmail(datosNuevos.getEmail());
+    existente.setCiudad(datosNuevos.getCiudad());
+    existente.setPais(datosNuevos.getPais());
+  }
 }

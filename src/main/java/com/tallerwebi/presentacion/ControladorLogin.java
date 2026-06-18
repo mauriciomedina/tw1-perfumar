@@ -91,12 +91,17 @@ public class ControladorLogin {
   @RequestMapping(path = "/perfil", method = RequestMethod.GET)
   public ModelAndView irAPerfil(HttpServletRequest request) {
     Usuario usuario = new Usuario();
+
+    usuario.setId((Long) request.getSession().getAttribute("USUARIO_ID"));
+
     usuario.setNombre((String) request.getSession().getAttribute("NOMBRE"));
     usuario.setEmail((String) request.getSession().getAttribute("EMAIL"));
     usuario.setCiudad((String) request.getSession().getAttribute("CIUDAD"));
     usuario.setPais((String) request.getSession().getAttribute("PAIS"));
+
     ModelMap model = new ModelMap();
-    model.put(ATTR_USUARIO, usuario);
+    model.put("usuario", usuario);
+
     return new ModelAndView("perfil", model);
   }
 

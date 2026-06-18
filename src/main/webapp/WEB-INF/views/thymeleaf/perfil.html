@@ -29,8 +29,8 @@
           <span class="material-symbols-outlined fs-6">light_mode</span>
           <span id="currentWeather" class="label-caps" style="font-size: 10px">Elije tu ciudad</span>
         </div>
-        <input type="text" id="cityInput" placeholder="Ciudad" />
-        <input type="text" id="countryInput" placeholder="Pais" />
+        <input type="text" id="cityInput" placeholder="Ciudad" th:value="${session.CIUDAD}" />
+        <input type="text" id="countryInput" placeholder="Pais" th:value="${session.PAIS}" />
         <button id="getWeatherBtn">Buscar</button>
         <div id="weather-info"></div>
         <div class="search-container">

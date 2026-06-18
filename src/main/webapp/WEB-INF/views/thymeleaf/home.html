@@ -28,8 +28,8 @@
         <div class="d-flex align-items-center gap-2 text-muted">
           <span id="currentWeather" class="label-caps" style="font-size: 10px">Elije tu ciudad</span>
         </div>
-        <input type="text" id="cityInput" placeholder="Ciudad" />
-        <input type="text" id="countryInput" placeholder="Pais" />
+        <input type="text" id="cityInput" placeholder="Ciudad" th:value="${session.CIUDAD}" />
+        <input type="text" id="countryInput" placeholder="Pais" th:value="${session.PAIS}" />
         <button id="getWeatherBtn">Buscar</button>
         <div id="weather-info"></div>
         <div class="search-container">

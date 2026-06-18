@@ -57,15 +57,21 @@ public class EntidadesTest {
   public void queSePuedaAsignarYObtenerDatosDeUsuario() {
     Usuario usuario = new Usuario();
     usuario.setId(1L);
+    usuario.setNombre("Juan Perez");
     usuario.setEmail("test@unlam.edu.ar");
     usuario.setPassword("1234");
     usuario.setRol("ADMIN");
     usuario.setActivo(true);
+    usuario.setCiudad("Buenos Aires");
+    usuario.setPais("AR");
 
     assertEquals(1L, usuario.getId());
+    assertThat(usuario.getNombre(), equalToIgnoringCase("Juan Perez"));
     assertThat(usuario.getEmail(), equalToIgnoringCase("test@unlam.edu.ar"));
     assertThat(usuario.getPassword(), equalToIgnoringCase("1234"));
     assertThat(usuario.getRol(), equalToIgnoringCase("ADMIN"));
     assertTrue(usuario.getActivo());
+    assertThat(usuario.getCiudad(), equalToIgnoringCase("Buenos Aires"));
+    assertThat(usuario.getPais(), equalToIgnoringCase("AR"));
   }
 }

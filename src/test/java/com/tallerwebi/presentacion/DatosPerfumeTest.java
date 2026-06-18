@@ -10,16 +10,15 @@ public class DatosPerfumeTest {
 
   @Test
   public void queSePuedanAsignarYObtenerLosDatosDelFormulario() {
-    // Preparación
+
     DatosPerfume datos = new DatosPerfume();
 
-    // Ejecución (Usamos los Setters)
+
     datos.setNombre("Sauvage");
     datos.setMarca("Dior");
     datos.setEnMaceracion(true);
     datos.setFechaInicio("2024-12-01");
 
-    // Validación (Usamos los Getters)
     assertThat(datos.getNombre(), equalToIgnoringCase("Sauvage"));
     assertThat(datos.getMarca(), equalToIgnoringCase("Dior"));
     assertTrue(datos.getEnMaceracion());

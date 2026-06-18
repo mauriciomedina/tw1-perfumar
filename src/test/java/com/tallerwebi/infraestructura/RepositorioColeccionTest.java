@@ -10,7 +10,6 @@ import com.tallerwebi.integracion.config.HibernateTestConfig;
 import com.tallerwebi.integracion.config.SpringWebTestConfig;
 import java.util.List;
 import javax.transaction.Transactional;
-import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +22,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @WebAppConfiguration
 @ContextConfiguration(classes = { SpringWebTestConfig.class, HibernateTestConfig.class })
 public class RepositorioColeccionTest {
-
-  @Autowired
-  private SessionFactory sessionFactory;
 
   @Autowired
   private RepositorioColeccion repositorioColeccion;

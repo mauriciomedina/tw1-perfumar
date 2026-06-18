@@ -27,14 +27,13 @@ public class ServicioColeccionImplTest {
     Perfume perfumeSimulado = new Perfume();
     perfumeSimulado.setId(idPerfume);
 
-    // Le enseñamos al mock qué hacer cuando el servicio le pida el perfume
     when(repositorioColeccionMock.buscarPerfume(idPerfume)).thenReturn(perfumeSimulado);
 
     // 2. Ejecución
     servicioColeccion.guardarEnColeccion(idPerfume);
 
     // 3. Validación
-    // Verificamos que el servicio haya llamado al método guardarColeccion pasándole un objeto
+
     verify(repositorioColeccionMock, times(1)).guardarColeccion(any(Coleccion.class));
   }
 }

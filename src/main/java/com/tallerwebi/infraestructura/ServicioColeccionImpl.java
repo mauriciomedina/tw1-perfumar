@@ -22,6 +22,7 @@ public class ServicioColeccionImpl implements ServicioColeccion {
     this.repositorioColeccion = repositorioColeccion;
   }
 
+  //borrar
   @Override
   public void guardar(DatosPerfume datosPerfume) {
     // 1. Instanciamos el perfume maestro
@@ -36,14 +37,13 @@ public class ServicioColeccionImpl implements ServicioColeccion {
     Coleccion itemColeccion = new Coleccion();
     itemColeccion.setPerfume(perfume);
 
-    // Manejamos el switch de maceración: si viene null (apagado), lo forzamos a false
+    // Manejamos el switch de maceración: si viene null , lo forzamos a false
     Boolean estaEnMaceracion = (datosPerfume.getEnMaceracion() != null)
       ? datosPerfume.getEnMaceracion()
       : false;
     itemColeccion.setEnMaceracion(estaEnMaceracion);
 
     // 3. Validación de la fecha
-    // Solo intentamos parsear si está en maceración, si la fecha no es nula, y si el String NO está vacío.
     if (
       estaEnMaceracion &&
       datosPerfume.getFechaInicio() != null &&
@@ -52,21 +52,40 @@ public class ServicioColeccionImpl implements ServicioColeccion {
       itemColeccion.setFechaInicioMaceracion(LocalDate.parse(datosPerfume.getFechaInicio()));
     }
 
-    // Guardamos el registro en la tabla intermedia de inventario
     repositorioColeccion.guardarColeccion(itemColeccion);
   }
 
   @Override
+  @Transactional
   public void guardarEnColeccion(Long idPerfume) {
     if (idPerfume == null) {
-      return; // Validación simple para usar la variable y que PMD no salte
+      return;
     }
-    // TODO: Implementar la lógica con el repositorio más adelante
+
+    // Si lo tengo en la coleccion trae la lista actual de perfumes que ya agregaste
+    List<Perfume> miColeccionActual = this.listar();
+
+    // Recorremos la lista para ver si el ID ya existe adentro
+    for (Perfume perfumeGuardado : miColeccionActual) {
+      if (perfumeGuardado.getId().equals(idPerfume)) {
+        return;
+      }
+    }
+
+    // 1. Busca el perfume
+    Perfume perfumeEncontrado = repositorioColeccion.buscarPerfume(idPerfume);
+
+    // 2. arma la colección con el perfume que seguro existe
+    Coleccion nuevaColeccion = new Coleccion();
+    nuevaColeccion.setPerfume(perfumeEncontrado);
+    nuevaColeccion.setEnMaceracion(false);
+
+    // 3. Guarda la relación
+    repositorioColeccion.guardarColeccion(nuevaColeccion);
   }
 
   @Override
   public List<Perfume> listar() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'listar'");
+    return repositorioColeccion.listar();
   }
 }

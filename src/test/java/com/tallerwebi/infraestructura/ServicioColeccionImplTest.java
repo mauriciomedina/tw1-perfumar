@@ -1,24 +1,40 @@
 package com.tallerwebi.infraestructura;
 
-import static org.mockito.Mockito.*; // Traemos las herramientas de Mockito
+import static org.mockito.Mockito.*;
 
-import com.tallerwebi.dominio.RepositorioColeccion; // Traemos tu repositorio
+import com.tallerwebi.dominio.Coleccion;
+import com.tallerwebi.dominio.Perfume;
+import com.tallerwebi.dominio.RepositorioColeccion;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ServicioColeccionImplTest {
 
+  private RepositorioColeccion repositorioColeccionMock;
+  private ServicioColeccionImpl servicioColeccion;
+
+  @BeforeEach
+  public void init() {
+    // Preparamos el mock y el servicio antes de cada test
+    repositorioColeccionMock = mock(RepositorioColeccion.class);
+    servicioColeccion = new ServicioColeccionImpl(repositorioColeccionMock);
+  }
+
   @Test
-  public void queAlGuardarEnColeccionCubraLasLineasDeCodigo() {
-    // 1. Creamos un Mock (simulacro) de tu repositorio
-    RepositorioColeccion repositorioMock = mock(RepositorioColeccion.class);
+  public void queAlGuardarEnColeccionSeArmeElObjetoYSeGuardeEnElRepositorio() {
+    // 1. Preparación
+    Long idPerfume = 1L;
+    Perfume perfumeSimulado = new Perfume();
+    perfumeSimulado.setId(idPerfume);
 
-    // 2. Ahora sí instanciamos el servicio, pero pasándole el mock por parámetro
-    ServicioColeccionImpl servicio = new ServicioColeccionImpl(repositorioMock);
+    // Le enseñamos al mock qué hacer cuando el servicio le pida el perfume
+    when(repositorioColeccionMock.buscarPerfume(idPerfume)).thenReturn(perfumeSimulado);
 
-    // 3. Ejecutamos el método con nulo para cubrir el "if (idPerfume == null)"
-    servicio.guardarEnColeccion(null);
+    // 2. Ejecución
+    servicioColeccion.guardarEnColeccion(idPerfume);
 
-    // 4. Ejecutamos el método con un ID válido para cubrir el resto del método
-    servicio.guardarEnColeccion(1L);
+    // 3. Validación
+    // Verificamos que el servicio haya llamado al método guardarColeccion pasándole un objeto
+    verify(repositorioColeccionMock, times(1)).guardarColeccion(any(Coleccion.class));
   }
 }

@@ -100,6 +100,12 @@ public class ControladorLogin {
     return new ModelAndView("perfil", model);
   }
 
+  @RequestMapping(path = "/logout", method = RequestMethod.GET)
+  public ModelAndView cerrarSesion(HttpServletRequest request) {
+    request.getSession().invalidate();
+    return new ModelAndView("redirect:/login");
+  }
+
   @RequestMapping(path = "/actualizar-perfil", method = RequestMethod.POST)
   public ModelAndView actualizarPerfil(
     @ModelAttribute(ATTR_USUARIO) Usuario usuario,

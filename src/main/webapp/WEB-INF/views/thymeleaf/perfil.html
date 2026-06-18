@@ -26,7 +26,6 @@
     <header class="header-nav">
       <div class="d-flex align-items-center gap-4">
         <div class="d-flex align-items-center gap-2 text-muted">
-          <span class="material-symbols-outlined fs-6">light_mode</span>
           <span id="currentWeather" class="label-caps" style="font-size: 10px">Elije tu ciudad</span>
         </div>
         <input type="text" id="cityInput" placeholder="Ciudad" th:value="${session.CIUDAD}" />
@@ -44,8 +43,7 @@
           <button class="btn btn-link text-dark p-0">
             <span class="material-symbols-outlined">notifications</span>
           </button>
-          <img alt="User" class="profile-img"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-hCBPLDM6m57yvuLe1u5ciOv0x9VbZoULYc6VvS2TtT4iVqeE9Xg-f7-vh2TLEFauUY7ODhttOKI-_RGUjJS1vPcMoteTz9xMDN-ZDsQiYaiV8LDryBpLllQzB-UJO7U-SHGEhKl5Cj2J4EnDoOKsps4YcJk1T62ceEph54Ia6rKSS-Og-E3IjQAUZFB8S-tUoeXOGasnseoqd6vNFoCHa2OThY7lReGnc4FY5jDBzuluNJ9Wxj-rouq7rsng9CmTyvJF6FhULgjV" />
+          <a class="btn btn-link text-decoration-none text-dark p-0 label-caps" th:href="@{/logout}">Cerrar sesión</a>
         </div>
       </div>
     </header>

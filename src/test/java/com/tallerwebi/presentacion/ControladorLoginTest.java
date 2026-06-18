@@ -152,6 +152,19 @@ public class ControladorLoginTest {
   }
 
   @Test
+  public void cerrarSesionDeberiaInvalidarLaSesionYRedirigirALogin() {
+    // preparacion
+    when(requestMock.getSession()).thenReturn(sessionMock);
+
+    // ejecucion
+    ModelAndView modelAndView = controladorLogin.cerrarSesion(requestMock);
+
+    // validacion
+    assertThat(modelAndView.getViewName(), equalToIgnoringCase("redirect:/login"));
+    verify(sessionMock).invalidate();
+  }
+
+  @Test
   public void irAPerfilDeberiaRetornarVistaPerfilConDatosDelUsuarioDeLaSesion() {
     // preparacion
     when(requestMock.getSession()).thenReturn(sessionMock);

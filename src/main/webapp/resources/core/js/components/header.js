@@ -5,8 +5,8 @@ class HeaderComponent extends HTMLElement {
 
   connectedCallback() {
     // Capturamos los valores de sesión que le vamos a pasar desde el HTML
-    const ciudad = this.getAttribute('ciudad') || '';
-    const pais = this.getAttribute('pais') || '';
+    const ciudad = this.getAttribute("ciudad") || "";
+    const pais = this.getAttribute("pais") || "";
 
     this.innerHTML = `
     <header class="header-nav">
@@ -37,4 +37,4 @@ class HeaderComponent extends HTMLElement {
   }
 }
 
-customElements.define('app-header', HeaderComponent);
+customElements.define("app-header", HeaderComponent);

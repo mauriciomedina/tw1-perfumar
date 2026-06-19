@@ -23,158 +23,69 @@
         <header class="header-nav">
             <div class="d-flex align-items-center gap-4">
                 <div class="d-flex align-items-center gap-2 text-muted">
-                    <span class="material-symbols-outlined fs-6">light_mode</span>
                     <span id="currentWeather" class="label-caps" style="font-size: 10px">Elije tu ciudad</span>
                 </div>
-                <input type="text" id="cityInput" placeholder="Ciudad" />
-                <input type="text" id="countryInput" placeholder="Pais" />
-                <button id="getWeatherBtn">Buscar</button>
+                <input type="text" id="cityInput" placeholder="Ciudad" th:value="${session.CIUDAD}" hidden />
+                <input type="text" id="countryInput" placeholder="Pais" th:value="${session.PAIS}" hidden />
+                <button id="getWeatherBtn" hidden>Buscar</button>
                 <div id="weather-info"></div>
                 <div class="search-container">
-                    <span class="material-symbols-outlined text-muted">search</span>
-                    <input class="search-input" placeholder="Search Collection" type="text" />
+                    <span id="buscador" class="material-symbols-outlined text-muted">search</span>
+                    <input class="search-input" id="inputBuscador" placeholder="Buscar perfume" type="text" />
                 </div>
             </div>
             <div class="d-flex align-items-center gap-4">
-                <a class="btn btn-link text-decoration-none text-dark p-0 label-caps" href="nuevo-perfume">+ Nuevo
-                    Perfume</a>
-                <a class="btn btn-link text-decoration-none text-dark p-0 label-caps" href="/spring/listado">Listado</a>
+                <a class="btn btn-link text-decoration-none text-dark p-0 label-caps" href="listado.html">Listado</a>
                 <div class="d-flex align-items-center gap-3">
                     <button class="btn btn-link text-dark p-0">
                         <span class="material-symbols-outlined">notifications</span>
                     </button>
-                    <img alt="User" class="profile-img"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-hCBPLDM6m57yvuLe1u5ciOv0x9VbZoULYc6VvS2TtT4iVqeE9Xg-f7-vh2TLEFauUY7ODhttOKI-_RGUjJS1vPcMoteTz9xMDN-ZDsQiYaiV8LDryBpLllQzB-UJO7U-SHGEhKl5Cj2J4EnDoOKsps4YcJk1T62ceEph54Ia6rKSS-Og-E3IjQAUZFB8S-tUoeXOGasnseoqd6vNFoCHa2OThY7lReGnc4FY5jDBzuluNJ9Wxj-rouq7rsng9CmTyvJF6FhULgjV" />
+                    <a class="btn btn-link text-decoration-none text-dark p-0 label-caps" href="perfil.html">Perfil</a>
                 </div>
             </div>
         </header>
 
-        <div class="container-fluid p-5">
-            <div class="row g-5">
-                <div class="col-lg-8">
-                    <div class="hero-card mb-5">
-                        <div class="hero-content">
-                            <span id="perfume-marca" class="label-caps text-muted mb-4 opacity-75">Cargando
-                                marca...</span>
-                            <h2 id="perfume-nombre" class="display-3 mb-4">Cargando fragancia...</h2>
-                            <p id="perfume-familia" class="text-muted mb-5 pe-lg-5"
-                                style="font-size: 16px; line-height: 1.6;">
-                                Buscando detalles en la base de datos...
-                            </p>
-                            <form th:action="@{/coleccion/agregar}" method="POST" class="w-100">
-                                <input type="hidden" name="idPerfume" th:value="${perfume.id}" />
-
-                                <button type="submit" class="btn btn-dark w-100 py-3 text-uppercase"
-                                    style="letter-spacing: 2px; font-weight: 600;">
-                                    Añadir a la colección
-                                </button>
-                            </form>
-                        </div>
-                        <div class="hero-image-wrapper d-none d-md-block">
-                            <img id="perfume-imagen" alt="Botella de perfume" src="" class="img-fluid"
-                                style="max-height: 400px; object-fit: cover;">
-                        </div>
-                    </div>
-
-                    <div class="row g-4">
-                        <div class="col-md-4">
-                            <div class="stat-card">
-                                <span class="label-caps text-muted">Total en Archivo</span>
-                                <div class="d-flex justify-content-between align-items-baseline mt-3">
-                                    <h3 class="mb-0">142</h3>
-                                    <small class="text-muted">+3 este mes</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="stat-card">
-                                <span class="label-caps text-muted">Tasa de Uso</span>
-                                <div class="d-flex justify-content-between align-items-baseline mt-3">
-                                    <h3 class="mb-0">84%</h3>
-                                    <small class="text-muted">Rotación activa</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="stat-card">
-                                <span class="label-caps text-muted">Valor de Mercado</span>
-                                <div class="d-flex justify-content-between align-items-baseline mt-3">
-                                    <h3 class="mb-0">$12.4k</h3>
-                                    <small class="text-muted">USD</small>
-                                </div>
-                            </div>
-                        </div>
+        <div class="container py-5 px-4 px-md-5">
+            <div class="row align-items-center min-vh-75 g-5">
+                <!-- Image Column -->
+                <div class="col-lg-5">
+                    <div class="product-image-container">
+                        <img id="perfume-imagen" alt="Botella de perfume" src="" class="product-image">
                     </div>
                 </div>
-
-                <div class="col-lg-4">
-                    <div class="d-flex justify-content-between align-items-end mb-4">
-                        <h3 class="h4 mb-0">Alertas de Maceración</h3>
-                        <span class="material-symbols-outlined text-muted fs-5">more_horiz</span>
+                <!-- Info Column -->
+                <div class="col-lg-7 ps-lg-5">
+                    <nav aria-label="breadcrumb" class="mb-4">
+                        <span class="text-secondary-custom"
+                            style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em;">Detalle de
+                            Fragancia</span>
+                    </nav>
+                    <div class="mb-5">
+                        <p class="text-secondary-custom mb-2" id="perfume-marca"
+                            style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em;">Marca</p>
+                        <h2 id="perfume-nombre" class="font-bodoni text-primary-custom display-luxury mb-3">Nombre</h2>
+                        <p id="perfume-familia"
+                            class="badge rounded-pill bg-transparent text-primary-custom border border-secondary border-opacity-25 px-3 py-2"
+                            style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500;">Familia Olfativa</p>
                     </div>
-                    <div class="maceration-alerts mb-5">
-                        <div class="maceration-card">
-                            <div class="d-flex justify-content-between mb-3">
-                                <div>
-                                    <h4 class="label-caps mb-1">Oud Noir Reserve</h4>
-                                    <p class="text-muted m-0" style="font-size: 10px;">Lote #4421</p>
-                                </div>
-                                <span class="label-caps" style="font-size: 10px;">82%</span>
-                            </div>
-                            <div class="progress progress-thin">
-                                <div class="progress-bar" style="width: 82%"></div>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <span style="font-size: 10px; color: var(--secondary-color);">Aprox. 12 días
-                                    rest.</span>
-                                <span class="material-symbols-outlined" style="font-size: 14px;">timer</span>
-                            </div>
-                        </div>
-                        <div class="maceration-card">
-                            <div class="d-flex justify-content-between mb-3">
-                                <div>
-                                    <h4 class="label-caps mb-1">Santal White</h4>
-                                    <p class="text-muted m-0" style="font-size: 10px;">Lote #4425</p>
-                                </div>
-                                <span class="label-caps" style="font-size: 10px;">45%</span>
-                            </div>
-                            <div class="progress progress-thin">
-                                <div class="progress-bar" style="width: 45%"></div>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <span style="font-size: 10px; color: var(--secondary-color);">Aprox. 28 días
-                                    rest.</span>
-                                <span class="material-symbols-outlined" style="font-size: 14px;">timer</span>
-                            </div>
-                        </div>
-                        <div class="maceration-card">
-                            <div class="d-flex justify-content-between mb-3">
-                                <div>
-                                    <h4 class="label-caps mb-1">Neroli Bloom</h4>
-                                    <p class="text-muted m-0" style="font-size: 10px;">Lote #4430</p>
-                                </div>
-                                <span class="label-caps" style="font-size: 10px;">15%</span>
-                            </div>
-                            <div class="progress progress-thin">
-                                <div class="progress-bar" style="width: 15%"></div>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <span style="font-size: 10px; color: var(--secondary-color);">Aprox. 44 días
-                                    rest.</span>
-                                <span class="material-symbols-outlined" style="font-size: 14px;">timer</span>
-                            </div>
-                        </div>
+                    <div class="mb-5">
+                        <h3 class="section-title">Descripción</h3>
+                        <p id="perfume-descripcion" class="text-secondary-custom lh-lg mb-0" style="font-size: 16px;"></p>
                     </div>
-                    <div class="tip-box mt-auto">
-                        <p class="label-caps mb-2" style="font-size: 10px;">Tip de Maduración</p>
-                        <p class="text-muted font-italic px-3 mb-0" style="font-size: 12px; font-style: italic;">
-                            "Guardar en un lugar fresco y oscuro, lejos de la luz solar directa, para un desarrollo
-                            óptimo del perfume."
-                        </p>
+                    <div class="mb-5">
+                        <h3 class="section-title">Notas</h3>
+                        <p id="perfume-notas" class="text-secondary-custom lh-lg mb-0" style="font-size: 16px;"></p>
+                    </div>
+                    <div class="d-flex gap-3 pt-4">
+                        <form th:action="@{/coleccion/agregar}" method="POST" class="w-100">
+                            <input type="hidden" name="idPerfume" th:value="${perfume.id}" />
+                            <button class="btn btn-primary-custom" type="submit">Agregar a mi colección</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
+
     </main>
 
     <script>
@@ -193,8 +104,10 @@
                         // Si lo encuentra, inyecta los datos
                         document.getElementById('perfume-nombre').textContent = perfume.nombre;
                         document.getElementById('perfume-marca').textContent = perfume.marca.toUpperCase();
-                        document.getElementById('perfume-familia').textContent = `Una exclusiva fragancia de la familia ${perfume.familiaOlfativa.toLowerCase()}, ideal para tu colección personal.`;
+                        document.getElementById('perfume-familia').textContent = perfume.familiaOlfativa;
                         document.getElementById('perfume-imagen').src = perfume.imagenUrl;
+                        document.getElementById('perfume-descripcion').textContent = perfume.descripcion;
+                        document.getElementById('perfume-notas').textContent = perfume.notas;
                     } else {
                         throw new Error("No se encontró el perfume");
                     }

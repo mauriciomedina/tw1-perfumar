@@ -8,7 +8,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-@Repository("repositorioColeccion")
+@Repository
 public class RepositorioColeccionImpl implements RepositorioColeccion {
 
   private SessionFactory sessionFactory;
@@ -19,17 +19,24 @@ public class RepositorioColeccionImpl implements RepositorioColeccion {
   }
 
   @Override
+  public Perfume buscarPerfume(Long id) {
+    return this.sessionFactory.getCurrentSession().get(Perfume.class, id);
+  }
+
+  @Override
   public void guardarPerfume(Perfume perfume) {
-    sessionFactory.getCurrentSession().save(perfume);
+    this.sessionFactory.getCurrentSession().save(perfume);
   }
 
   @Override
   public void guardarColeccion(Coleccion coleccion) {
-    sessionFactory.getCurrentSession().save(coleccion);
+    this.sessionFactory.getCurrentSession().save(coleccion);
   }
 
   @Override
   public List<Perfume> listar() {
-    return sessionFactory.getCurrentSession().createQuery("from Perfume", Perfume.class).list();
+    return this.sessionFactory.getCurrentSession()
+      .createQuery("SELECT c.perfume FROM Coleccion c", Perfume.class)
+      .list();
   }
 }

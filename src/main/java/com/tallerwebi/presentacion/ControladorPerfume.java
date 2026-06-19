@@ -16,25 +16,22 @@ public class ControladorPerfume {
 
   private ServicioColeccion servicioColeccion;
 
-  // Inyección de dependencias a través del constructor
   @Autowired
   public ControladorPerfume(ServicioColeccion servicioColeccion) {
     this.servicioColeccion = servicioColeccion;
   }
 
-  // Endpoint para abrir el formulario de carga
   @RequestMapping(path = "/nuevo-perfume", method = RequestMethod.GET)
   public ModelAndView irAFormularioAlta() {
     return new ModelAndView("formularioAltaPerfume");
   }
 
-  // Endpoint que recibe los datos del formulario y los manda a guardar
   @RequestMapping(path = "/guardar-perfume", method = RequestMethod.POST)
   public ModelAndView guardarPerfume(@ModelAttribute("datosPerfume") DatosPerfume datosPerfume) {
-    // Llamamos a la capa de negocio para hacer el insert en la BD
+    // capa de negocio para hacer el insert en la BD
     servicioColeccion.guardar(datosPerfume);
 
-    // Redirigimos al dashboard principal
+    // dashboard principal
     return new ModelAndView("redirect:/home");
   }
 

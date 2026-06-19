@@ -18,9 +18,8 @@ public class ServicioPerfumeTest {
 
   @BeforeEach
   public void init() {
-    // Creamos el actor (Mock) que se va a hacer pasar por la base de datos
+    // Mock que se va a hacer pasar por la base de datos
     repositorioMock = mock(RepositorioPerfumeImpl.class);
-    // Contratamos al actor en nuestro servicio
     servicioPerfume = new ServicioPerfumeImpl(repositorioMock);
   }
 
@@ -31,10 +30,8 @@ public class ServicioPerfumeTest {
     Perfume perfumeEsperado = new Perfume();
     perfumeEsperado.setNombre(nombre);
 
-    // Le damos el guion al actor: "Si te buscan por este nombre, devolvé este perfume"
     when(repositorioMock.buscar(nombre)).thenReturn(perfumeEsperado);
 
-    // Ejecución
     Perfume perfumeObtenido = servicioPerfume.consultarPerfume(nombre);
 
     // Validación
@@ -48,10 +45,8 @@ public class ServicioPerfumeTest {
     Perfume perfumeNuevo = new Perfume();
     perfumeNuevo.setNombre("Acqua di Gio");
 
-    // Le decimos al mock que devuelva null, simulando que el perfume NO existe aún
     when(repositorioMock.buscar(perfumeNuevo.getNombre())).thenReturn(null);
 
-    // Ejecución
     servicioPerfume.grabar(perfumeNuevo);
 
     // Validación: verificamos que el servicio haya mandado a guardar el perfume
@@ -64,10 +59,8 @@ public class ServicioPerfumeTest {
     Perfume perfumeExistente = new Perfume();
     perfumeExistente.setNombre("Polo Red");
 
-    // El mock avisa que el perfume YA existe
     when(repositorioMock.buscar(perfumeExistente.getNombre())).thenReturn(perfumeExistente);
 
-    // Ejecución y Validación: esperamos que tire la excepción
     assertThrows(
       Exception.class,
       () -> {

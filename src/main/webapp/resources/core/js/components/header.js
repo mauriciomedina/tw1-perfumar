@@ -26,14 +26,25 @@ class HeaderComponent extends HTMLElement {
       <div class="d-flex align-items-center gap-4">
         <a class="btn btn-link text-decoration-none text-dark p-0 label-caps" href="/spring/listado">Mi ColecciOn</a>
         <div class="d-flex align-items-center gap-3">
-          <button class="btn btn-link text-dark p-0">
-            <span class="material-symbols-outlined">notifications</span>
-          </button>
           <a class="btn btn-link text-decoration-none text-dark p-0 label-caps" href="/spring/perfil">Perfil</a>
         </div>
       </div>
     </header>
     `;
+
+    const inputBuscador = this.querySelector("#inputBuscador");
+    if (inputBuscador) {
+      inputBuscador.addEventListener("keydown", function (event) {
+        if (event.key !== "Enter") return;
+        const termino = inputBuscador.value.trim();
+        const enHome = window.location.pathname.endsWith("/home");
+        if (enHome && typeof window.buscarPerfume === "function") {
+          window.buscarPerfume();
+        } else {
+          window.location.href = `/spring/home?buscar=${encodeURIComponent(termino)}`;
+        }
+      });
+    }
   }
 }
 

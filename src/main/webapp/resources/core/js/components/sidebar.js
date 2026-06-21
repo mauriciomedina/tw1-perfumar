@@ -3,7 +3,7 @@ class Sidebar extends HTMLElement {
     this.innerHTML = `
       <aside class="sidebar">
         <div class="mb-5">
-          <a href="/spring/home" class="text-decoration-none text-reset">
+          <a href="/spring/bienvenida" class="text-decoration-none text-reset">
             <h1 class="brand-title" style="cursor: pointer;">PerfumAR</h1>
           </a>
           <p class="text-muted small mb-0">Colecci&oacute;n Exclusiva</p>
@@ -35,13 +35,13 @@ class Sidebar extends HTMLElement {
           </a>
         </nav>
         <div class="mt-auto pt-3 border-top" style="border-color: rgba(0, 0, 0, 0.05) !important">
-          <a class="nav-link mb-1" href="#">
+          <a class="nav-link mb-1" href="perfil.html">
             <span class="material-symbols-outlined">settings</span>
             <span class="label-caps">Configuraci&oacute;n</span>
           </a>
-          <a class="nav-link" href="#">
-            <span class="material-symbols-outlined">help_outline</span>
-            <span class="label-caps">Ayuda</span>
+          <a class="nav-link" href="/spring/logout">
+            <span class="material-symbols-outlined">logout</span>
+            <span class="label-caps">Cerrar sesi&oacute;n</span>
           </a>
         </div>
       </aside>

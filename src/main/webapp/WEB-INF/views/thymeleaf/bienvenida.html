@@ -56,7 +56,6 @@
                 </div>
                 <!-- Right Side: Details -->
                 <div class="col-lg-6 ps-lg-5">
-                    <div class="font-label-caps spacing-y-sm text-secondary">Selección Actual</div>
                     <div class="font-label-caps text-secondary mb-2" style="letter-spacing: 0.2em;">PERFUME DEL DÍA
                     </div>
                     <h1 class="font-display-lg spacing-y-sm text-white">L'Ombre Nomade</h1>
@@ -83,7 +82,10 @@
                     </div>
                     <div class="mt-4">
                         <div class="d-flex flex-wrap gap-3">
-                            <a class="btn-luxury" href="#" style="letter-spacing: 0.2em;">Agregar a mi colección</a>
+                            <form th:action="@{/agregar-a-coleccion(id=${perfume.id})}" method="POST" class="w-100">
+                                <input type="hidden" name="idPerfume" th:value="${perfume.id}" />
+                                <button class="btn btn-primary-custom" type="submit">Agregar a mi colección</button>
+                            </form>
                             <a class="btn-luxury-outline" href="/spring/home">Todas las fragancias</a>
                         </div>
                     </div>

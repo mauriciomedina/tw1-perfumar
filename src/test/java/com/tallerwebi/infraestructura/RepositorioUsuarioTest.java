@@ -112,6 +112,21 @@ public class RepositorioUsuarioTest {
   @Test
   @Transactional
   @Rollback
+  public void deberiaEncontrarUnUsuarioExistentePorId() {
+    // preparacion
+    Usuario usuario = this.dadoQueTengoUnUsuario("porid@test.com", "123", "USER");
+    this.dadoQueExisteElUsuario(usuario);
+
+    // ejecucion
+    Usuario obtenido = repositorioUsuario.buscarPorId(usuario.getId());
+
+    // validacion
+    assertThat(obtenido.getEmail(), is(equalTo(usuario.getEmail())));
+  }
+
+  @Test
+  @Transactional
+  @Rollback
   public void deberiaLanzarUnaExcepcionAlIntentarModificarUnUsuarioInexistente() {
     Usuario usuario = this.dadoQueTengoUnUsuario("noexiste@test.com", "123", "USER");
 

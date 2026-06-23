@@ -65,7 +65,7 @@ public class ControladorLoginTest {
     ModelAndView modelAndView = controladorLogin.validarLogin(datosLoginMock, requestMock);
 
     // validacion
-    assertThat(modelAndView.getViewName(), equalToIgnoringCase("redirect:/home"));
+    assertThat(modelAndView.getViewName(), equalToIgnoringCase("redirect:/bienvenida"));
     verify(sessionMock, times(1)).setAttribute("ROL", usuarioEncontradoMock.getRol());
   }
 
@@ -149,5 +149,59 @@ public class ControladorLoginTest {
 
     // validacion
     assertThat(modelAndView.getViewName(), equalToIgnoringCase("redirect:/login"));
+  }
+
+  @Test
+  public void cerrarSesionDeberiaInvalidarLaSesionYRedirigirALogin() {
+    // preparacion
+    when(requestMock.getSession()).thenReturn(sessionMock);
+
+    // ejecucion
+    ModelAndView modelAndView = controladorLogin.cerrarSesion(requestMock);
+
+    // validacion
+    assertThat(modelAndView.getViewName(), equalToIgnoringCase("redirect:/login"));
+    verify(sessionMock).invalidate();
+  }
+
+  @Test
+  public void irAPerfilDeberiaRetornarVistaPerfilConDatosDelUsuarioDeLaSesion() {
+    // preparacion
+    when(requestMock.getSession()).thenReturn(sessionMock);
+    when(sessionMock.getAttribute("NOMBRE")).thenReturn("Juan");
+    when(sessionMock.getAttribute("EMAIL")).thenReturn("juan@test.com");
+    when(sessionMock.getAttribute("CIUDAD")).thenReturn("Córdoba");
+    when(sessionMock.getAttribute("PAIS")).thenReturn("AR");
+
+    // ejecucion
+    ModelAndView modelAndView = controladorLogin.irAPerfil(requestMock);
+
+    // validacion
+    assertThat(modelAndView.getViewName(), equalToIgnoringCase("perfil"));
+    assertThat(modelAndView.getModel().get("usuario"), instanceOf(Usuario.class));
+  }
+
+  @Test
+  public void actualizarPerfilDeberiaGuardarCambiosActualizarSesionYRedirigirAPerfil() {
+    // preparacion
+    Usuario usuario = new Usuario();
+    usuario.setNombre("Nuevo Nombre");
+    usuario.setEmail("nuevo@test.com");
+    usuario.setCiudad("Rosario");
+    usuario.setPais("AR");
+
+    when(requestMock.getSession()).thenReturn(sessionMock);
+    when(sessionMock.getAttribute("USUARIO_ID")).thenReturn(1L);
+
+    // ejecucion
+    ModelAndView modelAndView = controladorLogin.actualizarPerfil(usuario, requestMock);
+
+    // validacion
+    assertThat(modelAndView.getViewName(), equalToIgnoringCase("redirect:/perfil"));
+    verify(servicioLoginMock, times(1)).actualizar(any(Usuario.class));
+    verify(sessionMock).setAttribute("CIUDAD", "Rosario");
+    verify(sessionMock).setAttribute("PAIS", "AR");
+    verify(sessionMock).setAttribute("NOMBRE", "Nuevo Nombre");
+    verify(sessionMock).setAttribute("EMAIL", "nuevo@test.com");
   }
 }

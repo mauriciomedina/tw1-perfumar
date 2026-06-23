@@ -46,3 +46,7 @@ function displayWeather(data) {
   currentWeatherSpan.textContent = `${cityName}, ${temp}\u00B0C`;
   weatherInfoDiv.innerHTML = "";
 }
+
+if (cityInput && cityInput.value.trim() !== "" && countryInput && countryInput.value.trim() !== "") {
+  getWeatherBtn.click();
+}

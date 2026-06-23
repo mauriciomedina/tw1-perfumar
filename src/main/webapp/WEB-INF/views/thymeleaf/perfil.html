@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Perfil</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&amp;family=Hanken+Grotesk:wght@300;400;600&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" th:href="@{/css/main.css}" />
+<script th:src="@{/js/components/sidebar.js}"></script>
+  <script th:src="@{/js/components/header.js}" defer></script>
+  
+  <script type="module" th:src="@{/js/clima.js}"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+</head>
+
+<body>
+  <mi-sidebar></mi-sidebar>
+
+  <main class="main-content">
+    <app-header th:attr="ciudad=${session.CIUDAD}, pais=${session.PAIS}"></app-header>
+
+        <section class="row m-3">
+            <div class="col-12">
+                <h1 class="font-display display-lg mb-4">Cuenta Personal</h1>
+                <form th:action="@{/actualizar-perfil}" method="POST" th:object="${usuario}">
+                  <input type="hidden" th:field="*{id}" />
+                    <div class="border-top pt-5">
+                        <div class="mb-5">
+                            <label class="label-caps d-block mb-2 text-muted" style="font-size: 10px;">Nombre del Usuario</label>
+                            <input class="form-control input-minimal" type="text" th:field="*{nombre}" placeholder="Tu nombre" />
+                        </div>
+                        <div class="mb-5">
+                            <label class="label-caps d-block mb-2 text-muted" style="font-size: 10px;">Correo Electrónico</label>
+                            <input class="form-control input-minimal" type="email" th:field="*{email}" placeholder="tu@email.com" />
+                        </div>
+                        <div class="row mb-5">
+                            <div class="col-md-6">
+                                <label class="label-caps d-block mb-2 text-muted" style="font-size: 10px;">Ciudad</label>
+                                <input class="form-control input-minimal" type="text" th:field="*{ciudad}" placeholder="Buenos Aires" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="label-caps d-block mb-2 text-muted" style="font-size: 10px;">País (código)</label>
+                                <input class="form-control input-minimal" type="text" th:field="*{pais}" placeholder="AR" />
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <button class="btn btn-brand" type="submit">Guardar Cambios</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+  </main>
+
+</body>
+
+</html>

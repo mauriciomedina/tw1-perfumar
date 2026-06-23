@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>PerfumAR | Bienvenida</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&amp;family=Hanken+Grotesk:wght@100..900&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <script th:src="@{/js/components/header.js}" defer></script>
+    <script type="module" th:src="@{/js/clima.js}"></script>
+    <script th:src="@{/js/components/sidebar.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+
+    <main>
+
+        <app-header th:attr="ciudad=${session.CIUDAD}, pais=${session.PAIS}"></app-header>
+
+        <section class="welcome-section container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 welcome-text">
+                    <div class="font-label-caps text-secondary mb-4" style="letter-spacing: 0.3em;">Filosofía</div>
+                    <h2 class="font-display-lg mb-5" style="line-height: 1.3;">
+                        La perfumería es arte, pero también contexto. Nuestra plataforma combina tu colección personal
+                        de fragancias con el clima actual de tu ciudad para sugerirte el perfume que mejor expresará sus
+                        notas y rendimiento en cada momento.
+                    </h2>
+                    <p class="font-body-lg text-secondary mx-auto" style="max-width: 650px; font-size: 18px;">
+                        Deja que el tiempo, la temperatura y tu colección trabajen juntos para encontrar la fragancia
+                        perfecta para hoy.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Section: Perfume del Día (Now Dark) -->
+        <section class="hero-section container-fluid">
+            <div class="row w-100 g-5 align-items-center">
+                <!-- Left Side: Image -->
+                <div class="col-lg-6">
+                    <div class="perfume-image-container">
+                        <img alt="Perfume del Día"
+                            data-alt="A professional high-end studio photograph of a sculptural perfume bottle made of heavy, transparent glass with sharp, architectural edges. The liquid inside is a pale amber color. The bottle is positioned centrally against a stark, pure white background with soft, diffused shadows that emphasize its luxury boutique aesthetic. The lighting is crisp and minimal, reflecting the quiet luxury theme of the brand Essence Archive."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyyyKcr9Sg-u4xfVCDMdXM63GxvVGGSXV0ZEGI92qz6cOoRpXiTOat2x2LHbJ6LFSLZurv5rrmQ916SdcRXiMsRGH0_EmP4op1E_9eb18C4c2jlWkgTztMhQ3gqj4I334ouEtXv7cSaBJbBtnK6GO887u4FhhomkgHA_hPDWk_K9wqNthngSnRorn3PEon1w_VWFdiwuzbGxUKn9mEaQkW2ASTzKulWLeHmx5hjYJ-eTrAxgHOT4BVPpn_GKPZ-PxoUaBwEI9KubA"
+                            class="">
+                    </div>
+                </div>
+                <!-- Right Side: Details -->
+                <div class="col-lg-6 ps-lg-5">
+                    <div class="font-label-caps spacing-y-sm text-secondary">Selección Actual</div>
+                    <div class="font-label-caps text-secondary mb-2" style="letter-spacing: 0.2em;">PERFUME DEL DÍA
+                    </div>
+                    <h1 class="font-display-lg spacing-y-sm text-white">L'Ombre Nomade</h1>
+                    <div class="font-title-sm spacing-y-sm text-white-50">Louis Vuitton</div>
+                    <div class="hairline-separator"></div>
+                    <p class="font-body-lg spacing-y-md text-secondary" style="max-width: 480px;">
+                        Una oda al material más preciado de la perfumería: el Oud. Una fragancia que captura el espíritu
+                        de los viajes interminables, mezclando la profundidad del incienso con la frescura de la
+                        frambuesa.
+                    </p>
+                    <div class="spacing-y-md">
+                        <div class="font-label-caps text-secondary spacing-y-sm">Familia Olfativa</div>
+                        <div class="font-body-lg text-white">Ámbar Amaderada</div>
+                    </div>
+                    <!-- Custom Scent Scale Component -->
+                    <div class="spacing-y-md">
+                        <div class="d-flex justify-content-between font-label-caps text-secondary mb-1">
+                            <span class="">Sutil</span>
+                            <span class="">Intenso</span>
+                        </div>
+                        <div class="scent-scale">
+                            <div class="scent-dot" style="left: 85%;"></div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="d-flex flex-wrap gap-3">
+                            <a class="btn-luxury" href="#" style="letter-spacing: 0.2em;">Agregar a mi colección</a>
+                            <a class="btn-luxury-outline" href="/spring/home">Todas las fragancias</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const luxuryButtons = document.querySelectorAll('.btn-luxury, .btn-luxury-outline');
+
+            luxuryButtons.forEach(btn => {
+                btn.addEventListener('mouseenter', () => {
+                    btn.style.letterSpacing = '0.25em';
+                });
+                btn.addEventListener('mouseleave', () => {
+                    btn.style.letterSpacing = '0.2em';
+                });
+            });
+
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const image = document.querySelector('.perfume-image-container img');
+                if (image) {
+                    image.style.transform = `translateY(${scrolled * 0.05}px)`;
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

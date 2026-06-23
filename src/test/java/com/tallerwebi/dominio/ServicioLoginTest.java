@@ -53,6 +53,32 @@ public class ServicioLoginTest {
   }
 
   @Test
+  public void actualizarUsuarioDeberiaCargarloDeLaBdYModificarSusDatos() {
+    // preparacion
+    Usuario datosNuevos = new Usuario();
+    datosNuevos.setId(1L);
+    datosNuevos.setNombre("Nuevo Nombre");
+    datosNuevos.setEmail("nuevo@test.com");
+    datosNuevos.setCiudad("Córdoba");
+    datosNuevos.setPais("AR");
+
+    Usuario existente = new Usuario();
+    existente.setId(1L);
+    existente.setEmail("viejo@test.com");
+    when(this.repositorioUsuarioMock.buscarPorId(1L)).thenReturn(existente);
+
+    // ejecucion
+    this.servicioLogin.actualizar(datosNuevos);
+
+    // validacion
+    verify(this.repositorioUsuarioMock, times(1)).buscarPorId(1L);
+    assertThat(existente.getNombre(), equalTo("Nuevo Nombre"));
+    assertThat(existente.getEmail(), equalTo("nuevo@test.com"));
+    assertThat(existente.getCiudad(), equalTo("Córdoba"));
+    assertThat(existente.getPais(), equalTo("AR"));
+  }
+
+  @Test
   public void registrarUsuarioSiExisteDeberiaLanzarExcepcion() {
     // preparacion
     Usuario usuario = new Usuario();

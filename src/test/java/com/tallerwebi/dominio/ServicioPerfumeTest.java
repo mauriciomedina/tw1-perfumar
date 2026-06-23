@@ -32,7 +32,6 @@ public class ServicioPerfumeTest {
 
     when(repositorioMock.buscar(nombre)).thenReturn(perfumeEsperado);
 
-
     Perfume perfumeObtenido = servicioPerfume.consultarPerfume(nombre);
 
     // Validación
@@ -45,7 +44,6 @@ public class ServicioPerfumeTest {
     // Preparación
     Perfume perfumeNuevo = new Perfume();
     perfumeNuevo.setNombre("Acqua di Gio");
-
 
     when(repositorioMock.buscar(perfumeNuevo.getNombre())).thenReturn(null);
 
@@ -61,9 +59,7 @@ public class ServicioPerfumeTest {
     Perfume perfumeExistente = new Perfume();
     perfumeExistente.setNombre("Polo Red");
 
-
     when(repositorioMock.buscar(perfumeExistente.getNombre())).thenReturn(perfumeExistente);
-
 
     assertThrows(
       Exception.class,

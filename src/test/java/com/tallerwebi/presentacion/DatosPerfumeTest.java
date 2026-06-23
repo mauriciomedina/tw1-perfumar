@@ -10,9 +10,7 @@ public class DatosPerfumeTest {
 
   @Test
   public void queSePuedanAsignarYObtenerLosDatosDelFormulario() {
-
     DatosPerfume datos = new DatosPerfume();
-
 
     datos.setNombre("Sauvage");
     datos.setMarca("Dior");

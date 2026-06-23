@@ -46,7 +46,6 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
     }
   }
 
-
   private void crearPerfume(String nombre, String marca, String imagenUrl) {
     Perfume perfume = new Perfume();
     perfume.setNombre(nombre);

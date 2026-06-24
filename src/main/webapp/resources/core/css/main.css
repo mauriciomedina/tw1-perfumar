@@ -681,7 +681,6 @@ footer {
 .product-image {
   width: 100%;
   height: auto;
-  filter: grayscale(100%);
   transition: filter 0.7s ease;
 }
 

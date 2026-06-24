@@ -4,6 +4,7 @@ import com.tallerwebi.dominio.Coleccion;
 import com.tallerwebi.dominio.Perfume;
 import com.tallerwebi.dominio.RepositorioColeccion;
 import com.tallerwebi.dominio.ServicioColeccion;
+import com.tallerwebi.dominio.Usuario;
 import com.tallerwebi.presentacion.DatosPerfume;
 import java.time.LocalDate;
 import java.util.List;
@@ -56,36 +57,42 @@ public class ServicioColeccionImpl implements ServicioColeccion {
   }
 
   @Override
-  @Transactional
-  public void guardarEnColeccion(Long idPerfume) {
-    if (idPerfume == null) {
-      return;
+  public void guardarEnColeccion(Long idUsuario, Long idPerfume) {
+    if (idUsuario == null || idPerfume == null) return;
+
+    // Validamos que no esté ya agregado usando el listar del repositorio
+    List<Perfume> miColeccion = this.listar(idUsuario);
+    for (Perfume p : miColeccion) {
+      if (p.getId().equals(idPerfume)) return;
     }
 
-    // Si lo tengo en la coleccion trae la lista actual de perfumes que ya agregaste
-    List<Perfume> miColeccionActual = this.listar();
-
-    // Recorremos la lista para ver si el ID ya existe adentro
-    for (Perfume perfumeGuardado : miColeccionActual) {
-      if (perfumeGuardado.getId().equals(idPerfume)) {
-        return;
-      }
-    }
-
-    // 1. Busca el perfume
+    // Buscamos el perfume maestro
     Perfume perfumeEncontrado = repositorioColeccion.buscarPerfume(idPerfume);
 
-    // 2. arma la colección con el perfume que seguro existe
+    // Creamos la relación
     Coleccion nuevaColeccion = new Coleccion();
     nuevaColeccion.setPerfume(perfumeEncontrado);
-    nuevaColeccion.setEnMaceracion(false);
 
-    // 3. Guarda la relación
+    Usuario dueno = new Usuario();
+    dueno.setId(idUsuario);
+    nuevaColeccion.setUsuario(dueno);
+
+    nuevaColeccion.setEnMaceracion(false);
     repositorioColeccion.guardarColeccion(nuevaColeccion);
   }
 
   @Override
+  public List<Perfume> listar(Long idUsuario) {
+    return repositorioColeccion.listar(idUsuario);
+  }
+
+  @Override
   public List<Perfume> listar() {
-    return repositorioColeccion.listar();
+    return repositorioColeccion.listar(); // El que ya tenías
+  }
+
+  @Override
+  public void eliminarPerfume(Long idUsuario, Long idPerfume) {
+    repositorioColeccion.eliminar(idUsuario, idPerfume);
   }
 }

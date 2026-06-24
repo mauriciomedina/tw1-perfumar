@@ -6,10 +6,12 @@ import static org.hamcrest.Matchers.*;
 import com.tallerwebi.dominio.Coleccion;
 import com.tallerwebi.dominio.Perfume;
 import com.tallerwebi.dominio.RepositorioColeccion;
+import com.tallerwebi.dominio.Usuario;
 import com.tallerwebi.integracion.config.HibernateTestConfig;
 import com.tallerwebi.integracion.config.SpringWebTestConfig;
 import java.util.List;
 import javax.transaction.Transactional;
+import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,24 +28,34 @@ public class RepositorioColeccionTest {
   @Autowired
   private RepositorioColeccion repositorioColeccion;
 
+  @Autowired
+  private SessionFactory sessionFactory;
+
   @Test
   @Transactional
   @Rollback
   public void queAlGuardarUnaColeccionSePuedaListarSuPerfume() {
-    // 1. Preparación
+
+    Usuario usuarioPrueba = new Usuario();
+    usuarioPrueba.setEmail("test@test.com"); 
+
+
+    this.sessionFactory.getCurrentSession().save(usuarioPrueba);
+
     Perfume perfumeSimulado = new Perfume();
     perfumeSimulado.setNombre("Tom Ford Ombré Leather");
-    repositorioColeccion.guardarPerfume(perfumeSimulado); // Guardamos en el catálogo
+    repositorioColeccion.guardarPerfume(perfumeSimulado);
 
     Coleccion nuevaColeccion = new Coleccion();
     nuevaColeccion.setPerfume(perfumeSimulado);
+    nuevaColeccion.setUsuario(usuarioPrueba); 
 
-    // 2. Ejecución
-    repositorioColeccion.guardarColeccion(nuevaColeccion); // Guardamos el vínculo
-    List<Perfume> listadoDb = repositorioColeccion.listar();
+  
+    repositorioColeccion.guardarColeccion(nuevaColeccion);
 
-    // 3. Validación
-    assertThat(listadoDb, is(not(empty())));
+  
+    List<Perfume> listadoDb = repositorioColeccion.listar(usuarioPrueba.getId());
+
     assertThat(listadoDb.size(), is(1));
     assertThat(listadoDb.get(0).getNombre(), equalToIgnoringCase("Tom Ford Ombré Leather"));
   }

@@ -1,5 +1,6 @@
 package com.tallerwebi.infraestructura;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 import com.tallerwebi.dominio.Coleccion;
@@ -30,7 +31,7 @@ public class ServicioColeccionImplTest {
     when(repositorioColeccionMock.buscarPerfume(idPerfume)).thenReturn(perfumeSimulado);
 
     // 2. Ejecución
-    servicioColeccion.guardarEnColeccion(idPerfume);
+    servicioColeccion.guardarEnColeccion(1L, idPerfume);
 
     // 3. Validación
 

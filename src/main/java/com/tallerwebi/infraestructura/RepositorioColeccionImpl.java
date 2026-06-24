@@ -35,8 +35,32 @@ public class RepositorioColeccionImpl implements RepositorioColeccion {
 
   @Override
   public List<Perfume> listar() {
+    // Este sigue siendo el de siempre para el catálogo general
+    return this.sessionFactory.getCurrentSession().createCriteria(Perfume.class).list();
+  }
+
+  @Override
+  public List<Perfume> listar(Long idUsuario) {
     return this.sessionFactory.getCurrentSession()
-      .createQuery("SELECT c.perfume FROM Coleccion c", Perfume.class)
+      .createQuery(
+        "SELECT c.perfume FROM Coleccion c WHERE c.usuario.id = :idUsuario",
+        Perfume.class
+      )
+      .setParameter("idUsuario", idUsuario)
       .list();
+  }
+
+  @Override
+  public void eliminar(Long idUsuario, Long idPerfume) {
+    this.sessionFactory.getCurrentSession()
+      .createQuery(
+        "DELETE FROM Coleccion c WHERE c.usuario.id = :idUsuario AND c.perfume.id = :idPerfume"
+      )
+      .setParameter("idUsuario", idUsuario)
+      .setParameter("idPerfume", idPerfume)
+      .executeUpdate();
+
+    this.sessionFactory.getCurrentSession().flush();
+    this.sessionFactory.getCurrentSession().clear();
   }
 }

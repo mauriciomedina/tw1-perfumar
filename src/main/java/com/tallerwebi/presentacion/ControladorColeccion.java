@@ -3,6 +3,7 @@ package com.tallerwebi.presentacion;
 import com.tallerwebi.dominio.Perfume;
 import com.tallerwebi.dominio.ServicioColeccion;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,21 +23,43 @@ public class ControladorColeccion {
   }
 
   @RequestMapping(path = "/agregar-a-coleccion", method = RequestMethod.POST)
-  public ModelAndView agregarPerfume(@RequestParam("idPerfume") Long idPerfume) {
-    servicioColeccion.guardarEnColeccion(idPerfume);
+  public ModelAndView agregarPerfume(
+    @RequestParam("idPerfume") Long idPerfume,
+    HttpServletRequest request
+  ) {
+    Long idUsuario = (Long) request.getSession().getAttribute("USUARIO_ID");
+    if (idUsuario == null) return new ModelAndView("redirect:/login");
+
+    servicioColeccion.guardarEnColeccion(idUsuario, idPerfume);
     return new ModelAndView("redirect:/listado");
   }
 
   @RequestMapping(path = "/listado", method = RequestMethod.GET)
-  public ModelAndView mostrarListado() {
+  public ModelAndView mostrarListado(HttpServletRequest request) {
+    Long idUsuario = (Long) request.getSession().getAttribute("USUARIO_ID");
+    if (idUsuario == null) return new ModelAndView("redirect:/login");
+
     ModelMap modelo = new ModelMap();
 
-    //el servicio real trae los perfumes de la base de datos
-    List<Perfume> misPerfumes = servicioColeccion.listar();
+    // AHORA SÍ TRAEMOS SOLO LOS PERFUMES DE ESTE USUARIO
+    List<Perfume> misPerfumes = servicioColeccion.listar(idUsuario);
 
-    // se muestra la vista de coleccion de perfumes
     modelo.put("perfumesColeccion", misPerfumes);
-
     return new ModelAndView("listado", modelo);
+  }
+
+  @RequestMapping(path = "/eliminar-de-coleccion", method = RequestMethod.POST)
+  public ModelAndView eliminarDeColeccion(
+    @RequestParam("idPerfume") Long idPerfume,
+    HttpServletRequest request
+  ) {
+    Long idUsuario = (Long) request.getSession().getAttribute("USUARIO_ID");
+
+    if (idUsuario == null) {
+      return new ModelAndView("redirect:/login");
+    }
+
+    servicioColeccion.eliminarPerfume(idUsuario, idPerfume);
+    return new ModelAndView("redirect:/listado");
   }
 }

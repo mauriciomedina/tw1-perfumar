@@ -68,7 +68,11 @@ function renderPerfumeDelDia(perfume, weatherData) {
   };
 
   const img = document.getElementById("pddia-imagen");
-  if (img) { img.src = perfume.imagenUrl; img.alt = perfume.nombre; }
+  if (img) {
+    img.onerror = () => { img.onerror = null; img.src = "/spring/img/sauvage.png"; };
+    img.src = perfume.imagenUrl;
+    img.alt = perfume.nombre;
+  }
 
   set("pddia-clima-info", `${condicion.charAt(0).toUpperCase() + condicion.slice(1)} · ${temp}°C`);
   set("pddia-nombre",      perfume.nombre);

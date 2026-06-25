@@ -35,10 +35,8 @@ public class RepositorioColeccionTest {
   @Transactional
   @Rollback
   public void queAlGuardarUnaColeccionSePuedaListarSuPerfume() {
-
     Usuario usuarioPrueba = new Usuario();
-    usuarioPrueba.setEmail("test@test.com"); 
-
+    usuarioPrueba.setEmail("test@test.com");
 
     this.sessionFactory.getCurrentSession().save(usuarioPrueba);
 
@@ -48,12 +46,10 @@ public class RepositorioColeccionTest {
 
     Coleccion nuevaColeccion = new Coleccion();
     nuevaColeccion.setPerfume(perfumeSimulado);
-    nuevaColeccion.setUsuario(usuarioPrueba); 
+    nuevaColeccion.setUsuario(usuarioPrueba);
 
-  
     repositorioColeccion.guardarColeccion(nuevaColeccion);
 
-  
     List<Perfume> listadoDb = repositorioColeccion.listar(usuarioPrueba.getId());
 
     assertThat(listadoDb.size(), is(1));

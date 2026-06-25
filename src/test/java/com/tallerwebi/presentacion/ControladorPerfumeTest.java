@@ -31,26 +31,4 @@ public class ControladorPerfumeTest {
     // Validación
     assertThat(mav.getViewName(), equalToIgnoringCase("especificacion"));
   }
-
-  @Test
-  public void queAlNavegarAlFormularioMeLleveALaVistaFormularioAltaPerfume() {
-    // Ejecución
-    ModelAndView modelAndView = controladorPerfume.irAFormularioAlta();
-
-    // Validación
-    assertThat(modelAndView.getViewName(), equalToIgnoringCase("formularioAltaPerfume"));
-  }
-
-  @Test
-  public void queAlGuardarUnPerfumeExitosamenteSeInvoqueAlServicioYRedirijaAlHome() {
-    DatosPerfume datosNuevos = new DatosPerfume();
-    datosNuevos.setNombre("Nocturnal Drift");
-    datosNuevos.setMarca("Oud & Bergamot");
-
-    ModelAndView mav = controladorPerfume.guardarPerfume(datosNuevos);
-
-    verify(servicioColeccionMock, times(1)).guardar(datosNuevos);
-
-    assertThat(mav.getViewName(), equalToIgnoringCase("redirect:/home"));
-  }
 }

@@ -34,7 +34,6 @@ public class ServicioColeccionImplTest {
     servicioColeccion.guardarEnColeccion(1L, idPerfume);
 
     // 3. Validación
-
     verify(repositorioColeccionMock, times(1)).guardarColeccion(any(Coleccion.class));
   }
 }

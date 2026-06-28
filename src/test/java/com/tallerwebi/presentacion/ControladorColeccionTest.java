@@ -25,9 +25,8 @@ public class ControladorColeccionTest {
     requestMock = mock(HttpServletRequest.class);
     sessionMock = mock(HttpSession.class);
 
-    
     when(requestMock.getSession()).thenReturn(sessionMock);
-   
+
     when(sessionMock.getAttribute("USUARIO_ID")).thenReturn(1L);
 
     controladorColeccion = new ControladorColeccion(servicioColeccionMock);
@@ -37,9 +36,7 @@ public class ControladorColeccionTest {
   public void queAlAgregarUnPerfumeExitosamenteRedirijaAlListado() {
     Long idPerfume = 1L;
 
-  
     ModelAndView mav = controladorColeccion.agregarPerfume(idPerfume, requestMock);
-
 
     verify(servicioColeccionMock, times(1)).guardarEnColeccion(1L, idPerfume);
 
@@ -48,7 +45,6 @@ public class ControladorColeccionTest {
 
   @Test
   public void queAlConsultarElListadoMuestreLaVistaDeColeccionConSuContenido() {
-   
     ModelAndView mav = controladorColeccion.mostrarListado(requestMock);
 
     assertThat(mav.getViewName(), equalToIgnoringCase("listado"));

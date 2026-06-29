@@ -5,30 +5,29 @@ import static org.hamcrest.text.IsEqualIgnoringCase.equalToIgnoringCase;
 import static org.mockito.Mockito.*;
 
 import com.tallerwebi.dominio.ServicioColeccion;
+import com.tallerwebi.dominio.ServicioLocal;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.servlet.ModelAndView;
 
 public class ControladorPerfumeTest {
 
-  private ControladorPerfume controladorPerfume;
   private ServicioColeccion servicioColeccionMock;
+  private ServicioLocal servicioLocalMock;
+  private ControladorPerfume controlador;
 
   @BeforeEach
   public void init() {
-    servicioColeccionMock = mock(ServicioColeccion.class);
+    this.servicioColeccionMock = mock(ServicioColeccion.class);
+    this.servicioLocalMock = mock(ServicioLocal.class);
 
-    controladorPerfume = new ControladorPerfume(servicioColeccionMock);
+    this.controlador = new ControladorPerfume(this.servicioColeccionMock, this.servicioLocalMock);
   }
 
   @Test
   public void queAlNavegarALaEspecificacionMeLleveALaVistaEspecificacion() {
-    // Ejecución
+    ModelAndView mav = controlador.mostrarEspecificacion(1L, null, null);
 
-    Long idDePrueba = 1L;
-    ModelAndView mav = controladorPerfume.mostrarEspecificacion(idDePrueba);
-
-    // Validación
     assertThat(mav.getViewName(), equalToIgnoringCase("especificacion"));
   }
 }

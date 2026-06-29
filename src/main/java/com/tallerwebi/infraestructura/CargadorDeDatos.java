@@ -26,7 +26,6 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
   @Override
   @Transactional
   public void onApplicationEvent(ContextRefreshedEvent event) {
-    
     if (repositorioColeccion.listar().isEmpty()) {
       crearPerfume("Sauvage", DIOR, "/spring/img/sauvage.png");
       crearPerfume("Fahrenheit", DIOR, "/spring/img/fahrenheit.png");

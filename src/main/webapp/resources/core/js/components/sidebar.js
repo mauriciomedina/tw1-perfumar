@@ -9,6 +9,7 @@ class Sidebar extends HTMLElement {
           <p class="text-muted small mb-0">Colecci&oacute;n Exclusiva</p>
         </div>
         <nav class="nav flex-column flex-grow-1">
+
           <a class="nav-link filtro-btn active" href="#" data-familia="TODAS">
             <span class="material-symbols-outlined">select_all</span>
             <span class="label-caps">Todas las Fragancias</span>
@@ -33,6 +34,10 @@ class Sidebar extends HTMLElement {
             <span class="material-symbols-outlined">auto_awesome</span>
             <span class="label-caps">Orientales</span>
           </a>
+          <a class="nav-link" href="/spring/listado">
+          <span class="material-symbols-outlined">collections_bookmark</span>
+          <span class="label-caps">Mi Colecci&oacute;n</span>
+    </a>
         </nav>
         <div class="mt-auto pt-3 border-top" style="border-color: rgba(0, 0, 0, 0.05) !important">
           <a class="nav-link mb-1" href="perfil.html">

@@ -11,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.tallerwebi.dominio.Usuario;
 import com.tallerwebi.integracion.config.HibernateTestConfig;
 import com.tallerwebi.integracion.config.SpringWebTestConfig;
+import com.tallerwebi.integracion.config.TestRestTemplateConfig;
 import java.util.Objects;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 @ExtendWith(SpringExtension.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = { SpringWebTestConfig.class, HibernateTestConfig.class })
+@ContextConfiguration(
+  classes = { SpringWebTestConfig.class, HibernateTestConfig.class, TestRestTemplateConfig.class }
+)
 public class ControladorLoginTest {
 
   private Usuario usuarioMock;

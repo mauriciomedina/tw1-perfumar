@@ -9,6 +9,7 @@ import com.tallerwebi.dominio.RepositorioColeccion;
 import com.tallerwebi.dominio.Usuario;
 import com.tallerwebi.integracion.config.HibernateTestConfig;
 import com.tallerwebi.integracion.config.SpringWebTestConfig;
+import com.tallerwebi.integracion.config.TestRestTemplateConfig;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.hibernate.SessionFactory;
@@ -22,7 +23,9 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 @ExtendWith(SpringExtension.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = { SpringWebTestConfig.class, HibernateTestConfig.class })
+@ContextConfiguration(
+  classes = { SpringWebTestConfig.class, HibernateTestConfig.class, TestRestTemplateConfig.class }
+)
 public class RepositorioColeccionTest {
 
   @Autowired

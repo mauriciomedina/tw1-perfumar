@@ -3,11 +3,14 @@ package com.tallerwebi.dominio;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -66,7 +69,7 @@ public class ServicioGeminiImpl implements ServicioGemini {
     "saturar el ambiente en una cena. ¿Le gustaría que le muestre alguna alternativa más " +
     "intensa, o prefiere mantenerse en esta línea fresca y ligera?\"";
 
-  private String systemInstructions = CONTEXTO_BASE;
+  private String systemInstructions;
 
   // Modelos disponibles:
   //
@@ -90,6 +93,41 @@ public class ServicioGeminiImpl implements ServicioGemini {
   @Autowired
   public ServicioGeminiImpl(RestTemplate restTemplate) {
     this.restTemplate = restTemplate;
+    this.systemInstructions = CONTEXTO_BASE + "\n\n" + cargarCatalogoPerfumes();
+  }
+
+  private String cargarCatalogoPerfumes() {
+    StringBuilder catalogo = new StringBuilder();
+    catalogo.append(
+      "Catálogo disponible: la siguiente es la ÚNICA lista de perfumes que existen en el " +
+      "inventario de PerfumAR. Regla crítica: solo podés recomendar perfumes que aparezcan " +
+      "exactamente en esta lista. Nunca inventes ni menciones nombres, marcas o perfumes que " +
+      "no estén acá, aunque el usuario los pida por su nombre. Si ningún perfume de la lista " +
+      "encaja bien con el pedido, decilo con honestidad y ofrecé la alternativa más cercana " +
+      "disponible en esta lista, explicando por qué no es un match perfecto.\n"
+    );
+    try (InputStream inputStream = new ClassPathResource("perfumes.json").getInputStream()) {
+      ObjectMapper mapper = new ObjectMapper();
+      JsonNode perfumes = mapper.readTree(inputStream);
+      for (JsonNode perfume : perfumes) {
+        catalogo
+          .append("- ")
+          .append(perfume.path("nombre").asText())
+          .append(" (")
+          .append(perfume.path("marca").asText())
+          .append(") — Familia: ")
+          .append(perfume.path("familiaOlfativa").asText())
+          .append(" — Notas: ")
+          .append(perfume.path("notas").asText())
+          .append("\n");
+      }
+    } catch (Exception e) {
+      catalogo.append(
+        "(No se pudo cargar el inventario. Informá al usuario que hay un problema técnico y " +
+        "que por ahora no podés hacer recomendaciones.)\n"
+      );
+    }
+    return catalogo.toString();
   }
 
   @Override
@@ -122,8 +160,12 @@ public class ServicioGeminiImpl implements ServicioGemini {
   }
 
   @Override
-  public String preguntar(String mensajeUsuario, String reglaAdicional, boolean persistir)
-    throws JsonProcessingException {
+  public String preguntar(
+    String mensajeUsuario,
+    String reglaAdicional,
+    boolean persistir,
+    List<MensajeConversacion> historial
+  ) throws JsonProcessingException {
     if (reglaAdicional != null && !reglaAdicional.isEmpty()) {
       if (persistir) {
         appendSystemInstruction(reglaAdicional);
@@ -132,15 +174,19 @@ public class ServicioGeminiImpl implements ServicioGemini {
           mensajeUsuario,
           (this.systemInstructions.isEmpty())
             ? reglaAdicional
-            : this.systemInstructions + ". " + reglaAdicional
+            : this.systemInstructions + ". " + reglaAdicional,
+          historial
         );
       }
     }
-    return ejecutarConContexto(mensajeUsuario, this.systemInstructions);
+    return ejecutarConContexto(mensajeUsuario, this.systemInstructions, historial);
   }
 
-  private String ejecutarConContexto(String mensaje, String contexto)
-    throws JsonProcessingException {
+  private String ejecutarConContexto(
+    String mensaje,
+    String contexto,
+    List<MensajeConversacion> historial
+  ) throws JsonProcessingException {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
     headers.set("X-goog-api-key", this.apiKey);
@@ -153,11 +199,14 @@ public class ServicioGeminiImpl implements ServicioGemini {
       body.put("system_instruction", systemInstructionPart);
     }
 
-    Map<String, Object> contents = new HashMap<>();
-    Map<String, String> part = new HashMap<>();
-    part.put("text", mensaje);
-    contents.put("parts", List.of(part));
-    body.put("contents", List.of(contents));
+    List<Map<String, Object>> contents = new ArrayList<>();
+    if (historial != null) {
+      for (MensajeConversacion turno : historial) {
+        contents.add(construirTurno(turno.getRol(), turno.getTexto()));
+      }
+    }
+    contents.add(construirTurno("user", mensaje));
+    body.put("contents", contents);
 
     ObjectMapper mapper = new ObjectMapper();
     String requestBody = mapper.writeValueAsString(body);
@@ -167,6 +216,13 @@ public class ServicioGeminiImpl implements ServicioGemini {
     String response = restTemplate.postForObject(URL, request, String.class);
 
     return extraerRespuesta(response);
+  }
+
+  private Map<String, Object> construirTurno(String rol, String texto) {
+    Map<String, Object> turno = new HashMap<>();
+    turno.put("role", rol);
+    turno.put("parts", List.of(Map.of("text", texto)));
+    return turno;
   }
 
   private String extraerRespuesta(String json) {

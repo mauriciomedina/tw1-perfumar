@@ -79,17 +79,18 @@ public class ControladorGeminiTest {
   }
 
   private void dadoQueElServicioResponde(String respuesta) throws JsonProcessingException {
-    when(servicioGeminiMock.preguntar(eq(PREGUNTA), any(), anyBoolean())).thenReturn(respuesta);
+    when(servicioGeminiMock.preguntar(eq(PREGUNTA), any(), anyBoolean(), any()))
+      .thenReturn(respuesta);
   }
 
   private void dadoQueElServicioLanzaUnaJsonProcessingException() throws JsonProcessingException {
-    when(this.servicioGeminiMock.preguntar(eq(PREGUNTA), any(), anyBoolean()))
+    when(this.servicioGeminiMock.preguntar(eq(PREGUNTA), any(), anyBoolean(), any()))
       .thenThrow(JsonProcessingException.class);
   }
 
   private void dadoQueElServicioLanzaUnaRuntimeException(String mensaje)
     throws JsonProcessingException {
-    when(this.servicioGeminiMock.preguntar(eq(PREGUNTA), any(), anyBoolean()))
+    when(this.servicioGeminiMock.preguntar(eq(PREGUNTA), any(), anyBoolean(), any()))
       .thenThrow(new RuntimeException(mensaje));
   }
 

@@ -25,7 +25,8 @@ public class ControladorGemini {
       String respuesta = servicioGemini.preguntar(
         geminiDto.getPregunta(),
         geminiDto.getReglaAdicional(),
-        persistir
+        persistir,
+        geminiDto.getHistorial()
       );
       geminiDto.setRespuesta(respuesta);
       geminiDto.setContextoActual(servicioGemini.getSystemInstructions());

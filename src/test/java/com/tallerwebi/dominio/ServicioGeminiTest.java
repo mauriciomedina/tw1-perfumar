@@ -6,6 +6,7 @@ import static org.hamcrest.Matchers.startsWith;
 import static org.mockito.Mockito.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
@@ -72,6 +73,35 @@ public class ServicioGeminiTest {
   }
 
   @Test
+  public void preguntarConHistorialDeberiaIncluirLosTurnosPreviosEnLaPeticion()
+    throws JsonProcessingException {
+    this.dadoQueLaApiResponde(JSON_RESPONSE);
+    List<MensajeConversacion> historial = List.of(
+      new MensajeConversacion("user", "Hola"),
+      new MensajeConversacion("model", "Hola, ¿en qué puedo ayudarte?")
+    );
+
+    String respuesta = servicioGemini.preguntar(PREGUNTA, null, false, historial);
+
+    this.entoncesLaRespuestaEs(respuesta, RESPUESTA_ESPERADA);
+    verify(restTemplateMock)
+      .postForObject(
+        anyString(),
+        argThat((HttpEntity<String> entity) -> {
+          String body = entity.getBody();
+          return (
+            body != null &&
+            body.contains("\"role\":\"user\"") &&
+            body.contains("\"role\":\"model\"") &&
+            body.contains("Hola, ¿en qué puedo ayudarte?") &&
+            body.contains(PREGUNTA)
+          );
+        }),
+        eq(String.class)
+      );
+  }
+
+  @Test
   public void limpiarContextoDeberiaVaciarLasInstrucciones() {
     this.dadoQueElContextoEstaConfigurado("Contexto persistente");
 
@@ -99,7 +129,7 @@ public class ServicioGeminiTest {
 
   private String cuandoPregunto(String mensaje, String contexto, boolean persistir)
     throws JsonProcessingException {
-    return servicioGemini.preguntar(mensaje, contexto, persistir);
+    return servicioGemini.preguntar(mensaje, contexto, persistir, null);
   }
 
   private void entoncesLaRespuestaEs(String respuestaActual, String respuestaEsperada) {

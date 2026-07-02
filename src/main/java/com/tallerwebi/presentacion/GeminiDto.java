@@ -1,11 +1,15 @@
 package com.tallerwebi.presentacion;
 
+import com.tallerwebi.dominio.MensajeConversacion;
+import java.util.List;
+
 public class GeminiDto {
 
   private String pregunta;
   private String respuesta;
   private String reglaAdicional;
   private String contextoActual;
+  private List<MensajeConversacion> historial;
 
   public String getPregunta() {
     return pregunta;
@@ -37,5 +41,13 @@ public class GeminiDto {
 
   public void setContextoActual(String contextoActual) {
     this.contextoActual = contextoActual;
+  }
+
+  public List<MensajeConversacion> getHistorial() {
+    return historial;
+  }
+
+  public void setHistorial(List<MensajeConversacion> historial) {
+    this.historial = historial;
   }
 }

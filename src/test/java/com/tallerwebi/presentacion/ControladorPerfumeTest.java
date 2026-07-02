@@ -1,11 +1,15 @@
 package com.tallerwebi.presentacion;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.text.IsEqualIgnoringCase.equalToIgnoringCase;
 import static org.mockito.Mockito.*;
 
 import com.tallerwebi.dominio.ServicioColeccion;
+import com.tallerwebi.dominio.ServicioFavorito;
 import com.tallerwebi.dominio.ServicioLocal;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,19 +19,42 @@ public class ControladorPerfumeTest {
   private ServicioColeccion servicioColeccionMock;
   private ServicioLocal servicioLocalMock;
   private ControladorPerfume controlador;
+  private HttpServletRequest requestMock;
+  private HttpSession sessionMock;
+  private ServicioFavorito servicioFavoritoMock;
 
   @BeforeEach
   public void init() {
     this.servicioColeccionMock = mock(ServicioColeccion.class);
     this.servicioLocalMock = mock(ServicioLocal.class);
+    this.servicioFavoritoMock = mock(ServicioFavorito.class);
+    this.requestMock = mock(HttpServletRequest.class);
+    this.sessionMock = mock(HttpSession.class);
 
-    this.controlador = new ControladorPerfume(this.servicioColeccionMock, this.servicioLocalMock);
+    when(requestMock.getSession()).thenReturn(sessionMock);
+    when(sessionMock.getAttribute("USUARIO_ID")).thenReturn(1L);
+
+    this.controlador =
+      new ControladorPerfume(
+        this.servicioColeccionMock,
+        this.servicioLocalMock,
+        this.servicioFavoritoMock
+      );
   }
 
   @Test
   public void queAlNavegarALaEspecificacionMeLleveALaVistaEspecificacion() {
-    ModelAndView mav = controlador.mostrarEspecificacion(1L, null, null);
+    ModelAndView mav = controlador.mostrarEspecificacion(1L, null, null, requestMock);
 
     assertThat(mav.getViewName(), equalToIgnoringCase("especificacion"));
+  }
+
+  @Test
+  public void queAlNavegarALaEspecificacionMeIndiqueSiEsFavorito() {
+    when(servicioFavoritoMock.esFavorito(1L, 1L)).thenReturn(true);
+
+    ModelAndView mav = controlador.mostrarEspecificacion(1L, null, null, requestMock);
+
+    assertThat((Boolean) mav.getModel().get("esFavorito"), is(true));
   }
 }

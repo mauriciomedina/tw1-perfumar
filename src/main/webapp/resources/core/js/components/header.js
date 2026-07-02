@@ -25,6 +25,7 @@ class HeaderComponent extends HTMLElement {
       </div>
       <div class="d-flex align-items-center gap-4">
         <a class="btn btn-link text-decoration-none text-dark p-0 label-caps" href="/spring/listado">Mi ColecciOn</a>
+        <a class="btn btn-link text-decoration-none text-dark p-0 label-caps" href="/spring/favoritos">Favoritos</a>
         <div class="d-flex align-items-center gap-3">
           <a class="btn btn-link text-decoration-none text-dark p-0 label-caps" href="/spring/perfil">Perfil</a>
         </div>

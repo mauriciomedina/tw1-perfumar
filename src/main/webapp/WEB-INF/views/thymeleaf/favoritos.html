@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Mis favoritos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&amp;family=Hanken+Grotesk:wght@300;400;600&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <script th:src="@{/js/components/header.js}" defer></script>
+    <script type="module" th:src="@{/js/clima.js}"></script>
+    <script th:src="@{/js/components/sidebar.js}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+
+    <mi-sidebar></mi-sidebar>
+
+    <main class="main-content">
+
+        <app-header th:attr="ciudad=${session.CIUDAD}, pais=${session.PAIS}"></app-header>
+
+        <section class="p-4 p-lg-5">
+            <div>
+                <h2 class="mb-1" style="font-family: 'Bodoni Moda', serif; font-size: 2.5rem; color: #1a1a1a;">Mis
+                    Favoritos</h2>
+                <p class="text-muted mb-0" style="font-size: 0.95rem; letter-spacing: 0.5px;">Las fragancias que te
+                    gustaría tener.</p>
+            </div>
+            <div class="text-end mb-1">
+                <span class="text-muted label-caps" th:text="|${#lists.size(perfumesFavoritos)} FRAGANCIAS|">0
+                    FRAGANCIAS</span>
+            </div>
+            </div>
+
+            <div class="container-fluid px-0">
+
+                <div th:if="${#lists.isEmpty(perfumesFavoritos)}" class="text-center py-5"
+                    style="background: #fdfdfd; border: 1px dashed #e0e0e0; border-radius: 12px; margin-top: 2rem;">
+                    <span class="material-symbols-outlined text-muted mb-3" style="font-size: 48px;">favorite</span>
+                    <h4 style="font-family: 'Bodoni Moda', serif;">Todavía no tenés favoritos</h4>
+                    <p class="text-muted mb-4">Explorá el catálogo y marcá las fragancias que más te gusten.</p>
+                    <a th:href="@{/home}" class="btn btn-outline-dark px-4 py-2"
+                        style="font-size: 0.75rem; letter-spacing: 2px; font-weight: 600; text-transform: uppercase;">Explorar
+                        Catálogo</a>
+                </div>
+
+                <div th:unless="${#lists.isEmpty(perfumesFavoritos)}" class="row">
+
+                    <div class="col-sm-6 col-lg-4 col-xl-3 mb-4" th:each="perfume : ${perfumesFavoritos}">
+                        <div class="card h-100 d-flex flex-column" style="border: none; background: transparent;">
+                            <a th:href="@{/especificacion(id=${perfume.id})}" class="text-decoration-none text-reset d-block">
+                            <div style="position: relative; width: 100%; aspect-ratio: 2/3; overflow: hidden; background-color: #f4f4f4;">
+                             <img th:alt="${perfume.nombre}" th:src="${perfume.imagenUrl}" style="width: 100%; height: 100%; object-fit: cover;">
+                             <span style="position: absolute; top: 12px; left: 12px; background: white; padding: 4px 8px; font-size: 10px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; z-index: 2;" th:text="${perfume.marca}">
+                            MARCA
+                            </span>
+                            </div>
+                            </a>
+
+                        <div class="card-body px-0 mt-3 d-flex justify-content-between align-items-start flex-grow-1">
+
+            <a th:href="@{/especificacion(id=${perfume.id})}" class="text-decoration-none text-reset flex-grow-1">
+                <span class="text-muted" style="font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase;" th:text="${perfume.familia != null ? perfume.familia.nombre : ''}">Familia</span>
+                <h3 class="h5 mb-0 mt-1" style="font-family: 'Bodoni Moda', serif;" th:text="${perfume.nombre}">Nombre Perfume</h3>
+            </a>
+
+            <form th:action="@{/eliminar-de-favoritos}" method="POST" class="m-0 ms-2">
+                <input type="hidden" name="idPerfume" th:value="${perfume.id}" />
+                <button type="submit" class="btn btn-link text-danger p-0 border-0 bg-transparent" title="Quitar de favoritos" style="opacity: 0.7; transition: opacity 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.7">
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1; font-size: 22px;">favorite</span>
+                </button>
+            </form>
+
+                    </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+</body>
+
+</html>

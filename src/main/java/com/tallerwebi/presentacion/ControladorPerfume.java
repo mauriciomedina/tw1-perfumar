@@ -3,8 +3,10 @@ package com.tallerwebi.presentacion;
 import com.tallerwebi.dominio.Local;
 import com.tallerwebi.dominio.Perfume;
 import com.tallerwebi.dominio.ServicioColeccion;
+import com.tallerwebi.dominio.ServicioFavorito;
 import com.tallerwebi.dominio.ServicioLocal;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,11 +20,17 @@ public class ControladorPerfume {
 
   private ServicioColeccion servicioColeccion;
   private ServicioLocal servicioLocal;
+  private ServicioFavorito servicioFavorito;
 
   @Autowired
-  public ControladorPerfume(ServicioColeccion servicioColeccion, ServicioLocal servicioLocal) {
+  public ControladorPerfume(
+    ServicioColeccion servicioColeccion,
+    ServicioLocal servicioLocal,
+    ServicioFavorito servicioFavorito
+  ) {
     this.servicioColeccion = servicioColeccion;
     this.servicioLocal = servicioLocal;
+    this.servicioFavorito = servicioFavorito;
   }
 
   @RequestMapping("/listar-perfumes")
@@ -37,12 +45,16 @@ public class ControladorPerfume {
   public ModelAndView mostrarEspecificacion(
     @RequestParam("id") Long id,
     @RequestParam(value = "lat", required = false) Double lat,
-    @RequestParam(value = "lon", required = false) Double lon
+    @RequestParam(value = "lon", required = false) Double lon,
+    HttpServletRequest request
   ) {
     ModelMap modelo = new ModelMap();
 
     Perfume perfumeReal = servicioColeccion.buscarPerfume(id);
     modelo.put("perfume", perfumeReal);
+
+    Long idUsuario = (Long) request.getSession().getAttribute("USUARIO_ID");
+    modelo.put("esFavorito", servicioFavorito.esFavorito(idUsuario, id));
 
     if (lat != null && lon != null) {
       List<Local> localesCercanos = this.servicioLocal.obtenerLocalesMasCercanos(lat, lon, 3);

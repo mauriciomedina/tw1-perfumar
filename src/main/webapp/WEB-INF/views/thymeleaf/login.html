@@ -14,7 +14,7 @@
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
     rel="stylesheet">
   <link rel="stylesheet" th:href="@{/css/main.css}" />
-  
+  <script th:src="@{/js/components/chat.js}" defer></script>
 </head>
 
 <body>
@@ -98,6 +98,7 @@
   </script>
   <script type="module" th:src="@{js/login.js}"></script>
 
+  <app-chat></app-chat>
 </body>
 
 </html>

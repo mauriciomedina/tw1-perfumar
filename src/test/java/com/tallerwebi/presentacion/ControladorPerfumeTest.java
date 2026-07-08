@@ -8,6 +8,8 @@ import static org.mockito.Mockito.*;
 import com.tallerwebi.dominio.ServicioColeccion;
 import com.tallerwebi.dominio.ServicioFavorito;
 import com.tallerwebi.dominio.ServicioLocal;
+import com.tallerwebi.dominio.ServicioResena;
+import java.util.Collections;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,6 +20,7 @@ public class ControladorPerfumeTest {
 
   private ServicioColeccion servicioColeccionMock;
   private ServicioLocal servicioLocalMock;
+  private ServicioResena servicioResenaMock;
   private ControladorPerfume controlador;
   private HttpServletRequest requestMock;
   private HttpSession sessionMock;
@@ -28,17 +31,20 @@ public class ControladorPerfumeTest {
     this.servicioColeccionMock = mock(ServicioColeccion.class);
     this.servicioLocalMock = mock(ServicioLocal.class);
     this.servicioFavoritoMock = mock(ServicioFavorito.class);
+    this.servicioResenaMock = mock(ServicioResena.class);
     this.requestMock = mock(HttpServletRequest.class);
     this.sessionMock = mock(HttpSession.class);
 
     when(requestMock.getSession()).thenReturn(sessionMock);
     when(sessionMock.getAttribute("USUARIO_ID")).thenReturn(1L);
+    when(servicioResenaMock.listarPorPerfume(1L)).thenReturn(Collections.emptyList());
 
     this.controlador =
       new ControladorPerfume(
         this.servicioColeccionMock,
         this.servicioLocalMock,
-        this.servicioFavoritoMock
+        this.servicioFavoritoMock,
+        this.servicioResenaMock
       );
   }
 
@@ -56,5 +62,14 @@ public class ControladorPerfumeTest {
     ModelAndView mav = controlador.mostrarEspecificacion(1L, null, null, requestMock);
 
     assertThat((Boolean) mav.getModel().get("esFavorito"), is(true));
+  }
+
+  @Test
+  public void queAlNavegarALaEspecificacionMeTraigaElPromedioDeResenas() {
+    when(servicioResenaMock.promedioDePuntuacion(1L)).thenReturn(4.5);
+
+    ModelAndView mav = controlador.mostrarEspecificacion(1L, null, null, requestMock);
+
+    assertThat((Double) mav.getModel().get("promedioPuntuacion"), is(4.5));
   }
 }

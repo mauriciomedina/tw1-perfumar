@@ -2,9 +2,11 @@ package com.tallerwebi.presentacion;
 
 import com.tallerwebi.dominio.Local;
 import com.tallerwebi.dominio.Perfume;
+import com.tallerwebi.dominio.Resena;
 import com.tallerwebi.dominio.ServicioColeccion;
 import com.tallerwebi.dominio.ServicioFavorito;
 import com.tallerwebi.dominio.ServicioLocal;
+import com.tallerwebi.dominio.ServicioResena;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,16 +23,19 @@ public class ControladorPerfume {
   private ServicioColeccion servicioColeccion;
   private ServicioLocal servicioLocal;
   private ServicioFavorito servicioFavorito;
+  private ServicioResena servicioResena;
 
   @Autowired
   public ControladorPerfume(
     ServicioColeccion servicioColeccion,
     ServicioLocal servicioLocal,
-    ServicioFavorito servicioFavorito
+    ServicioFavorito servicioFavorito,
+    ServicioResena servicioResena
   ) {
     this.servicioColeccion = servicioColeccion;
     this.servicioLocal = servicioLocal;
     this.servicioFavorito = servicioFavorito;
+    this.servicioResena = servicioResena;
   }
 
   @RequestMapping("/listar-perfumes")
@@ -55,6 +60,12 @@ public class ControladorPerfume {
 
     Long idUsuario = (Long) request.getSession().getAttribute("USUARIO_ID");
     modelo.put("esFavorito", servicioFavorito.esFavorito(idUsuario, id));
+
+    List<Resena> resenas = servicioResena.listarPorPerfume(id);
+    Double promedio = servicioResena.promedioDePuntuacion(id);
+
+    modelo.put("resenas", resenas);
+    modelo.put("promedioPuntuacion", promedio != null ? promedio : 0.0);
 
     if (lat != null && lon != null) {
       List<Local> localesCercanos = this.servicioLocal.obtenerLocalesMasCercanos(lat, lon, 3);

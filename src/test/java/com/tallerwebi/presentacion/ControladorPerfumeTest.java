@@ -7,7 +7,6 @@ import static org.mockito.Mockito.*;
 
 import com.tallerwebi.dominio.ServicioColeccion;
 import com.tallerwebi.dominio.ServicioFavorito;
-import com.tallerwebi.dominio.ServicioLocal;
 import com.tallerwebi.dominio.ServicioResena;
 import java.util.Collections;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class ControladorPerfumeTest {
 
   private ServicioColeccion servicioColeccionMock;
-  private ServicioLocal servicioLocalMock;
+
   private ServicioResena servicioResenaMock;
   private ControladorPerfume controlador;
   private HttpServletRequest requestMock;
@@ -29,7 +28,6 @@ public class ControladorPerfumeTest {
   @BeforeEach
   public void init() {
     this.servicioColeccionMock = mock(ServicioColeccion.class);
-    this.servicioLocalMock = mock(ServicioLocal.class);
     this.servicioFavoritoMock = mock(ServicioFavorito.class);
     this.servicioResenaMock = mock(ServicioResena.class);
     this.requestMock = mock(HttpServletRequest.class);
@@ -42,7 +40,6 @@ public class ControladorPerfumeTest {
     this.controlador =
       new ControladorPerfume(
         this.servicioColeccionMock,
-        this.servicioLocalMock,
         this.servicioFavoritoMock,
         this.servicioResenaMock
       );
@@ -50,7 +47,7 @@ public class ControladorPerfumeTest {
 
   @Test
   public void queAlNavegarALaEspecificacionMeLleveALaVistaEspecificacion() {
-    ModelAndView mav = controlador.mostrarEspecificacion(1L, null, null, requestMock);
+    ModelAndView mav = controlador.mostrarEspecificacion(1L, requestMock);
 
     assertThat(mav.getViewName(), equalToIgnoringCase("especificacion"));
   }
@@ -59,7 +56,7 @@ public class ControladorPerfumeTest {
   public void queAlNavegarALaEspecificacionMeIndiqueSiEsFavorito() {
     when(servicioFavoritoMock.esFavorito(1L, 1L)).thenReturn(true);
 
-    ModelAndView mav = controlador.mostrarEspecificacion(1L, null, null, requestMock);
+    ModelAndView mav = controlador.mostrarEspecificacion(1L, requestMock);
 
     assertThat((Boolean) mav.getModel().get("esFavorito"), is(true));
   }
@@ -68,7 +65,7 @@ public class ControladorPerfumeTest {
   public void queAlNavegarALaEspecificacionMeTraigaElPromedioDeResenas() {
     when(servicioResenaMock.promedioDePuntuacion(1L)).thenReturn(4.5);
 
-    ModelAndView mav = controlador.mostrarEspecificacion(1L, null, null, requestMock);
+    ModelAndView mav = controlador.mostrarEspecificacion(1L, requestMock);
 
     assertThat((Double) mav.getModel().get("promedioPuntuacion"), is(4.5));
   }

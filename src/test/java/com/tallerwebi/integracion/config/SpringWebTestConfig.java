@@ -22,7 +22,6 @@ import org.thymeleaf.templatemode.TemplateMode;
 )
 public class SpringWebTestConfig implements WebMvcConfigurer {
 
-
   @Autowired
   private ApplicationContext applicationContext;
 
@@ -58,7 +57,6 @@ public class SpringWebTestConfig implements WebMvcConfigurer {
     return templateResolver;
   }
 
-
   @Bean
   public SpringTemplateEngine templateEngine() {
     SpringTemplateEngine templateEngine = new SpringTemplateEngine();
@@ -66,8 +64,6 @@ public class SpringWebTestConfig implements WebMvcConfigurer {
     templateEngine.setEnableSpringELCompiler(true);
     return templateEngine;
   }
-
-
 
   @Bean
   public ThymeleafViewResolver viewResolver() {

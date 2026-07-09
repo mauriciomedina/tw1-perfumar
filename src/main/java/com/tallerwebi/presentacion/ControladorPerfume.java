@@ -1,11 +1,9 @@
 package com.tallerwebi.presentacion;
 
-import com.tallerwebi.dominio.Local;
 import com.tallerwebi.dominio.Perfume;
 import com.tallerwebi.dominio.Resena;
 import com.tallerwebi.dominio.ServicioColeccion;
 import com.tallerwebi.dominio.ServicioFavorito;
-import com.tallerwebi.dominio.ServicioLocal;
 import com.tallerwebi.dominio.ServicioResena;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -21,19 +19,16 @@ import org.springframework.web.servlet.ModelAndView;
 public class ControladorPerfume {
 
   private ServicioColeccion servicioColeccion;
-  private ServicioLocal servicioLocal;
   private ServicioFavorito servicioFavorito;
   private ServicioResena servicioResena;
 
   @Autowired
   public ControladorPerfume(
     ServicioColeccion servicioColeccion,
-    ServicioLocal servicioLocal,
     ServicioFavorito servicioFavorito,
     ServicioResena servicioResena
   ) {
     this.servicioColeccion = servicioColeccion;
-    this.servicioLocal = servicioLocal;
     this.servicioFavorito = servicioFavorito;
     this.servicioResena = servicioResena;
   }
@@ -49,8 +44,6 @@ public class ControladorPerfume {
   @RequestMapping(path = "/especificacion", method = RequestMethod.GET)
   public ModelAndView mostrarEspecificacion(
     @RequestParam("id") Long id,
-    @RequestParam(value = "lat", required = false) Double lat,
-    @RequestParam(value = "lon", required = false) Double lon,
     HttpServletRequest request
   ) {
     ModelMap modelo = new ModelMap();
@@ -66,14 +59,6 @@ public class ControladorPerfume {
 
     modelo.put("resenas", resenas);
     modelo.put("promedioPuntuacion", promedio != null ? promedio : 0.0);
-
-    if (lat != null && lon != null) {
-      List<Local> localesCercanos = this.servicioLocal.obtenerLocalesMasCercanos(lat, lon, 3);
-
-      modelo.put("locales", localesCercanos);
-      modelo.put("latUsuario", lat);
-      modelo.put("lonUsuario", lon);
-    }
 
     return new ModelAndView("especificacion", modelo);
   }

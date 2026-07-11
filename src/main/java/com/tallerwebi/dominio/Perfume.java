@@ -8,13 +8,21 @@ public class Perfume {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
   private String nombre;
-  private String marca;
   private String imagenUrl;
 
-  @JoinColumn(name = "familia_id")
-  @ManyToOne
-  private FamiliaOlfativa familia;
+  @Enumerated(EnumType.STRING)
+  private FamiliaOlfativa familiaOlfativa;
+
+  @Enumerated(EnumType.STRING)
+  private Marca marca;
+
+  @Column(length = 1000)
+  private String descripcion;
+
+  @Column(length = 500)
+  private String notas;
 
   public Long getId() {
     return id;
@@ -32,11 +40,11 @@ public class Perfume {
     this.nombre = nombre;
   }
 
-  public String getMarca() {
+  public Marca getMarca() {
     return marca;
   }
 
-  public void setMarca(String marca) {
+  public void setMarca(Marca marca) {
     this.marca = marca;
   }
 
@@ -48,11 +56,27 @@ public class Perfume {
     this.imagenUrl = imagenUrl;
   }
 
-  public FamiliaOlfativa getFamilia() {
-    return familia;
+  public FamiliaOlfativa getFamiliaOlfativa() {
+    return familiaOlfativa;
   }
 
-  public void setFamilia(FamiliaOlfativa familia) {
-    this.familia = familia;
+  public void setFamiliaOlfativa(FamiliaOlfativa familiaOlfativa) {
+    this.familiaOlfativa = familiaOlfativa;
+  }
+
+  public String getDescripcion() {
+    return descripcion;
+  }
+
+  public void setDescripcion(String descripcion) {
+    this.descripcion = descripcion;
+  }
+
+  public String getNotas() {
+    return notas;
+  }
+
+  public void setNotas(String notas) {
+    this.notas = notas;
   }
 }

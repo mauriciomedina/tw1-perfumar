@@ -10,6 +10,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tallerwebi.integracion.config.HibernateTestConfig;
 import com.tallerwebi.integracion.config.SpringWebTestConfig;
 import com.tallerwebi.presentacion.GeminiDto;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,7 +32,9 @@ import org.springframework.web.context.WebApplicationContext;
 @WebAppConfiguration
 @ContextConfiguration(
   classes = {
-    SpringWebTestConfig.class, com.tallerwebi.integracion.config.TestRestTemplateConfig.class,
+    SpringWebTestConfig.class,
+    HibernateTestConfig.class,
+    com.tallerwebi.integracion.config.TestRestTemplateConfig.class,
   }
 )
 @TestPropertySource(properties = "GEMINI_API_KEY=key-de-prueba")

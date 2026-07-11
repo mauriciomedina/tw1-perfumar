@@ -37,51 +37,44 @@
         <div class="container-fluid p-4 p-lg-5">
             <div class="row align-items-start g-5">
 
-                <!-- Imagen -->
-                <div class="col-lg-5">
-                    <div class="product-image-container">
-                        <img id="perfume-imagen" class="product-image" src="" alt="Imagen del perfume"
-                            style="width: 100%; height: 500px; object-fit: cover;" />
-                    </div>
-                </div>
+               <!-- Imagen -->
+<div class="col-lg-5">
+    <div class="product-image-container">
+        <img id="perfume-imagen" class="product-image" th:src="${perfume.imagenUrl}" alt="Imagen del perfume"
+            style="width: 100%; height: 500px; object-fit: cover;" />
+    </div>
+</div>
 
-                <!-- Info Column -->
-                <div class="col-lg-7 ps-lg-5">
-                    <nav aria-label="breadcrumb" class="mb-4">
-                        <span class="text-secondary-custom"
-                            style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em;">Detalle de
-                            Fragancia</span>
-                    </nav>
-                    <div class="mb-5">
-                        <p class="text-secondary-custom mb-2" id="perfume-marca"
-                            style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em;">Marca</p>
-                        <h2 id="perfume-nombre" class="font-bodoni text-primary-custom display-luxury mb-3">Nombre</h2>
-                        <p id="perfume-familia"
-                            class="badge rounded-pill bg-transparent text-primary-custom border border-secondary border-opacity-25 px-3 py-2"
-                            style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500;">
-                            Familia
-                            Olfativa</p>
-                    </div>
-                    <div class="mb-5">
-                        <h3 class="section-title">Descripción</h3>
-                        <p id="perfume-descripcion" class="text-secondary-custom lh-lg mb-0" style="font-size: 16px;">
-                        </p>
-                    </div>
-                    <div class="mb-5">
-                        <h3 class="section-title">Notas</h3>
-                        <p id="perfume-notas" class="text-secondary-custom lh-lg mb-0" style="font-size: 16px;"></p>
-                    </div>
-                    <div class="d-flex gap-3 pt-4">
-                        <form th:action="@{/agregar-a-coleccion(id=${perfume.id})}" method="POST" class="w-100">
-                            <input type="hidden" name="idPerfume" th:value="${perfume.id}" />
-                            <button class="btn btn-primary-custom" type="submit">Agregar a mi colección</button>
-                        </form>
-                        <button type="button" id="boton-favorito" class="btn d-flex align-items-center justify-content-center"th:classappend="${esFavorito} ? 'btn-outline-danger' : 'btn-outline-dark'"th:attr="data-id=${perfume.id},data-favorito=${esFavorito}"title="Favoritos" style="width: 52px; height: 100%;">
-                        <span id="icono-favorito" class="material-symbols-outlined" th:classappend="${esFavorito} ? 'icono-favorito-lleno' : ''"th:text="${esFavorito} ? 'favorite' : 'favorite_border'">favorite_border</span>
-                        </button>
-                        
-                    </div>
-                </div>
+<!-- Info Column -->
+<div class="col-lg-7 ps-lg-5">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <span class="text-secondary-custom"
+            style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em;">Detalle de
+            Fragancia</span>
+    </nav>
+    <div class="mb-5">
+        <p class="text-secondary-custom mb-2" id="perfume-marca"
+            th:text="${perfume.marca != null ? #strings.toUpperCase(perfume.marca) : ''}"
+            style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em;">Marca</p>
+        <h2 id="perfume-nombre" class="font-bodoni text-primary-custom display-luxury mb-3"
+            th:text="${perfume.nombre}">Nombre</h2>
+        <p id="perfume-familia" th:text="${perfume.familiaOlfativa}"
+            class="badge rounded-pill bg-transparent text-primary-custom border border-secondary border-opacity-25 px-3 py-2"
+            style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500;">
+            Familia
+            Olfativa</p>
+    </div>
+    <div class="mb-5">
+        <h3 class="section-title">Descripción</h3>
+        <p id="perfume-descripcion" class="text-secondary-custom lh-lg mb-0" style="font-size: 16px;"
+            th:text="${perfume.descripcion}">
+        </p>
+    </div>
+    <div class="mb-5">
+        <h3 class="section-title">Notas</h3>
+        <p id="perfume-notas" class="text-secondary-custom lh-lg mb-0" style="font-size: 16px;"
+            th:text="${perfume.notas}"></p>
+    </div>
 
             </div>
         </div>
@@ -157,41 +150,7 @@
 
     </main>
 
-    <!-- Buscar perfume -->
-    <script>
-        const parametros = new URLSearchParams(window.location.search);
-        const idPerfume = parametros.get('id');
-
-        if (idPerfume) {
-            // Buscamos TODOS los perfumes al endpoint que ya te funciona
-            fetch('/spring/api/perfumes')
-                .then(respuesta => respuesta.json())
-                .then(perfumes => {
-                    // JavaScript busca en la lista el perfume que coincida con el ID de la URL
-                    const perfume = perfumes.find(p => p.id == idPerfume);
-
-                    if (perfume) {
-                        // Si lo encuentra, inyecta los datos
-                        document.getElementById('perfume-nombre').textContent = perfume.nombre;
-                        document.getElementById('perfume-marca').textContent = perfume.marca.toUpperCase();
-                        document.getElementById('perfume-familia').textContent = perfume.familiaOlfativa;
-                        document.getElementById('perfume-imagen').src = perfume.imagenUrl;
-                        document.getElementById('perfume-descripcion').textContent = perfume.descripcion;
-                        document.getElementById('perfume-notas').textContent = perfume.notas;
-                    } else {
-                        throw new Error("No se encontró el perfume");
-                    }
-                })
-                .catch(error => {
-                    console.error('Error trayendo el perfume:', error);
-                    document.getElementById('perfume-nombre').textContent = "Error al cargar";
-                    document.getElementById('perfume-familia').textContent = "No pudimos cargar los datos de esta fragancia.";
-                });
-        } else {
-            document.getElementById('perfume-nombre').textContent = "Perfume no encontrado";
-            document.getElementById('perfume-familia').textContent = "Seleccioná un perfume desde el catálogo.";
-        }
-    </script>
+  
   
     <!-- ubicacion -->
     <script>

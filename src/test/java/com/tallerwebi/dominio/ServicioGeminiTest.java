@@ -3,6 +3,10 @@ package com.tallerwebi.dominio;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.startsWith;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -16,6 +20,7 @@ public class ServicioGeminiTest {
 
   private ServicioGeminiImpl servicioGemini;
   private RestTemplate restTemplateMock;
+  private ServicioColeccion servicioColeccionMock;
   private static final String PREGUNTA = "¿Hola?";
   private static final String RESPUESTA_ESPERADA = "Respuesta Gemini";
   private static final String JSON_RESPONSE =
@@ -24,7 +29,8 @@ public class ServicioGeminiTest {
   @BeforeEach
   public void init() {
     this.restTemplateMock = mock(RestTemplate.class);
-    this.servicioGemini = new ServicioGeminiImpl(restTemplateMock);
+    this.servicioColeccionMock = mock(ServicioColeccion.class);
+    this.servicioGemini = new ServicioGeminiImpl(restTemplateMock, servicioColeccionMock);
   }
 
   @Test

@@ -1,41 +1,24 @@
 package com.tallerwebi.dominio;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+public enum FamiliaOlfativa {
+  AMADERADA("Amaderada"),
+  CITRICA("Cítrica"),
+  FRUTAL("Frutal"),
+  HELECHO("Helecho"),
+  ORIENTAL("Oriental");
 
-@Entity
-public class FamiliaOlfativa {
+  private final String nombreVisible;
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
-
-  private String nombre;
-  private String climaIdeal;
-
-  public Long getId() {
-    return id;
+  FamiliaOlfativa(String nombreVisible) {
+    this.nombreVisible = nombreVisible;
   }
 
-  public void setId(Long id) {
-    this.id = id;
+  public String getNombreVisible() {
+    return nombreVisible;
   }
 
-  public String getNombre() {
-    return nombre;
-  }
-
-  public void setNombre(String nombre) {
-    this.nombre = nombre;
-  }
-
-  public String getClimaIdeal() {
-    return climaIdeal;
-  }
-
-  public void setClimaIdeal(String climaIdeal) {
-    this.climaIdeal = climaIdeal;
+  @Override
+  public String toString() {
+    return nombreVisible;
   }
 }

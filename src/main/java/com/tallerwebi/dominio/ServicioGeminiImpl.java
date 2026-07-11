@@ -3,14 +3,12 @@ package com.tallerwebi.dominio;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -24,6 +22,7 @@ public class ServicioGeminiImpl implements ServicioGemini {
   private String apiKey;
 
   private final RestTemplate restTemplate;
+  private final ServicioColeccion servicioColeccion;
 
   private static final String CONTEXTO_BASE =
     "Rol y objetivo: Sos el asistente personal virtual de \"PerfumAR\". Tu única función es " +
@@ -91,9 +90,13 @@ public class ServicioGeminiImpl implements ServicioGemini {
     "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
 
   @Autowired
-  public ServicioGeminiImpl(RestTemplate restTemplate) {
+  public ServicioGeminiImpl(RestTemplate restTemplate, ServicioColeccion servicioColeccion) {
     this.restTemplate = restTemplate;
-    this.systemInstructions = CONTEXTO_BASE + "\n\n" + cargarCatalogoPerfumes();
+    this.servicioColeccion = servicioColeccion;
+    // El catálogo NO se arma acá: en este momento la base todavía puede estar
+    // vacía (el seed de perfumes corre después, al refrescarse el contexto).
+    // Se arma fresco en cada consulta, en ejecutarConContexto().
+    this.systemInstructions = CONTEXTO_BASE;
   }
 
   private String cargarCatalogoPerfumes() {
@@ -106,19 +109,18 @@ public class ServicioGeminiImpl implements ServicioGemini {
       "encaja bien con el pedido, decilo con honestidad y ofrecé la alternativa más cercana " +
       "disponible en esta lista, explicando por qué no es un match perfecto.\n"
     );
-    try (InputStream inputStream = new ClassPathResource("perfumes.json").getInputStream()) {
-      ObjectMapper mapper = new ObjectMapper();
-      JsonNode perfumes = mapper.readTree(inputStream);
-      for (JsonNode perfume : perfumes) {
+    try {
+      List<Perfume> perfumes = servicioColeccion.listar();
+      for (Perfume perfume : perfumes) {
         catalogo
           .append("- ")
-          .append(perfume.path("nombre").asText())
+          .append(perfume.getNombre())
           .append(" (")
-          .append(perfume.path("marca").asText())
+          .append(perfume.getMarca())
           .append(") — Familia: ")
-          .append(perfume.path("familiaOlfativa").asText())
+          .append(perfume.getFamiliaOlfativa())
           .append(" — Notas: ")
-          .append(perfume.path("notas").asText())
+          .append(perfume.getNotas())
           .append("\n");
       }
     } catch (Exception e) {
@@ -193,11 +195,12 @@ public class ServicioGeminiImpl implements ServicioGemini {
 
     Map<String, Object> body = new HashMap<>();
 
-    if (contexto != null && !contexto.isEmpty()) {
-      Map<String, Object> systemInstructionPart = new HashMap<>();
-      systemInstructionPart.put("parts", List.of(Map.of("text", contexto)));
-      body.put("system_instruction", systemInstructionPart);
-    }
+    String contextoConCatalogo =
+      (contexto != null ? contexto : "") + "\n\n" + cargarCatalogoPerfumes();
+
+    Map<String, Object> systemInstructionPart = new HashMap<>();
+    systemInstructionPart.put("parts", List.of(Map.of("text", contextoConCatalogo)));
+    body.put("system_instruction", systemInstructionPart);
 
     List<Map<String, Object>> contents = new ArrayList<>();
     if (historial != null) {

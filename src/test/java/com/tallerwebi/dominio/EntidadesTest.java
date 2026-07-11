@@ -10,30 +10,17 @@ import org.junit.jupiter.api.Test;
 public class EntidadesTest {
 
   @Test
-  public void queSePuedaAsignarYObtenerDatosDeFamiliaOlfativa() {
-    FamiliaOlfativa familia = new FamiliaOlfativa();
-    familia.setId(1L);
-    familia.setNombre("Amaderada");
-
-    assertEquals(1L, familia.getId());
-    assertThat(familia.getNombre(), equalToIgnoringCase("Amaderada"));
-  }
-
-  @Test
   public void queSePuedaAsignarYObtenerDatosDePerfume() {
-    FamiliaOlfativa familia = new FamiliaOlfativa();
-    familia.setId(1L);
-
     Perfume perfume = new Perfume();
     perfume.setId(1L);
     perfume.setNombre("Fahrenheit");
-    perfume.setMarca("Dior");
-    perfume.setFamilia(familia);
+    perfume.setMarca(Marca.DIOR);
+    perfume.setFamiliaOlfativa(FamiliaOlfativa.AMADERADA);
 
     assertEquals(1L, perfume.getId());
     assertThat(perfume.getNombre(), equalToIgnoringCase("Fahrenheit"));
-    assertThat(perfume.getMarca(), equalToIgnoringCase("Dior"));
-    assertNotNull(perfume.getFamilia());
+    assertEquals(Marca.DIOR, perfume.getMarca());
+    assertEquals(FamiliaOlfativa.AMADERADA, perfume.getFamiliaOlfativa());
   }
 
   @Test

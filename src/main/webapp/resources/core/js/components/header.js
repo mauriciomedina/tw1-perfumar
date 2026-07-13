@@ -4,20 +4,15 @@ class HeaderComponent extends HTMLElement {
   }
 
   connectedCallback() {
-    // Capturamos los valores de sesión que le vamos a pasar desde el HTML
-    const ciudad = this.getAttribute("ciudad") || "";
-    const pais = this.getAttribute("pais") || "";
+    // El clima ya viene calculado por el backend (ControladorClima / AtributosClimaGlobal)
+    const clima = this.getAttribute("clima") || "Elije tu ciudad";
 
     this.innerHTML = `
     <header class="header-nav">
       <div class="d-flex align-items-center gap-4">
         <div class="d-flex align-items-center gap-2 text-muted">
-          <span id="currentWeather" class="label-caps" style="font-size: 10px">Elije tu ciudad</span>
+          <span id="currentWeather" class="label-caps" style="font-size: 10px">${clima}</span>
         </div>
-        <input type="text" id="cityInput" placeholder="Ciudad" value="${ciudad}" hidden />
-        <input type="text" id="countryInput" placeholder="Pais" value="${pais}" hidden />
-        <button id="getWeatherBtn" hidden>Buscar</button>
-        <div id="weather-info"></div>
         <div class="search-container">
           <span id="buscador" class="material-symbols-outlined text-muted">search</span>
           <input class="search-input" id="inputBuscador" placeholder="Buscar perfume" type="text" />

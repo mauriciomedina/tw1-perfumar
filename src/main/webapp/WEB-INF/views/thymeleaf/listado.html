@@ -14,7 +14,6 @@
         rel="stylesheet" />
     <link rel="stylesheet" th:href="@{/css/main.css}" />
     <script th:src="@{/js/components/header.js}" defer></script>
-    <script type="module" th:src="@{/js/clima.js}"></script>
     <script th:src="@{/js/components/sidebar.js}"></script>
     <script th:src="@{/js/components/chat.js}" defer></script>
 
@@ -27,7 +26,7 @@
 
     <main class="main-content">
 
-        <app-header th:attr="ciudad=${session.CIUDAD}, pais=${session.PAIS}"></app-header>
+        <app-header th:attr="clima=${climaActual != null ? climaActual.textoHeader : 'Elije tu ciudad'}"></app-header>
        
         <section class="p-4 p-lg-5">
             <div>

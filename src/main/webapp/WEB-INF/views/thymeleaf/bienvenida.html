@@ -14,8 +14,6 @@
         rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/main.css}" />
     <script th:src="@{/js/components/header.js}" defer></script>
-    <script type="module" th:src="@{/js/clima.js}"></script>
-    <script type="module" th:src="@{/js/perfumeDelDia.js}"></script>
     <script th:src="@{/js/components/sidebar.js}"></script>
     <script th:src="@{/js/components/chat.js}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -25,7 +23,7 @@
 
     <main>
 
-        <app-header th:attr="ciudad=${session.CIUDAD}, pais=${session.PAIS}"></app-header>
+        <app-header th:attr="clima=${climaActual != null ? climaActual.textoHeader : 'Elije tu ciudad'}"></app-header>
 
         <section class="welcome-section container-fluid" style="background-image: linear-gradient(rgba(249, 249, 249, 0.85), rgba(249, 249, 249, 0.85)), url('https://lh3.googleusercontent.com/aida-public/AB6AXuAonAbu0iBsFZeFg6DC3ovoMY9s9vqein4UBhjtoaj1zq9_YU_efNy-a-TBb8f1YdjjpOUF3tQFVpfHHriuor0xCj2EVVYW_eQ4PxWJwL-JP2N_c2kB2iniQgvrKAc1Gl4K_xCTD_HLkNJUoaXF2wUB3qlhY62vTMJvkSBGH5u9K5UG_16V1lxoNsXiWKpuhw6HBhWZ25mspje3HuL0hO2dbOk2Zn57kTINygjVCvkyAbuXbExni_ZnWihNi9f1ZbNl5XoPIClrFfI'); background-size: cover; background-position: center; background-repeat: no-repeat;">
             <div class="row justify-content-center">
@@ -49,7 +47,7 @@
                 <div class="col-lg-6">
                     <div class="product-image-container">
                         <img class="product-image" id="pddia-imagen" alt="Perfume del Día"
-                            src="/spring/img/sauvage.png"
+                            th:src="${pddiaImagen} ?: '/spring/img/sauvage.png'"
                             onerror="this.onerror=null; this.src='/spring/img/sauvage.png';"
                             style="width: 100%; height: 500px; object-fit: cover;" >
                     </div>
@@ -57,19 +55,19 @@
                 <!-- Right Side: Details -->
                 <div class="col-lg-6 ps-lg-5">
                     <div class="font-label-caps text-secondary mb-2" style="letter-spacing: 0.2em;">PERFUME DEL DÍA</div>
-                    <div id="pddia-clima-info" class="font-label-caps text-secondary mb-3" style="opacity: 0.55; letter-spacing: 0.1em; font-size: 10px;"></div>
-                    <h1 id="pddia-nombre" class="font-display-lg spacing-y-sm text-white">L'Ombre Nomade</h1>
-                    <div id="pddia-marca" class="font-title-sm spacing-y-sm text-white-50">Louis Vuitton</div>
+                    <div id="pddia-clima-info" class="font-label-caps text-secondary mb-3" style="opacity: 0.55; letter-spacing: 0.1em; font-size: 10px;" th:text="${pddiaClimaInfo}"></div>
+                    <h1 id="pddia-nombre" class="font-display-lg spacing-y-sm text-white" th:text="${pddiaNombre}">L'Ombre Nomade</h1>
+                    <div id="pddia-marca" class="font-title-sm spacing-y-sm text-white-50" th:text="${pddiaMarca}">Louis Vuitton</div>
                     <div class="hairline-separator"></div>
-                    <p id="pddia-descripcion" class="font-body-lg spacing-y-md text-secondary" style="max-width: 480px;">
+                    <p id="pddia-descripcion" class="font-body-lg spacing-y-md text-secondary" style="max-width: 480px;" th:text="${pddiaDescripcion}">
                         Una oda al material más preciado de la perfumería: el Oud. Una fragancia que captura el espíritu
                         de los viajes interminables, mezclando la profundidad del incienso con la frescura de la
                         frambuesa.
                     </p>
                     <div class="spacing-y-md">
                         <div class="font-label-caps text-secondary spacing-y-sm">Familia Olfativa</div>
-                        <div id="pddia-familia" class="font-body-lg text-white">Ámbar Amaderada</div>
-                        <div id="pddia-notas" class="font-label-caps text-secondary mt-1" style="font-size: 10px; letter-spacing: 0.05em;"></div>
+                        <div id="pddia-familia" class="font-body-lg text-white" th:text="${pddiaFamilia}">Ámbar Amaderada</div>
+                        <div id="pddia-notas" class="font-label-caps text-secondary mt-1" style="font-size: 10px; letter-spacing: 0.05em;" th:text="${pddiaNotas}"></div>
                     </div>
                     <!-- Custom Scent Scale Component -->
                     <div class="spacing-y-md">
@@ -78,13 +76,13 @@
                             <span>Intenso</span>
                         </div>
                         <div class="scent-scale">
-                            <div id="pddia-punto" class="scent-dot" style="left: 85%;"></div>
+                            <div id="pddia-punto" class="scent-dot" th:style="'left: ' + (${pddiaIntensidad} ?: '50%') + ';'"></div>
                         </div>
                     </div>
                     <div class="mt-4">
                         <div class="d-flex flex-wrap gap-3">
                             <form id="pddia-form" action="/spring/agregar-a-coleccion" method="POST">
-                                <input type="hidden" id="pddia-form-input" name="idPerfume" value="" />
+                                <input type="hidden" id="pddia-form-input" name="idPerfume" th:value="${pddiaIdPerfume}" />
                                 <button class="btn btn-primary-custom" type="submit">Agregar a mi colección</button>
                             </form>
                             <a class="btn-luxury-outline" href="/spring/home">Todas las fragancias</a>

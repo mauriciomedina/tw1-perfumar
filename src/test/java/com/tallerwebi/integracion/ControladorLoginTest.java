@@ -13,6 +13,7 @@ import com.tallerwebi.integracion.config.HibernateTestConfig;
 import com.tallerwebi.integracion.config.SpringWebTestConfig;
 import com.tallerwebi.integracion.config.TestRestTemplateConfig;
 import java.util.Objects;
+import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -58,7 +59,9 @@ public class ControladorLoginTest {
       "redirect:/login",
       equalToIgnoringCase(Objects.requireNonNull(modelAndView.getViewName()))
     );
-    assertThat(true, is(modelAndView.getModel().isEmpty()));
+    // "climaActual" lo agrega globalmente AtributosClimaGlobal (@ControllerAdvice) a
+    // toda vista/redirect de la app; el propio inicio() no agrega ningún dato propio.
+    assertThat(true, is(modelAndView.getModel().keySet().equals(Set.of("climaActual"))));
   }
 
   @Test

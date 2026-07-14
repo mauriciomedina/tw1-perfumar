@@ -74,6 +74,20 @@
         <p id="perfume-notas" class="text-secondary-custom lh-lg mb-0" style="font-size: 16px;"
             th:text="${perfume.notas}"></p>
     </div>
+    <!-- Botón de Favoritos -->
+<button id="boton-favorito" 
+        class="btn mt-3 d-inline-flex align-items-center justify-content-center"
+        th:classappend="${esFavorito} ? 'btn-outline-danger' : 'btn-outline-dark'"
+        th:attr="data-id=${perfume.id}, data-favorito=${esFavorito != null ? esFavorito : 'false'}"
+        title="Favoritos">
+    <span id="icono-favorito" 
+          class="material-symbols-outlined"
+          th:classappend="${esFavorito} ? 'icono-favorito-lleno' : ''"
+          th:text="${esFavorito} ? 'favorite' : 'favorite_border'">
+        favorite_border
+    </span>
+</button>
+
 
             </div>
         </div>

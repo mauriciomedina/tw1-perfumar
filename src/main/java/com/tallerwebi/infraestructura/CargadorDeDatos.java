@@ -184,6 +184,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
         "Una de las maderas más raras, preciosas y caras del arsenal de un perfumista, a menudo quemada en los templos.",
         "Madera de Oud, Palo de Rosa, Cardamomo, Sándalo"
       );
+      /*de aca */
       crearPerfume(
         "Coco Mademoiselle",
         Marca.CHANEL,
@@ -312,10 +313,11 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
         "Una oda a la feminidad absoluta, luminosa y floral, sinónimo de belleza y elegancia.",
         "Ylang Ylang, Rosa de Damasco, Jazmín, Sándalo"
       );
+      /*seguir aca */
       crearPerfume(
         "Narciso For Her",
         Marca.NARCISO_RODRIGUEZ,
-        "/spring/img/narciso-for-her.jpg",
+        "/spring/img/narciso-for-her.png",
         FamiliaOlfativa.AMADERADA,
         "Un homenaje a la sensualidad femenina a través del almizcle puro y la madera envolvente.",
         "Rosa, Almizcle, Cedro, Ámbar, Pachulí"
@@ -323,7 +325,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
       crearPerfume(
         "Si",
         Marca.GIORGIO_ARMANI,
-        "/spring/img/armani-si.jpg",
+        "/spring/img/armani-si.png",
         FamiliaOlfativa.ORIENTAL,
         "Un perfume que dice sí a la vida, sensual y moderno, inspirado en la mujer contemporánea.",
         "Grosella Negra, Néctar de Rosa, Vainilla, Pachulí, Almizcle"
@@ -331,7 +333,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
       crearPerfume(
         "Dolce",
         Marca.DOLCE_Y_GABBANA,
-        "/spring/img/dg-dolce.jpg",
+        "/spring/img/dg-dolce.png",
         FamiliaOlfativa.FRUTAL,
         "Una fragancia de pureza angelical, delicada como el azahar y ligera como la seda.",
         "Neroli, Papaya, Flor de Ajo Silvestre, Cachemira, Almizcle"
@@ -339,7 +341,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
       crearPerfume(
         "Idôle",
         Marca.LANCOME,
-        "/spring/img/lancome-idole.jpg",
+        "/spring/img/lancome-idole.png",
         FamiliaOlfativa.AMADERADA,
         "Una fragancia para las mujeres que inspiran al mundo: limpia, poderosa y llena de esperanza.",
         "Rosa, Jazmín, Musgo, Madera de Cedro, Almizcle"
@@ -347,7 +349,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
       crearPerfume(
         "Guilty Pour Femme",
         Marca.GUCCI,
-        "/spring/img/gucci-guilty.jpg",
+        "/spring/img/gucci-guilty.png",
         FamiliaOlfativa.ORIENTAL,
         "Una fragancia audaz y seductora que celebra la libertad de seguir los propios deseos.",
         "Mandarina, Rosa, Durazno, Pachulí, Ámbar"
@@ -355,7 +357,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
       crearPerfume(
         "Bloom",
         Marca.GUCCI,
-        "/spring/img/gucci-bloom.jpg",
+        "/spring/img/gucci-bloom.png",
         FamiliaOlfativa.FRUTAL,
         "Un jardín blanco en plena floración: una fragancia rica, intensa y femenina.",
         "Tuberosa, Jazmín, Ranúnculo, Gardenia, Almizcle"
@@ -363,7 +365,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
       crearPerfume(
         "Angel",
         Marca.THIERRY_MUGLER,
-        "/spring/img/angel-mugler.jpg",
+        "/spring/img/angel-mugler.png",
         FamiliaOlfativa.ORIENTAL,
         "Un perfume mítico y revolucionario, el primero en introducir el concepto gourmand en la perfumería.",
         "Frutos Rojos, Miel, Chocolate, Pachulí, Vainilla"
@@ -371,7 +373,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
       crearPerfume(
         "Alien",
         Marca.THIERRY_MUGLER,
-        "/spring/img/alien-mugler.jpg",
+        "/spring/img/alien-mugler.png",
         FamiliaOlfativa.AMADERADA,
         "Una fragancia de otro mundo: mineral, luminosa y magnética, para una mujer única.",
         "Jazmín Sambac, Madera de Cachemira, Ámbar Blanco"
@@ -379,7 +381,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
       crearPerfume(
         "Scandal",
         Marca.JEAN_PAUL_GAULTIER,
-        "/spring/img/scandal-jpgaultier.jpg",
+        "/spring/img/scandal-jpgaultier.png",
         FamiliaOlfativa.ORIENTAL,
         "Una fragancia provocadora y glamorosa inspirada en el lujo dorado y la noche parisina.",
         "Naranja, Gardenia, Miel, Pachulí, Vetiver"
@@ -387,7 +389,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
       crearPerfume(
         "Bright Crystal",
         Marca.VERSACE,
-        "/spring/img/bright-crystal.jpg",
+        "/spring/img/bright-crystal.png",
         FamiliaOlfativa.FRUTAL,
         "Una mezcla refrescante y sensual de reflejos cristalinos y flores frescas y elegantes.",
         "Granada, Yuzu, Peonía, Magnolia, Almizcle"
@@ -395,7 +397,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
       crearPerfume(
         "Terre d'Hermès",
         Marca.HERMES,
-        "/spring/img/terre-hermes.jpg",
+        "/spring/img/terre-hermes.png",
         FamiliaOlfativa.AMADERADA,
         "Un diálogo entre la tierra y el cielo, entre lo mineral y lo vegetal. Un perfume de raíces profundas.",
         "Naranja, Pomelo, Pimienta, Vetiver, Cedro"
@@ -403,7 +405,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
       crearPerfume(
         "Voyage d'Hermès",
         Marca.HERMES,
-        "/spring/img/voyage-hermes.jpg",
+        "/spring/img/voyage-hermes.png",
         FamiliaOlfativa.AMADERADA,
         "Una invitación al viaje interior, fresca y profunda, para el hombre que lleva su libertad consigo.",
         "Cardamomo, Vetiver, Sándalo, Cedro, Madera"
@@ -411,7 +413,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
       crearPerfume(
         "Chanel N°5",
         Marca.CHANEL,
-        "/spring/img/chanel-n5.jpg",
+        "/spring/img/chanel-n5.png",
         FamiliaOlfativa.AMADERADA,
         "El perfume más famoso del mundo: intemporal, sofisticado y sinónimo de feminidad absoluta.",
         "Aldehídos, Neroli, Ylang Ylang, Jazmín, Sándalo"
@@ -419,7 +421,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
       crearPerfume(
         "L'Interdit",
         Marca.GIVENCHY,
-        "/spring/img/linterdit-givenchy.jpg",
+        "/spring/img/linterdit-givenchy.png",
         FamiliaOlfativa.AMADERADA,
         "Lo prohibido tiene su propio perfume: oscuro, floral y seductor, para una mujer que desafía las reglas.",
         "Naranja Amarga, Jazmín, Tuberosa, Cedro, Vainilla"
@@ -427,7 +429,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
       crearPerfume(
         "Gentleman Eau de Parfum",
         Marca.GIVENCHY,
-        "/spring/img/gentleman-givenchy.jpg",
+        "/spring/img/gentleman-givenchy.png",
         FamiliaOlfativa.HELECHO,
         "La dualidad del hombre moderno: la suavidad del iris y la fuerza del cuero en perfecta armonía.",
         "Bergamota, Iris, Pachulí, Cuero, Vainilla"
@@ -435,7 +437,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
       crearPerfume(
         "Born in Roma",
         Marca.VALENTINO,
-        "/spring/img/born-in-roma.jpg",
+        "/spring/img/born-in-roma.png",
         FamiliaOlfativa.HELECHO,
         "Nacido en la ciudad eterna: un perfume que fusiona la tradición romana con la energía urbana.",
         "Café, Cardamomo, Habá Tonka, Vetiver, Cedro"
@@ -443,7 +445,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
       crearPerfume(
         "Valentino Uomo",
         Marca.VALENTINO,
-        "/spring/img/valentino-uomo.jpg",
+        "/spring/img/valentino-uomo.png",
         FamiliaOlfativa.AMADERADA,
         "La esencia del hombre Valentino: elegante, sensual y con el refinamiento propio de la alta costura italiana.",
         "Bergamota, Neroli, Iris, Cuero, Cedro Virginia"
@@ -451,7 +453,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
       crearPerfume(
         "Club de Nuit Intense Man",
         Marca.ARMAF,
-        "/spring/img/club-de-nuit.jpg",
+        "/spring/img/club-de-nuit.png",
         FamiliaOlfativa.FRUTAL,
         "Una fragancia intensa y magnética que evoca las noches de lujo y la energía de los grandes eventos.",
         "Piña, Abedul, Jazmín, Pachulí, Almizcle"
@@ -459,7 +461,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
       crearPerfume(
         "Baccarat Rouge 540",
         Marca.MAISON_FRANCIS_KURKDJIAN,
-        "/spring/img/baccarat-rouge.jpg",
+        "/spring/img/baccarat-rouge.png",
         FamiliaOlfativa.AMADERADA,
         "Una fragancia celestial nacida del encuentro entre el cristal y el fuego, cálida y etérea a la vez.",
         "Azafrán, Jazmín, Ambroxan, Cedro, Eritroxilona"
@@ -467,7 +469,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
       crearPerfume(
         "Sì Passione",
         Marca.GIORGIO_ARMANI,
-        "/spring/img/si-passione.jpg",
+        "/spring/img/si-passione.png",
         FamiliaOlfativa.ORIENTAL,
         "La intensidad de la pasión convertida en perfume: más oscura, más intensa y más seductora.",
         "Pera, Rosa Negra, Cedro, Pachulí, Vainilla"
@@ -475,7 +477,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
       crearPerfume(
         "CH Men",
         Marca.CAROLINA_HERRERA,
-        "/spring/img/ch-men.jpg",
+        "/spring/img/ch-men.png",
         FamiliaOlfativa.AMADERADA,
         "La sofisticación del hombre contemporáneo capturada en un frasco icónico de cristal biselado.",
         "Bergamota, Lavanda, Cedro, Ámbar, Almizcle"
@@ -483,7 +485,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
       crearPerfume(
         "Crystal Noir",
         Marca.VERSACE,
-        "/spring/img/crystal-noir.jpg",
+        "/spring/img/crystal-noir.png",
         FamiliaOlfativa.ORIENTAL,
         "La feminidad misteriosa y oscura de Versace: sensual, especiada y de seductora profundidad.",
         "Pimienta, Nuez Moscada, Jengibre, Gardenia, Coco"
@@ -491,7 +493,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
       crearPerfume(
         "212 VIP",
         Marca.CAROLINA_HERRERA,
-        "/spring/img/212-vip.jpg",
+        "/spring/img/212-vip.png",
         FamiliaOlfativa.FRUTAL,
         "El aroma de la ciudad que nunca duerme: fresco, moderno y con el ritmo de Manhattan.",
         "Gardenia, Almizcle Blanco, Azahar, Cachemira"
@@ -499,7 +501,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
       crearPerfume(
         "Hypnôse",
         Marca.LANCOME,
-        "/spring/img/hypnose-lancome.jpg",
+        "/spring/img/hypnose-lancome.png",
         FamiliaOlfativa.ORIENTAL,
         "Una fragancia hipnótica y envolvente que despierta los sentidos con su calor y suavidad.",
         "Castaña de Agua, Gardenia, Heliotropo, Praliné, Vainilla"

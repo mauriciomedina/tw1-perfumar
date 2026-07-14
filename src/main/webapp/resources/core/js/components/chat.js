@@ -11,6 +11,10 @@ function chatEscaparHtml(texto) {
 function chatFormatearTexto(texto) {
   return chatEscaparHtml(texto)
     .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+    .replace(
+      /\[([^\]\[]+)\]\(\/spring\/especificacion\?id=(\d+)\)/g,
+      '<a href="/spring/especificacion?id=$2" class="pa-chat-link">$1</a>'
+    )
     .replace(/\n/g, "<br>");
 }
 
@@ -129,6 +133,12 @@ class ChatComponent extends HTMLElement {
           background: #fde8e8;
           color: #8a1f1f;
         }
+        .pa-chat-link {
+          color: inherit;
+          font-weight: 600;
+          text-decoration: underline;
+        }
+        .pa-chat-link:hover { opacity: 0.8; }
         .pa-chat-form {
           display: flex;
           gap: 8px;

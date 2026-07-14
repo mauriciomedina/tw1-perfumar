@@ -61,7 +61,8 @@ public class ServicioGeminiImpl implements ServicioGemini {
     "ciudad y la ocasión que me indiques\").\n\n" +
     "Formato de respuesta: Saludo breve y cordial solo en el primer mensaje de la " +
     "conversación. Para las recomendaciones, usá una estructura clara (puede ser una lista " +
-    "breve por perfume) que incluya: nombre + marca, por qué se ajusta al clima/ocasión, " +
+    "breve por perfume) que incluya: nombre + marca con su link Markdown según el ID del " +
+    "catálogo (ver formato obligatorio más abajo), por qué se ajusta al clima/ocasión, " +
     "familia olfativa e intensidad. Cerrá la respuesta invitando a refinar la búsqueda " +
     "(\"¿le gustaría algo más fresco/intenso/económico?\") o preguntando la ocasión si el " +
     "usuario no la mencionó. Si falta un dato clave para recomendar bien (ej: no indicó la " +
@@ -69,9 +70,10 @@ public class ServicioGeminiImpl implements ServicioGemini {
     "Ejemplo de interacción: Usuario: \"Hace bastante calor hoy, voy a salir a cenar con mi " +
     "pareja, algo elegante pero no muy cargado.\" Asistente: \"Con gusto. Considerando el " +
     "clima cálido de hoy en [ciudad] y una cena elegante, le sugiero estas opciones de " +
-    "nuestro catálogo: 1. [Nombre] — [Marca]: familia cítrica-amaderada, intensidad " +
-    "moderada. Ideal para climas cálidos y ocasiones formales sin resultar pesado. 2. " +
-    "[Nombre] — [Marca]: familia floral fresca, intensidad ligera. Aporta sofisticación sin " +
+    "nuestro catálogo: 1. [Nombre](/spring/especificacion?id=ID) — [Marca]: familia " +
+    "cítrica-amaderada, intensidad moderada. Ideal para climas cálidos y ocasiones formales " +
+    "sin resultar pesado. 2. [Nombre](/spring/especificacion?id=ID) — [Marca]: familia " +
+    "floral fresca, intensidad ligera. Aporta sofisticación sin " +
     "saturar el ambiente en una cena. ¿Le gustaría que le muestre alguna alternativa más " +
     "intensa, o prefiere mantenerse en esta línea fresca y ligera?\"";
 
@@ -114,13 +116,19 @@ public class ServicioGeminiImpl implements ServicioGemini {
       "exactamente en esta lista. Nunca inventes ni menciones nombres, marcas o perfumes que " +
       "no estén acá, aunque el usuario los pida por su nombre. Si ningún perfume de la lista " +
       "encaja bien con el pedido, decilo con honestidad y ofrecé la alternativa más cercana " +
-      "disponible en esta lista, explicando por qué no es un match perfecto.\n"
+      "disponible en esta lista, explicando por qué no es un match perfecto.\n" +
+      "Formato obligatorio al recomendar: cada perfume que menciones como recomendación " +
+      "tiene que incluir, inmediatamente después de su nombre, un link en formato Markdown " +
+      "con el ID exacto de esta lista: [Nombre del perfume](/spring/especificacion?id=ID). " +
+      "Nunca inventes un ID ni armés el link si el perfume no está en esta lista.\n"
     );
     try {
       List<Perfume> perfumes = servicioColeccion.listar();
       for (Perfume perfume : perfumes) {
         catalogo
-          .append("- ")
+          .append("- ID: ")
+          .append(perfume.getId())
+          .append(" | ")
           .append(perfume.getNombre())
           .append(" (")
           .append(perfume.getMarca())

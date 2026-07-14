@@ -14,9 +14,9 @@ class Sidebar extends HTMLElement {
             <span class="material-symbols-outlined">select_all</span>
             <span class="label-caps">Todas las Fragancias</span>
           </a>
-          <a class="nav-link filtro-btn" href="#" data-familia="CITRIC">
-            <span class="material-symbols-outlined">bakery_dining</span>
-            <span class="label-caps">C&iacute;tricas</span>
+           <a class="nav-link filtro-btn" href="#" data-familia="ORIENTAL">
+            <span class="material-symbols-outlined">auto_awesome</span>
+            <span class="label-caps">Orientales</span>
           </a>
           <a class="nav-link filtro-btn" href="#" data-familia="AMADERADA">
             <span class="material-symbols-outlined">forest</span>
@@ -30,10 +30,11 @@ class Sidebar extends HTMLElement {
             <span class="material-symbols-outlined">spa</span>
             <span class="label-caps">Helecho</span>
           </a>
-          <a class="nav-link filtro-btn" href="#" data-familia="ORIENTAL">
-            <span class="material-symbols-outlined">auto_awesome</span>
-            <span class="label-caps">Orientales</span>
+          <a class="nav-link filtro-btn" href="#" data-familia="CITRIC">
+            <span class="material-symbols-outlined">bakery_dining</span>
+            <span class="label-caps">C&iacute;tricas</span>
           </a>
+         
           
         </nav>
         <div class="mt-auto pt-3 border-top" style="border-color: rgba(0, 0, 0, 0.05) !important">

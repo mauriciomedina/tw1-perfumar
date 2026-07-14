@@ -36,57 +36,64 @@
         <div class="container-fluid p-4 p-lg-5">
             <div class="row align-items-start g-5">
 
-               <!-- Imagen -->
-<div class="col-lg-5">
-    <div class="product-image-container">
-        <img id="perfume-imagen" class="product-image" th:src="${perfume.imagenUrl}" alt="Imagen del perfume"
-            style="width: 100%; height: 500px; object-fit: cover;" />
-    </div>
-</div>
+        <!-- Imagen -->
+        <div class="col-lg-5">
+            <div class="product-image-container">
+                <img id="perfume-imagen" class="product-image" th:src="${perfume.imagenUrl}" alt="Imagen del perfume"
+             style="width: 100%; height: 500px; object-fit: cover;" />
+            </div>
+         </div>
 
-<!-- Info Column -->
-<div class="col-lg-7 ps-lg-5">
-    <nav aria-label="breadcrumb" class="mb-4">
-        <span class="text-secondary-custom"
-            style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em;">Detalle de
-            Fragancia</span>
-    </nav>
-    <div class="mb-5">
-        <p class="text-secondary-custom mb-2" id="perfume-marca"
-            th:text="${perfume.marca != null ? #strings.toUpperCase(perfume.marca) : ''}"
-            style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em;">Marca</p>
-        <h2 id="perfume-nombre" class="font-bodoni text-primary-custom display-luxury mb-3"
-            th:text="${perfume.nombre}">Nombre</h2>
-        <p id="perfume-familia" th:text="${perfume.familiaOlfativa}"
-            class="badge rounded-pill bg-transparent text-primary-custom border border-secondary border-opacity-25 px-3 py-2"
-            style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500;">
-            Familia
-            Olfativa</p>
-    </div>
-    <div class="mb-5">
-        <h3 class="section-title">Descripción</h3>
-        <p id="perfume-descripcion" class="text-secondary-custom lh-lg mb-0" style="font-size: 16px;"
-            th:text="${perfume.descripcion}">
-        </p>
-    </div>
-    <div class="mb-5">
-        <h3 class="section-title">Notas</h3>
-        <p id="perfume-notas" class="text-secondary-custom lh-lg mb-0" style="font-size: 16px;"
-            th:text="${perfume.notas}"></p>
-    </div>
-    <!-- Botón de Favoritos -->
-<button id="boton-favorito" 
-        class="btn mt-3 d-inline-flex align-items-center justify-content-center"
-        th:classappend="${esFavorito} ? 'btn-outline-danger' : 'btn-outline-dark'"
-        th:attr="data-id=${perfume.id}, data-favorito=${esFavorito != null ? esFavorito : 'false'}"
-        title="Favoritos">
-    <span id="icono-favorito" 
-          class="material-symbols-outlined"
-          th:classappend="${esFavorito} ? 'icono-favorito-lleno' : ''"
-          th:text="${esFavorito} ? 'favorite' : 'favorite_border'">
-        favorite_border
-    </span>
-</button>
+        <!-- Info Column -->
+         <div class="col-lg-7 ps-lg-5">
+            <nav aria-label="breadcrumb" class="mb-4">
+                <span class="text-secondary-custom"
+                    style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em;">Detalle de
+                    Fragancia</span>
+            </nav>
+            <div class="mb-5">
+                <p class="text-secondary-custom mb-2" id="perfume-marca"
+                    th:text="${perfume.marca != null ? #strings.toUpperCase(perfume.marca) : ''}"
+                    style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em;">Marca</p>
+                <h2 id="perfume-nombre" class="font-bodoni text-primary-custom display-luxury mb-3"
+                    th:text="${perfume.nombre}">Nombre</h2>
+                <p id="perfume-familia" th:text="${perfume.familiaOlfativa}"
+                    class="badge rounded-pill bg-transparent text-primary-custom border border-secondary border-opacity-25 px-3 py-2"
+                    style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500;">
+                    Familia
+                    Olfativa</p>
+            </div>
+            <div class="mb-5">
+                <h3 class="section-title">Descripción</h3>
+                <p id="perfume-descripcion" class="text-secondary-custom lh-lg mb-0" style="font-size: 16px;"
+                    th:text="${perfume.descripcion}">
+                </p>
+            </div>
+            <div class="mb-5">
+                <h3 class="section-title">Notas</h3>
+                <p id="perfume-notas" class="text-secondary-custom lh-lg mb-0" style="font-size: 16px;"
+                    th:text="${perfume.notas}"></p>
+            </div>
+            <!-- Botones de acción -->
+            <div class="d-flex gap-3 mt-3 align-items-stretch">
+                <form th:action="@{/agregar-a-coleccion}" method="POST">
+                    <input type="hidden" name="idPerfume" th:value="${perfume.id}" />
+                    <button class="btn btn-primary-custom px-4 h-100" type="submit">Agregar a mi colección</button>
+                </form>
+
+                <button id="boton-favorito" type="button"
+                        class="btn d-inline-flex align-items-center justify-content-center"
+                        th:classappend="${esFavorito} ? 'btn-outline-danger' : 'btn-outline-dark'"
+                        th:attr="data-id=${perfume.id},data-favorito=${esFavorito != null ? esFavorito : 'false'}"
+                        title="Favoritos" style="width: 52px; flex-shrink: 0;">
+                    <span id="icono-favorito"
+                        class="material-symbols-outlined"
+                        th:classappend="${esFavorito} ? 'icono-favorito-lleno' : ''"
+                        th:text="${esFavorito} ? 'favorite' : 'favorite_border'">
+                        favorite_border
+                    </span>
+                </button>
+            </div>
 
 
             </div>
@@ -159,7 +166,7 @@
                 </div>
             </div>
         </div>
-    </div>
+        </div>
 
     </main>
 

@@ -46,12 +46,14 @@ public class ControladorPerfume {
     @RequestParam("id") Long id,
     HttpServletRequest request
   ) {
+    Long idUsuario = (Long) request.getSession().getAttribute("USUARIO_ID");
+    if (idUsuario == null) return new ModelAndView("redirect:/login");
+
     ModelMap modelo = new ModelMap();
 
     Perfume perfumeReal = servicioColeccion.buscarPerfume(id);
     modelo.put("perfume", perfumeReal);
 
-    Long idUsuario = (Long) request.getSession().getAttribute("USUARIO_ID");
     modelo.put("esFavorito", servicioFavorito.esFavorito(idUsuario, id));
 
     List<Resena> resenas = servicioResena.listarPorPerfume(id);

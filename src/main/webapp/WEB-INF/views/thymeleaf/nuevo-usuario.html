@@ -13,6 +13,7 @@
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
     rel="stylesheet">
   <link rel="stylesheet" th:href="@{/css/main.css}" />
+  <script th:src="@{/js/paisesCiudades.js}"></script>
   <script th:src="@{/js/components/chat.js}" defer></script>
 </head>
 
@@ -49,29 +50,23 @@
               th:field="*{email}" id="email" required>
           </div>
           <div class="row g-4 mb-4">
-            <div class="col-md-6">
+            <div class="col-md-12">
               <label class="form-label-caps">Contraseña</label>
               <input class="form-control input-minimal" placeholder="••••••••" type="password" th:field="*{password}"
                 id="password" required>
             </div>
-            <div class="col-md-6">
-              <label class="form-label-caps">Confirmar Contraseña</label>
-              <input class="form-control input-minimal" placeholder="••••••••" type="password">
-            </div>
           </div>
           <div class="row g-4 mb-4">
             <div class="col-md-6">
-              <label class="form-label-caps">Ciudad</label>
-              <input class="form-control input-minimal" placeholder="Buenos Aires" type="text"
-                th:field="*{ciudad}" id="ciudad" required>
+              <label class="form-label-caps">País</label>
+              <select class="form-control input-minimal" id="pais" name="pais" required></select>
             </div>
             <div class="col-md-6">
-              <label class="form-label-caps">País (código)</label>
-              <input class="form-control input-minimal" placeholder="AR" type="text"
-                th:field="*{pais}" id="pais" required>
+              <label class="form-label-caps">Ciudad</label>
+              <select class="form-control input-minimal" id="ciudad" name="ciudad" required></select>
             </div>
           </div>
-          <button class="btn btn-luxury mb-4" type="submit" id="btn-registrarme">CREAR CUENTA</button>
+          <button class="btn btn-dark-custom mb-4" type="submit" id="btn-registrarme">CREAR CUENTA</button>
           <p th:if="${error != null}" class="alert alert-danger" th:text="'Error: ' + ${error}">
           </p>
         </form>
@@ -117,6 +112,8 @@
         card.style.opacity = '1';
         card.style.transform = 'translateY(0)';
       }, 100);
+
+      inicializarSelectPaisCiudad("pais", "ciudad");
     });
   </script>
 

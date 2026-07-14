@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -76,7 +77,13 @@ public class ControladorClima {
   }
 
   @GetMapping("/bienvenida")
-  public ModelAndView irABienvenida(@ModelAttribute("climaActual") Clima clima) {
+  public ModelAndView irABienvenida(
+    @ModelAttribute("climaActual") Clima clima,
+    HttpServletRequest request
+  ) {
+    Long idUsuario = (Long) request.getSession().getAttribute("USUARIO_ID");
+    if (idUsuario == null) return new ModelAndView("redirect:/login");
+
     ModelMap model = new ModelMap();
     List<Perfume> perfumes = servicioColeccion.listar();
 

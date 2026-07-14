@@ -11,6 +11,8 @@ import com.tallerwebi.dominio.ServicioClima;
 import com.tallerwebi.dominio.ServicioColeccion;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;
@@ -25,6 +27,8 @@ public class ControladorClimaTest {
   private ControladorClima controladorClima;
   private ServicioClima servicioClimaMock;
   private ServicioColeccion servicioColeccionMock;
+  private HttpServletRequest requestMock;
+  private HttpSession sessionMock;
   private static final String CIUDAD = "Buenos Aires";
   private static final String PAIS = "AR";
 
@@ -32,6 +36,10 @@ public class ControladorClimaTest {
   public void init() {
     servicioClimaMock = mock(ServicioClima.class);
     servicioColeccionMock = mock(ServicioColeccion.class);
+    requestMock = mock(HttpServletRequest.class);
+    sessionMock = mock(HttpSession.class);
+    when(requestMock.getSession()).thenReturn(sessionMock);
+    when(sessionMock.getAttribute("USUARIO_ID")).thenReturn(1L);
     controladorClima = new ControladorClima();
     ReflectionTestUtils.setField(controladorClima, "servicioClima", servicioClimaMock);
     ReflectionTestUtils.setField(controladorClima, "servicioColeccion", servicioColeccionMock);
@@ -55,7 +63,7 @@ public class ControladorClimaTest {
     when(servicioColeccionMock.listar())
       .thenReturn(List.of(perfumeCitrico, crearPerfume(FamiliaOlfativa.ORIENTAL)));
 
-    ModelAndView modelAndView = controladorClima.irABienvenida(climaCalido);
+    ModelAndView modelAndView = controladorClima.irABienvenida(climaCalido, requestMock);
 
     assertThat(modelAndView.getViewName(), equalTo("bienvenida"));
     assertThat(modelAndView.getModel().get("pddiaFamilia"), equalTo("Cítrica"));
@@ -67,7 +75,7 @@ public class ControladorClimaTest {
     Perfume perfumeAmaderado = crearPerfume(FamiliaOlfativa.AMADERADA);
     when(servicioColeccionMock.listar()).thenReturn(List.of(perfumeAmaderado));
 
-    ModelAndView modelAndView = controladorClima.irABienvenida(null);
+    ModelAndView modelAndView = controladorClima.irABienvenida(null, requestMock);
 
     assertThat(modelAndView.getModel().get("pddiaFamilia"), equalTo("Amaderada"));
     assertThat(
@@ -80,9 +88,18 @@ public class ControladorClimaTest {
   public void irABienvenidaConCatalogoVacioNoDeberiaAgregarDatosDePerfume() {
     when(servicioColeccionMock.listar()).thenReturn(List.of());
 
-    ModelAndView modelAndView = controladorClima.irABienvenida(null);
+    ModelAndView modelAndView = controladorClima.irABienvenida(null, requestMock);
 
     assertThat(modelAndView.getModel().containsKey("pddiaNombre"), equalTo(false));
+  }
+
+  @Test
+  public void irABienvenidaDeberiaRedirigirALoginSiNoHaySesion() {
+    when(sessionMock.getAttribute("USUARIO_ID")).thenReturn(null);
+
+    ModelAndView modelAndView = controladorClima.irABienvenida(null, requestMock);
+
+    assertThat(modelAndView.getViewName(), equalTo("redirect:/login"));
   }
 
   @Test

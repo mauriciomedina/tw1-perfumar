@@ -15,6 +15,7 @@
   <link rel="stylesheet" th:href="@{/css/main.css}" />
 <script th:src="@{/js/components/sidebar.js}"></script>
   <script th:src="@{/js/components/header.js}" defer></script>
+  <script th:src="@{/js/paisesCiudades.js}"></script>
 
   <script th:src="@{/js/components/chat.js}" defer></script>
 
@@ -44,12 +45,12 @@
                         </div>
                         <div class="row mb-5">
                             <div class="col-md-6">
-                                <label class="label-caps d-block mb-2 text-muted" style="font-size: 10px;">Ciudad</label>
-                                <input class="form-control input-minimal" type="text" th:field="*{ciudad}" placeholder="Buenos Aires" />
+                                <label class="label-caps d-block mb-2 text-muted" style="font-size: 10px;">País</label>
+                                <select class="form-control input-minimal" id="pais" name="pais" th:attr="data-actual=${usuario.pais}" required></select>
                             </div>
                             <div class="col-md-6">
-                                <label class="label-caps d-block mb-2 text-muted" style="font-size: 10px;">País (código)</label>
-                                <input class="form-control input-minimal" type="text" th:field="*{pais}" placeholder="AR" />
+                                <label class="label-caps d-block mb-2 text-muted" style="font-size: 10px;">Ciudad</label>
+                                <select class="form-control input-minimal" id="ciudad" name="ciudad" th:attr="data-actual=${usuario.ciudad}" required></select>
                             </div>
                         </div>
                         <div class="mt-4">
@@ -63,6 +64,12 @@
   </main>
 
   <app-chat></app-chat>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      inicializarSelectPaisCiudad("pais", "ciudad");
+    });
+  </script>
 </body>
 
 </html>

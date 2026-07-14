@@ -5,7 +5,10 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.Mockito.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.tallerwebi.dominio.ServicioClima;
 import com.tallerwebi.dominio.ServicioGemini;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
@@ -16,13 +19,21 @@ public class ControladorGeminiTest {
 
   private ControladorGemini controladorGemini;
   private ServicioGemini servicioGeminiMock;
+  private ServicioClima servicioClimaMock;
+  private HttpServletRequest requestMock;
+  private HttpSession sessionMock;
   private static final String PREGUNTA = "Hola!";
 
   @BeforeEach
   public void init() {
     servicioGeminiMock = mock(ServicioGemini.class);
+    servicioClimaMock = mock(ServicioClima.class);
+    requestMock = mock(HttpServletRequest.class);
+    sessionMock = mock(HttpSession.class);
+    when(requestMock.getSession()).thenReturn(sessionMock);
     controladorGemini = new ControladorGemini();
     ReflectionTestUtils.setField(controladorGemini, "servicioGemini", servicioGeminiMock);
+    ReflectionTestUtils.setField(controladorGemini, "servicioClima", servicioClimaMock);
   }
 
   @Test
@@ -95,7 +106,7 @@ public class ControladorGeminiTest {
   }
 
   private ResponseEntity<?> cuandoLePreguntoAlServicio(GeminiDto dto) {
-    return controladorGemini.preguntar(dto);
+    return controladorGemini.preguntar(dto, requestMock);
   }
 
   private void entoncesLaRespuestaEsExitosa(ResponseEntity<?> response) {

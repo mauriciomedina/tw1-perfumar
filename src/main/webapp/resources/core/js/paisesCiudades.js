@@ -58,7 +58,7 @@ function poblarCiudades(selectCiudad, codigoPais, ciudadPreseleccionada) {
   const pais = PAISES_CIUDADES[codigoPais];
 
   if (!pais) {
-    selectCiudad.innerHTML = '<option value="">Seleccione un país primero</option>';
+    selectCiudad.innerHTML = "<option value=\"\">Seleccione un país primero</option>";
     selectCiudad.disabled = true;
     return;
   }
@@ -87,11 +87,14 @@ function inicializarSelectPaisCiudad(idSelectPais, idSelectCiudad) {
     })
     .join("");
 
-  selectPais.innerHTML = '<option value="">Seleccione un país</option>' + opcionesPaises;
+  selectPais.innerHTML = "<option value=\"\">Seleccione un país</option>" + opcionesPaises;
 
   poblarCiudades(selectCiudad, paisActual, ciudadActual);
 
   selectPais.addEventListener("change", () => {
+    console.log("1. Detectó un cambio. País seleccionado:", selectPais.value);
+    console.log("2. Elemento ciudad destino:", selectCiudad);
     poblarCiudades(selectCiudad, selectPais.value, "");
+    console.log("3. Ciudades cargadas exitosamente");
   });
 }

@@ -134,12 +134,29 @@ public class ControladorLoginTest {
   }
 
   @Test
-  public void irAHomeDeberiaRetornarVistaHome() {
+  public void irAHomeDeberiaRetornarVistaHomeSiHaySesion() {
+    // preparacion
+    when(requestMock.getSession()).thenReturn(sessionMock);
+    when(sessionMock.getAttribute("USUARIO_ID")).thenReturn(1L);
+
     // ejecucion
-    ModelAndView modelAndView = controladorLogin.irAHome();
+    ModelAndView modelAndView = controladorLogin.irAHome(requestMock);
 
     // validacion
     assertThat(modelAndView.getViewName(), equalToIgnoringCase("home"));
+  }
+
+  @Test
+  public void irAHomeDeberiaRedirigirALoginSiNoHaySesion() {
+    // preparacion
+    when(requestMock.getSession()).thenReturn(sessionMock);
+    when(sessionMock.getAttribute("USUARIO_ID")).thenReturn(null);
+
+    // ejecucion
+    ModelAndView modelAndView = controladorLogin.irAHome(requestMock);
+
+    // validacion
+    assertThat(modelAndView.getViewName(), equalToIgnoringCase("redirect:/login"));
   }
 
   @Test
@@ -168,6 +185,7 @@ public class ControladorLoginTest {
   public void irAPerfilDeberiaRetornarVistaPerfilConDatosDelUsuarioDeLaSesion() {
     // preparacion
     when(requestMock.getSession()).thenReturn(sessionMock);
+    when(sessionMock.getAttribute("USUARIO_ID")).thenReturn(1L);
     when(sessionMock.getAttribute("NOMBRE")).thenReturn("Juan");
     when(sessionMock.getAttribute("EMAIL")).thenReturn("juan@test.com");
     when(sessionMock.getAttribute("CIUDAD")).thenReturn("Córdoba");
@@ -179,6 +197,33 @@ public class ControladorLoginTest {
     // validacion
     assertThat(modelAndView.getViewName(), equalToIgnoringCase("perfil"));
     assertThat(modelAndView.getModel().get("usuario"), instanceOf(Usuario.class));
+  }
+
+  @Test
+  public void irAPerfilDeberiaRedirigirALoginSiNoHaySesion() {
+    // preparacion
+    when(requestMock.getSession()).thenReturn(sessionMock);
+    when(sessionMock.getAttribute("USUARIO_ID")).thenReturn(null);
+
+    // ejecucion
+    ModelAndView modelAndView = controladorLogin.irAPerfil(requestMock);
+
+    // validacion
+    assertThat(modelAndView.getViewName(), equalToIgnoringCase("redirect:/login"));
+  }
+
+  @Test
+  public void actualizarPerfilDeberiaRedirigirALoginSiNoHaySesion() {
+    // preparacion
+    when(requestMock.getSession()).thenReturn(sessionMock);
+    when(sessionMock.getAttribute("USUARIO_ID")).thenReturn(null);
+
+    // ejecucion
+    ModelAndView modelAndView = controladorLogin.actualizarPerfil(new Usuario(), requestMock);
+
+    // validacion
+    assertThat(modelAndView.getViewName(), equalToIgnoringCase("redirect:/login"));
+    verify(servicioLoginMock, times(0)).actualizar(any(Usuario.class));
   }
 
   @Test

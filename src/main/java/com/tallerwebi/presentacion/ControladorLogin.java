@@ -16,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class ControladorLogin {
 
   private static final String ATTR_USUARIO = "usuario";
+  private static final String ATTR_USUARIO_ID = "USUARIO_ID";
+  private static final String REDIRECT_LOGIN = "redirect:/login";
 
   private ServicioLogin servicioLogin;
 
@@ -42,7 +44,7 @@ public class ControladorLogin {
     );
     if (usuarioBuscado != null) {
       request.getSession().setAttribute("ROL", usuarioBuscado.getRol());
-      request.getSession().setAttribute("USUARIO_ID", usuarioBuscado.getId());
+      request.getSession().setAttribute(ATTR_USUARIO_ID, usuarioBuscado.getId());
       request.getSession().setAttribute("NOMBRE", usuarioBuscado.getNombre());
       request.getSession().setAttribute("EMAIL", usuarioBuscado.getEmail());
       request.getSession().setAttribute("CIUDAD", usuarioBuscado.getCiudad());
@@ -68,7 +70,7 @@ public class ControladorLogin {
       model.put("error", "Error al registrar el nuevo usuario");
       return new ModelAndView("nuevo-usuario", model);
     }
-    return new ModelAndView("redirect:/login");
+    return new ModelAndView(REDIRECT_LOGIN);
   }
 
   @RequestMapping(path = "/nuevo-usuario", method = RequestMethod.GET)
@@ -79,20 +81,26 @@ public class ControladorLogin {
   }
 
   @RequestMapping(path = "/home", method = RequestMethod.GET)
-  public ModelAndView irAHome() {
+  public ModelAndView irAHome(HttpServletRequest request) {
+    Long idUsuario = (Long) request.getSession().getAttribute(ATTR_USUARIO_ID);
+    if (idUsuario == null) return new ModelAndView(REDIRECT_LOGIN);
+
     return new ModelAndView("home");
   }
 
   @RequestMapping(path = "/", method = RequestMethod.GET)
   public ModelAndView inicio() {
-    return new ModelAndView("redirect:/login");
+    return new ModelAndView(REDIRECT_LOGIN);
   }
 
   @RequestMapping(path = "/perfil", method = RequestMethod.GET)
   public ModelAndView irAPerfil(HttpServletRequest request) {
+    Long idUsuario = (Long) request.getSession().getAttribute(ATTR_USUARIO_ID);
+    if (idUsuario == null) return new ModelAndView(REDIRECT_LOGIN);
+
     Usuario usuario = new Usuario();
 
-    usuario.setId((Long) request.getSession().getAttribute("USUARIO_ID"));
+    usuario.setId(idUsuario);
 
     usuario.setNombre((String) request.getSession().getAttribute("NOMBRE"));
     usuario.setEmail((String) request.getSession().getAttribute("EMAIL"));
@@ -108,7 +116,7 @@ public class ControladorLogin {
   @RequestMapping(path = "/logout", method = RequestMethod.GET)
   public ModelAndView cerrarSesion(HttpServletRequest request) {
     request.getSession().invalidate();
-    return new ModelAndView("redirect:/login");
+    return new ModelAndView(REDIRECT_LOGIN);
   }
 
   @RequestMapping(path = "/actualizar-perfil", method = RequestMethod.POST)
@@ -116,7 +124,9 @@ public class ControladorLogin {
     @ModelAttribute(ATTR_USUARIO) Usuario usuario,
     HttpServletRequest request
   ) {
-    Long idUsuario = (Long) request.getSession().getAttribute("USUARIO_ID");
+    Long idUsuario = (Long) request.getSession().getAttribute(ATTR_USUARIO_ID);
+    if (idUsuario == null) return new ModelAndView(REDIRECT_LOGIN);
+
     usuario.setId(idUsuario);
     servicioLogin.actualizar(usuario);
     request.getSession().setAttribute("NOMBRE", usuario.getNombre());

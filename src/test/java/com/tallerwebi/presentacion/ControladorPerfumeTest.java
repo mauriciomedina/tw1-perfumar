@@ -69,4 +69,13 @@ public class ControladorPerfumeTest {
 
     assertThat((Double) mav.getModel().get("promedioPuntuacion"), is(4.5));
   }
+
+  @Test
+  public void queAlNavegarALaEspecificacionSinSesionMeRedirijaALogin() {
+    when(sessionMock.getAttribute("USUARIO_ID")).thenReturn(null);
+
+    ModelAndView mav = controlador.mostrarEspecificacion(1L, requestMock);
+
+    assertThat(mav.getViewName(), equalToIgnoringCase("redirect:/login"));
+  }
 }

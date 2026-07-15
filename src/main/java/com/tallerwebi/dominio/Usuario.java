@@ -19,6 +19,7 @@ public class Usuario {
   private Boolean activo = false;
   private String ciudad;
   private String pais;
+  private String genero;
 
   public String getNombre() {
     return nombre;
@@ -86,5 +87,13 @@ public class Usuario {
 
   public void setPais(String pais) {
     this.pais = pais;
+  }
+
+  public String getGenero() {
+    return genero;
+  }
+
+  public void setGenero(String genero) {
+    this.genero = genero;
   }
 }

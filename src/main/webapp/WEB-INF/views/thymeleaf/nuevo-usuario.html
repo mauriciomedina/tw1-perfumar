@@ -66,6 +66,15 @@
               <select class="form-control input-minimal" id="ciudad" name="ciudad" required></select>
             </div>
           </div>
+          <div class="mb-4">
+            <label class="form-label-caps">Género</label>
+            <select class="form-control input-minimal" th:field="*{genero}" id="genero" required>
+              <option value="">Seleccione un género</option>
+              <option value="Femenino">Femenino</option>
+              <option value="Masculino">Masculino</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
           <button class="btn btn-dark-custom mb-4" type="submit" id="btn-registrarme">CREAR CUENTA</button>
           <p th:if="${error != null}" class="alert alert-danger" th:text="'Error: ' + ${error}">
           </p>

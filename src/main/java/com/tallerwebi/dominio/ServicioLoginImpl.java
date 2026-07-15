@@ -40,5 +40,6 @@ public class ServicioLoginImpl implements ServicioLogin {
     existente.setEmail(datosNuevos.getEmail());
     existente.setCiudad(datosNuevos.getCiudad());
     existente.setPais(datosNuevos.getPais());
+    existente.setGenero(datosNuevos.getGenero());
   }
 }

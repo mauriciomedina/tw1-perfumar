@@ -61,6 +61,7 @@ public class ServicioLoginTest {
     datosNuevos.setEmail("nuevo@test.com");
     datosNuevos.setCiudad("Córdoba");
     datosNuevos.setPais("AR");
+    datosNuevos.setGenero("Femenino");
 
     Usuario existente = new Usuario();
     existente.setId(1L);
@@ -76,6 +77,7 @@ public class ServicioLoginTest {
     assertThat(existente.getEmail(), equalTo("nuevo@test.com"));
     assertThat(existente.getCiudad(), equalTo("Córdoba"));
     assertThat(existente.getPais(), equalTo("AR"));
+    assertThat(existente.getGenero(), equalTo("Femenino"));
   }
 
   @Test

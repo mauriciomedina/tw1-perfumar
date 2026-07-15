@@ -56,6 +56,7 @@ public class ControladorLoginTest {
     // preparacion
     Usuario usuarioEncontradoMock = mock(Usuario.class);
     when(usuarioEncontradoMock.getRol()).thenReturn("ADMIN");
+    when(usuarioEncontradoMock.getGenero()).thenReturn("Otro");
 
     when(requestMock.getSession()).thenReturn(sessionMock);
     when(servicioLoginMock.consultarUsuario(anyString(), anyString()))
@@ -67,6 +68,7 @@ public class ControladorLoginTest {
     // validacion
     assertThat(modelAndView.getViewName(), equalToIgnoringCase("redirect:/bienvenida"));
     verify(sessionMock, times(1)).setAttribute("ROL", usuarioEncontradoMock.getRol());
+    verify(sessionMock, times(1)).setAttribute("GENERO", usuarioEncontradoMock.getGenero());
   }
 
   @Test
@@ -190,6 +192,7 @@ public class ControladorLoginTest {
     when(sessionMock.getAttribute("EMAIL")).thenReturn("juan@test.com");
     when(sessionMock.getAttribute("CIUDAD")).thenReturn("Córdoba");
     when(sessionMock.getAttribute("PAIS")).thenReturn("AR");
+    when(sessionMock.getAttribute("GENERO")).thenReturn("Femenino");
 
     // ejecucion
     ModelAndView modelAndView = controladorLogin.irAPerfil(requestMock);
@@ -197,6 +200,10 @@ public class ControladorLoginTest {
     // validacion
     assertThat(modelAndView.getViewName(), equalToIgnoringCase("perfil"));
     assertThat(modelAndView.getModel().get("usuario"), instanceOf(Usuario.class));
+    assertThat(
+      ((Usuario) modelAndView.getModel().get("usuario")).getGenero(),
+      equalToIgnoringCase("Femenino")
+    );
   }
 
   @Test
@@ -234,6 +241,7 @@ public class ControladorLoginTest {
     usuario.setEmail("nuevo@test.com");
     usuario.setCiudad("Rosario");
     usuario.setPais("AR");
+    usuario.setGenero("Masculino");
 
     when(requestMock.getSession()).thenReturn(sessionMock);
     when(sessionMock.getAttribute("USUARIO_ID")).thenReturn(1L);
@@ -248,5 +256,6 @@ public class ControladorLoginTest {
     verify(sessionMock).setAttribute("PAIS", "AR");
     verify(sessionMock).setAttribute("NOMBRE", "Nuevo Nombre");
     verify(sessionMock).setAttribute("EMAIL", "nuevo@test.com");
+    verify(sessionMock).setAttribute("GENERO", "Masculino");
   }
 }

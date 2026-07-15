@@ -49,6 +49,7 @@ public class ControladorLogin {
       request.getSession().setAttribute("EMAIL", usuarioBuscado.getEmail());
       request.getSession().setAttribute("CIUDAD", usuarioBuscado.getCiudad());
       request.getSession().setAttribute("PAIS", usuarioBuscado.getPais());
+      request.getSession().setAttribute("GENERO", usuarioBuscado.getGenero());
       return new ModelAndView("redirect:/bienvenida");
     } else {
       /* Se instancia el ModelMap solo cuando es necesario (en el flujo de error) para evitar anomalías en el flujo de datos (DU-anomaly de PMD) */
@@ -106,6 +107,7 @@ public class ControladorLogin {
     usuario.setEmail((String) request.getSession().getAttribute("EMAIL"));
     usuario.setCiudad((String) request.getSession().getAttribute("CIUDAD"));
     usuario.setPais((String) request.getSession().getAttribute("PAIS"));
+    usuario.setGenero((String) request.getSession().getAttribute("GENERO"));
 
     ModelMap model = new ModelMap();
     model.put("usuario", usuario);
@@ -133,6 +135,7 @@ public class ControladorLogin {
     request.getSession().setAttribute("EMAIL", usuario.getEmail());
     request.getSession().setAttribute("CIUDAD", usuario.getCiudad());
     request.getSession().setAttribute("PAIS", usuario.getPais());
+    request.getSession().setAttribute("GENERO", usuario.getGenero());
     return new ModelAndView("redirect:/perfil");
   }
 }

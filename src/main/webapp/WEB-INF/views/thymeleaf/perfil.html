@@ -53,6 +53,15 @@
                                 <select class="form-control input-minimal" id="ciudad" name="ciudad" th:attr="data-actual=${usuario.ciudad}" required></select>
                             </div>
                         </div>
+                        <div class="mb-5">
+                            <label class="label-caps d-block mb-2 text-muted" style="font-size: 10px;">Género</label>
+                            <select class="form-control input-minimal" th:field="*{genero}" id="genero" required>
+                                <option value="">Seleccione un género</option>
+                                <option value="Femenino">Femenino</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
                         <div class="mt-4">
                             <button class="btn btn-brand" type="submit">Guardar Cambios</button>
                         </div>

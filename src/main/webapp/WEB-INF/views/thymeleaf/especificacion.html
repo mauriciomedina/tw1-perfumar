@@ -240,6 +240,13 @@
                     var contenido = "<div style='text-align:center;'><h6 style='margin-bottom:5px;'><b>" + local.nombre + "</b></h6><p style='margin-bottom:0;'>" + local.direccion + "</p></div>";
                     marcador.bindPopup(contenido);
                 });
+
+                if (locales.length === 0) {
+                    document.getElementById('mensaje-ubicacion').style.display = 'block';
+                    document.getElementById('mensaje-ubicacion').innerHTML =
+                        "No encontramos perfumerías cercanas registradas en el mapa.";
+                    document.getElementById('mensaje-ubicacion').classList.replace('text-danger', 'text-muted');
+                }
             })
             .catch(function (error) {
                 console.error('Error trayendo los locales cercanos:', error);

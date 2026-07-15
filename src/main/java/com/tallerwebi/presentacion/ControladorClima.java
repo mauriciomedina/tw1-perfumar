@@ -8,7 +8,6 @@ import com.tallerwebi.dominio.ServicioColeccion;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,19 +37,6 @@ public class ControladorClima {
   private static final String CONDICION_LLUVIA = "Rain";
   private static final String CONDICION_LLOVIZNA = "Drizzle";
   private static final String CONDICION_NIEVE = "Snow";
-
-  private static final Map<FamiliaOlfativa, String> INTENSIDAD = Map.of(
-    FamiliaOlfativa.CITRICA,
-    "20%",
-    FamiliaOlfativa.FRUTAL,
-    "35%",
-    FamiliaOlfativa.HELECHO,
-    "50%",
-    FamiliaOlfativa.AMADERADA,
-    "70%",
-    FamiliaOlfativa.ORIENTAL,
-    "85%"
-  );
 
   @Autowired
   private ServicioClima servicioClima;
@@ -123,7 +109,7 @@ public class ControladorClima {
     model.put("pddiaNotas", "Notas: " + perfume.getNotas());
     model.put(
       "pddiaIntensidad",
-      perfume.getFamiliaOlfativa() != null ? INTENSIDAD.get(perfume.getFamiliaOlfativa()) : "50%"
+      perfume.getFamiliaOlfativa() != null ? perfume.getFamiliaOlfativa().getIntensidad() : "50%"
     );
     model.put("pddiaIdPerfume", perfume.getId());
   }

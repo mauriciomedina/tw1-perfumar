@@ -50,4 +50,35 @@ public class ControladorColeccionTest {
     assertThat(mav.getViewName(), equalToIgnoringCase("listado"));
     assertThat(mav.getModel().get("perfumesColeccion"), notNullValue());
   }
+
+  @Test
+  public void queAlIniciarMaceracionConFechaSeParseeYSeRedirijaAlListado() {
+    Long idPerfume = 1L;
+
+    ModelAndView mav = controladorColeccion.iniciarMaceracion(idPerfume, "2026-06-01", requestMock);
+
+    verify(servicioColeccionMock, times(1))
+      .iniciarMaceracion(1L, idPerfume, java.time.LocalDate.of(2026, 6, 1));
+    assertThat(mav.getViewName(), equalToIgnoringCase("redirect:/listado"));
+  }
+
+  @Test
+  public void queAlIniciarMaceracionSinFechaSeUseNullYSeaElServicioQuienDecidaLaFechaPorDefecto() {
+    Long idPerfume = 1L;
+
+    ModelAndView mav = controladorColeccion.iniciarMaceracion(idPerfume, null, requestMock);
+
+    verify(servicioColeccionMock, times(1)).iniciarMaceracion(1L, idPerfume, null);
+    assertThat(mav.getViewName(), equalToIgnoringCase("redirect:/listado"));
+  }
+
+  @Test
+  public void queAlCancelarMaceracionSeLlameAlServicioYSeRedirijaAlListado() {
+    Long idPerfume = 1L;
+
+    ModelAndView mav = controladorColeccion.cancelarMaceracion(idPerfume, requestMock);
+
+    verify(servicioColeccionMock, times(1)).cancelarMaceracion(1L, idPerfume);
+    assertThat(mav.getViewName(), equalToIgnoringCase("redirect:/listado"));
+  }
 }

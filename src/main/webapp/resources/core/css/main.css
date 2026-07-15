@@ -23,6 +23,8 @@
   --dark-bg: #1a1c1c;
   --font-display: 'Bodoni Moda', serif;
   --font-body: 'Hanken Grotesk', sans-serif;
+  --sidebar-width: 280px;
+  --header-height: 64px;
 }
 
 body {
@@ -37,6 +39,9 @@ body {
   flex-direction: column;
   margin: 0;
   padding: 0;
+}
+app-header {
+  display: block;
 }
 
 h1,
@@ -163,12 +168,22 @@ h4,
   font-weight: 700;
 }
 
-/* Main Content Adjustments */
+
 .main-content {
   margin-left: var(--sidebar-width);
+  padding-top: var(--header-height);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+/* En las páginas con sidebar, el header no debe pasar por detrás de ella */
+.main-content .header-nav {
+  left: var(--sidebar-width);
+}
+
+/* Páginas que muestran el header pero no tienen sidebar (ej: bienvenida) */
+.main-sin-sidebar {
+  padding-top: var(--header-height);
 }
 
 .header-nav {
@@ -179,8 +194,10 @@ h4,
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 999;
 }
 

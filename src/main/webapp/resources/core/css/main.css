@@ -823,6 +823,24 @@ footer {
   transform: translateY(-50%);
 }
 
+/* Scent Scale Component (card variant, light background) */
+.card-scent-scale {
+  width: 100%;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.1);
+  position: relative;
+  margin-top: 12px;
+}
+
+.card-scent-dot {
+  width: 8px;
+  height: 8px;
+  background: #000000;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 /* Welcome Section */
 .welcome-section {
   padding: 60px var(--margin-edge);

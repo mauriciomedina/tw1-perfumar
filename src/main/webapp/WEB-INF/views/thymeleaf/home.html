@@ -51,6 +51,18 @@
   <script>
     let perfumesGlobales = [];
 
+    const INTENSIDAD_POR_FAMILIA = {
+      "Cítrica": "20%",
+      "Frutal": "35%",
+      "Helecho": "50%",
+      "Amaderada": "70%",
+      "Oriental": "85%",
+    };
+
+    function obtenerIntensidad(familiaOlfativa) {
+      return INTENSIDAD_POR_FAMILIA[familiaOlfativa] || "50%";
+    }
+
     function renderizarGaleria(listaPerfumes) {
       document.getElementById("contador-perfumes").textContent =
         `${listaPerfumes.length} FRAGANCIAS`;
@@ -82,12 +94,10 @@
                     ${perfume.familiaOlfativa.toUpperCase()}
                   </p>
                   <h3 class="h5 mb-3" style="font-family: 'Bodoni Moda', serif;">${perfume.nombre}</h3>
-                  <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center" style="border-color: rgba(0,0,0,0.05) !important;">
+                  <div class="mt-auto pt-3 border-top" style="border-color: rgba(0,0,0,0.05) !important;">
                     <span class="small" style="color: gray;">Intensidad</span>
-                    <div class="d-flex">
-                      <span class="intensity-dot" style="height: 8px; width: 8px; background: #000; border-radius: 50%; display: inline-block; margin-left: 4px;"></span>
-                      <span class="intensity-dot" style="height: 8px; width: 8px; background: #000; border-radius: 50%; display: inline-block; margin-left: 4px;"></span>
-                      <span class="intensity-dot" style="height: 8px; width: 8px; border: 1px solid #000; border-radius: 50%; display: inline-block; margin-left: 4px;"></span>
+                    <div class="card-scent-scale">
+                      <div class="card-scent-dot" style="left: ${obtenerIntensidad(perfume.familiaOlfativa)};"></div>
                     </div>
                   </div>
                 </div>

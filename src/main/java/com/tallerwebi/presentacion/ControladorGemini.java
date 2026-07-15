@@ -30,6 +30,10 @@ public class ControladorGemini {
     "al usuario ni le pidas el clima: seguí ayudando igual según la ocasión y preferencias " +
     "que indique.";
 
+  private static final String SIN_GENERO =
+    "El usuario no tiene un género configurado en su perfil. No se lo preguntes: seguí " +
+    "ayudando igual según el clima, la ocasión y las preferencias que indique.";
+
   @Autowired
   private ServicioGemini servicioGemini;
 
@@ -39,9 +43,10 @@ public class ControladorGemini {
   @PostMapping("/preguntar")
   public ResponseEntity<?> preguntar(@RequestBody GeminiDto geminiDto, HttpServletRequest request) {
     try {
+      String contexto = construirContextoClima(request) + "\n" + construirContextoGenero(request);
       String respuesta = servicioGemini.preguntar(
         geminiDto.getPregunta(),
-        construirContextoClima(request),
+        contexto,
         false,
         geminiDto.getHistorial()
       );
@@ -81,6 +86,19 @@ public class ControladorGemini {
     } catch (Exception e) {
       return ERROR_CLIMA;
     }
+  }
+
+  private String construirContextoGenero(HttpServletRequest request) {
+    Object genero = request.getSession().getAttribute("GENERO");
+    if (genero == null || genero.toString().isEmpty()) {
+      return SIN_GENERO;
+    }
+    return String.format(
+      "Género del usuario, ya obtenido por el sistema (no se lo pidas bajo ninguna " +
+      "circunstancia): %s. Usalo como un factor más para elegir qué perfumes del catálogo " +
+      "recomendar.",
+      genero
+    );
   }
 
   @PostMapping("/limpiar")

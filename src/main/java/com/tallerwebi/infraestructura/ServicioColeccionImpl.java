@@ -1,10 +1,14 @@
 package com.tallerwebi.infraestructura;
 
 import com.tallerwebi.dominio.Coleccion;
+import com.tallerwebi.dominio.ItemColeccion;
 import com.tallerwebi.dominio.Perfume;
 import com.tallerwebi.dominio.RepositorioColeccion;
 import com.tallerwebi.dominio.ServicioColeccion;
+import com.tallerwebi.dominio.ServicioFavorito;
 import com.tallerwebi.dominio.Usuario;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +19,15 @@ import org.springframework.stereotype.Service;
 public class ServicioColeccionImpl implements ServicioColeccion {
 
   private RepositorioColeccion repositorioColeccion;
+  private ServicioFavorito servicioFavorito;
 
   @Autowired
-  public ServicioColeccionImpl(RepositorioColeccion repositorioColeccion) {
+  public ServicioColeccionImpl(
+    RepositorioColeccion repositorioColeccion,
+    ServicioFavorito servicioFavorito
+  ) {
     this.repositorioColeccion = repositorioColeccion;
+    this.servicioFavorito = servicioFavorito;
   }
 
   @Override
@@ -64,5 +73,42 @@ public class ServicioColeccionImpl implements ServicioColeccion {
   @Override
   public Perfume buscarPerfume(Long id) {
     return repositorioColeccion.buscarPerfume(id);
+  }
+
+  @Override
+  public List<ItemColeccion> listarConDetalle(Long idUsuario) {
+    List<ItemColeccion> items = new ArrayList<>();
+    if (idUsuario == null) return items;
+
+    List<Coleccion> colecciones = repositorioColeccion.listarEntidades(idUsuario);
+    for (Coleccion coleccion : colecciones) {
+      boolean esFavorito =
+        coleccion.getPerfume() != null &&
+        servicioFavorito.esFavorito(idUsuario, coleccion.getPerfume().getId());
+      items.add(ItemColeccion.desde(coleccion, esFavorito));
+    }
+    return items;
+  }
+
+  @Override
+  public void iniciarMaceracion(Long idUsuario, Long idPerfume, LocalDate fechaInicio) {
+    if (idUsuario == null || idPerfume == null) return;
+
+    Coleccion coleccion = repositorioColeccion.buscarColeccion(idUsuario, idPerfume);
+    if (coleccion == null) return;
+
+    coleccion.setEnMaceracion(true);
+    coleccion.setFechaInicioMaceracion(fechaInicio != null ? fechaInicio : LocalDate.now());
+  }
+
+  @Override
+  public void cancelarMaceracion(Long idUsuario, Long idPerfume) {
+    if (idUsuario == null || idPerfume == null) return;
+
+    Coleccion coleccion = repositorioColeccion.buscarColeccion(idUsuario, idPerfume);
+    if (coleccion == null) return;
+
+    coleccion.setEnMaceracion(false);
+    coleccion.setFechaInicioMaceracion(null);
   }
 }

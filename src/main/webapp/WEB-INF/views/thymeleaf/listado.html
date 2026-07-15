@@ -55,30 +55,82 @@
 
                 <div th:unless="${#lists.isEmpty(perfumesColeccion)}" class="row">
 
-                    <div class="col-sm-6 col-lg-4 col-xl-3 mb-4" th:each="perfume : ${perfumesColeccion}">
+                    <div class="col-sm-6 col-lg-4 col-xl-3 mb-4" th:each="item : ${perfumesColeccion}">
                         <div class="card h-100 d-flex flex-column" style="border: none; background: transparent;">
-                            <a th:href="@{/especificacion(id=${perfume.id})}" class="text-decoration-none text-reset d-block">
+                            <a th:href="@{/especificacion(id=${item.perfume.id})}" class="text-decoration-none text-reset d-block">
                             <div style="position: relative; width: 100%; aspect-ratio: 2/3; overflow: hidden; background-color: #f4f4f4;">
-                             <img th:alt="${perfume.nombre}" th:src="${perfume.imagenUrl}" style="width: 100%; height: 100%; object-fit: cover;">
-                             <span style="position: absolute; top: 12px; left: 12px; background: white; padding: 4px 8px; font-size: 10px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; z-index: 2;" th:text="${perfume.marca}">
+                             <img th:alt="${item.perfume.nombre}" th:src="${item.perfume.imagenUrl}" style="width: 100%; height: 100%; object-fit: cover;">
+                             <span style="position: absolute; top: 12px; left: 12px; background: white; padding: 4px 8px; font-size: 10px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; z-index: 2;" th:text="${item.perfume.marca}">
                             MARCA
                             </span>
+                             <!-- Distintivo de favorito -->
+                             <span th:if="${item.favorito}" title="También está en tus favoritos"
+                                style="position: absolute; top: 10px; right: 10px; width: 28px; height: 28px; border-radius: 50%; background: rgba(0,0,0,0.55); display: flex; align-items: center; justify-content: center; z-index: 2;">
+                                <span class="material-symbols-outlined" style="font-size: 16px; color: #ff5c7a; font-variation-settings: 'FILL' 1;">favorite</span>
+                             </span>
                             </div>
                             </a>
 
-                        <div class="card-body px-0 mt-3 d-flex justify-content-between align-items-start flex-grow-1">
-            
-            <a th:href="@{/especificacion(id=${perfume.id})}" class="text-decoration-none text-reset flex-grow-1">
-                <span class="text-muted" style="font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase;" th:text="${perfume.familiaOlfativa}">Familia</span>
-                <h3 class="h5 mb-0 mt-1" style="font-family: 'Bodoni Moda', serif;" th:text="${perfume.nombre}">Nombre Perfume</h3>
-            </a>
+                        <div class="card-body px-0 mt-3 d-flex flex-column flex-grow-1">
 
-            <form th:action="@{/eliminar-de-coleccion}" method="POST" class="m-0 ms-2">
-                <input type="hidden" name="idPerfume" th:value="${perfume.id}" />
-                <button type="submit" class="btn btn-link text-danger p-0 border-0 bg-transparent" title="Eliminar de mi colección" style="opacity: 0.7; transition: opacity 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.7">
-                    <span class="material-symbols-outlined" style="font-size: 22px;">delete</span>
-                </button>
-            </form>
+            <div class="d-flex justify-content-between align-items-start">
+                <a th:href="@{/especificacion(id=${item.perfume.id})}" class="text-decoration-none text-reset flex-grow-1">
+                    <span class="text-muted" style="font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase;" th:text="${item.perfume.familiaOlfativa}">Familia</span>
+                    <h3 class="h5 mb-0 mt-1" style="font-family: 'Bodoni Moda', serif;" th:text="${item.perfume.nombre}">Nombre Perfume</h3>
+                </a>
+
+                <form th:action="@{/eliminar-de-coleccion}" method="POST" class="m-0 ms-2">
+                    <input type="hidden" name="idPerfume" th:value="${item.perfume.id}" />
+                    <button type="submit" class="btn btn-link text-danger p-0 border-0 bg-transparent" title="Eliminar de mi colección" style="opacity: 0.7; transition: opacity 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.7">
+                        <span class="material-symbols-outlined" style="font-size: 22px;">delete</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Bloque de maceración -->
+            <div class="mt-3 pt-2" style="border-top: 1px solid #eee;">
+
+                <!-- Caso 1: todavía no se inició la maceración -->
+                <form th:if="${!item.enMaceracion}" th:action="@{/iniciar-maceracion}" method="POST" class="d-flex align-items-center gap-2">
+                    <input type="hidden" name="idPerfume" th:value="${item.perfume.id}" />
+                    <input type="date" name="fechaInicioMaceracion" class="form-control form-control-sm"
+                        th:value="${fechaHoy}"
+                        style="font-size: 0.75rem;" title="Fecha de inicio de maceración" />
+                    <button type="submit" class="btn btn-sm btn-outline-dark text-nowrap" style="font-size: 0.7rem; letter-spacing: 0.5px;">
+                        Iniciar maceración
+                    </button>
+                </form>
+
+                <!-- Caso 2: ya está macerando (o lista) -->
+                <div th:if="${item.enMaceracion}">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <span style="font-size: 0.7rem; letter-spacing: 0.5px; text-transform: uppercase;"
+                            th:classappend="${item.listaParaUsar} ? 'text-success fw-bold' : 'text-muted'">
+                            <span class="material-symbols-outlined align-middle" style="font-size: 14px;"
+                                th:text="${item.listaParaUsar} ? 'check_circle' : 'hourglass_top'">hourglass_top</span>
+                            <span th:if="${item.listaParaUsar}">Lista para usar</span>
+                            <span th:unless="${item.listaParaUsar}" th:text="|Macerando · faltan ${item.diasRestantes} días|">Macerando</span>
+                        </span>
+                        <span class="text-muted" style="font-size: 0.7rem;" th:text="|${item.diasTranscurridos}/${item.diasRecomendados}d|">0/30d</span>
+                    </div>
+                    <div class="progress mb-2" style="height: 6px;">
+                        <div class="progress-bar" role="progressbar"
+                            th:classappend="${item.listaParaUsar} ? 'bg-success' : 'bg-dark'"
+                            th:style="'width: ' + ${item.porcentajeMaceracion} + '%'"
+                            th:attr="aria-valuenow=${item.porcentajeMaceracion}" aria-valuemin="0" aria-valuemax="100">
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="text-muted" style="font-size: 0.65rem;" th:text="|Desde el ${item.fechaInicioMaceracionFormateada}|">Desde</span>
+                        <form th:action="@{/cancelar-maceracion}" method="POST" class="m-0">
+                            <input type="hidden" name="idPerfume" th:value="${item.perfume.id}" />
+                            <button type="submit" class="btn btn-link btn-sm text-muted p-0" style="font-size: 0.65rem; letter-spacing: 0.5px;">
+                                Reiniciar
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
                     </div>
                     </div>

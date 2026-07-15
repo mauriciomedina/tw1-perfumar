@@ -12,6 +12,8 @@ import org.springframework.stereotype.Repository;
 public class RepositorioColeccionImpl implements RepositorioColeccion {
 
   private SessionFactory sessionFactory;
+  private static final String PARAM_ID_USUARIO = "idUsuario";
+  private static final String PARAM_ID_PERFUME = "idPerfume";
 
   @Autowired
   public RepositorioColeccionImpl(SessionFactory sessionFactory) {
@@ -46,8 +48,29 @@ public class RepositorioColeccionImpl implements RepositorioColeccion {
         "SELECT c.perfume FROM Coleccion c WHERE c.usuario.id = :idUsuario",
         Perfume.class
       )
-      .setParameter("idUsuario", idUsuario)
+      .setParameter(PARAM_ID_USUARIO, idUsuario)
       .list();
+  }
+
+  @Override
+  public List<Coleccion> listarEntidades(Long idUsuario) {
+    return this.sessionFactory.getCurrentSession()
+      .createQuery("FROM Coleccion c WHERE c.usuario.id = :idUsuario", Coleccion.class)
+      .setParameter(PARAM_ID_USUARIO, idUsuario)
+      .list();
+  }
+
+  @Override
+  public Coleccion buscarColeccion(Long idUsuario, Long idPerfume) {
+    return this.sessionFactory.getCurrentSession()
+      .createQuery(
+        "FROM Coleccion c WHERE c.usuario.id = :idUsuario AND c.perfume.id = :idPerfume",
+        Coleccion.class
+      )
+      .setParameter(PARAM_ID_USUARIO, idUsuario)
+      .setParameter(PARAM_ID_PERFUME, idPerfume)
+      .uniqueResultOptional()
+      .orElse(null);
   }
 
   @Override
@@ -56,8 +79,8 @@ public class RepositorioColeccionImpl implements RepositorioColeccion {
       .createQuery(
         "DELETE FROM Coleccion c WHERE c.usuario.id = :idUsuario AND c.perfume.id = :idPerfume"
       )
-      .setParameter("idUsuario", idUsuario)
-      .setParameter("idPerfume", idPerfume)
+      .setParameter(PARAM_ID_USUARIO, idUsuario)
+      .setParameter(PARAM_ID_PERFUME, idPerfume)
       .executeUpdate();
 
     this.sessionFactory.getCurrentSession().flush();

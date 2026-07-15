@@ -92,9 +92,8 @@ function inicializarSelectPaisCiudad(idSelectPais, idSelectCiudad) {
   poblarCiudades(selectCiudad, paisActual, ciudadActual);
 
   selectPais.addEventListener("change", () => {
-    console.log("1. Detectó un cambio. País seleccionado:", selectPais.value);
-    console.log("2. Elemento ciudad destino:", selectCiudad);
     poblarCiudades(selectCiudad, selectPais.value, "");
-    console.log("3. Ciudades cargadas exitosamente");
   });
 }
+
+window.inicializarSelectPaisCiudad = inicializarSelectPaisCiudad;

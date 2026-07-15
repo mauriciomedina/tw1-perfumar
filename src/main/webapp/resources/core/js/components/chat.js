@@ -12,8 +12,8 @@ function chatFormatearTexto(texto) {
   return chatEscaparHtml(texto)
     .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
     .replace(
-      /\[([^\]\[]+)\]\(\/spring\/especificacion\?id=(\d+)\)/g,
-      '<a href="/spring/especificacion?id=$2" class="pa-chat-link">$1</a>'
+      /\[([^\][]+)\]\(\/spring\/especificacion\?id=(\d+)\)/g,
+      "<a href=\"/spring/especificacion?id=$2\" class=\"pa-chat-link\">$1</a>"
     )
     .replace(/\n/g, "<br>");
 }
@@ -23,6 +23,7 @@ function chatLeerHistorial() {
     const guardado = localStorage.getItem(CHAT_STORAGE_KEY);
     return guardado ? JSON.parse(guardado) : [];
   } catch (error) {
+    console.error("[Chat]", error);
     return [];
   }
 }
@@ -290,6 +291,7 @@ class ChatComponent extends HTMLElement {
         ]);
       }
     } catch (error) {
+      console.error("[Chat]", error);
       burbujaCargando.remove();
       this.agregarBurbuja(
         "model",

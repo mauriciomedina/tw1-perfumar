@@ -14,22 +14,37 @@ public class ReiniciarDB {
         ? System.getenv("DB_PASSWORD")
         : "user";
 
+      // Coleccion, Favorito y Resena tienen FK a Usuario: hay que borrarlas
+      // primero o el DELETE FROM Usuario falla por constraint violation.
       String sqlCommands =
+        "DELETE FROM Coleccion;\n" +
+        "DELETE FROM Favorito;\n" +
+        "DELETE FROM Resena;\n" +
         "DELETE FROM Usuario;\n" +
         "ALTER TABLE Usuario AUTO_INCREMENT = 1;\n" +
         "INSERT INTO Usuario(id, email, password, rol, activo) VALUES(null, 'test@unlam.edu.ar', 'test', 'ADMIN', true);";
 
-      String comando = String.format(
-        "docker exec tallerwebi-mysql mysql -h %s -P %s -u %s -p%s %s -e \"%s\"",
+      // Se pasa como array de argumentos (no como un único string de shell) para
+      // que funcione en cualquier sistema operativo sin depender de /bin/bash.
+      ProcessBuilder processBuilder = new ProcessBuilder(
+        "docker",
+        "exec",
+        "tallerwebi-mysql",
+        "mysql",
+        "-h",
         dbHost,
+        "-P",
         dbPort,
+        "-u",
         dbUser,
-        dbPassword,
+        "-p" + dbPassword,
         dbName,
+        "-e",
         sqlCommands
       );
+      processBuilder.redirectErrorStream(true);
 
-      Process process = Runtime.getRuntime().exec(new String[] { "/bin/bash", "-c", comando });
+      Process process = processBuilder.start();
       int exitCode = process.waitFor();
 
       if (exitCode == 0) {

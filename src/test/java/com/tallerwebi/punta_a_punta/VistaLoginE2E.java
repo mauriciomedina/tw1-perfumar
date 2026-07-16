@@ -49,9 +49,9 @@ public class VistaLoginE2E {
   }
 
   @Test
-  void deberiaDecirUNLAMEnElNavbar() throws MalformedURLException {
+  void deberiaDecirPerfumARenElNavbar() throws MalformedURLException {
     dadoQueElUsuarioEstaEnLaVistaDeLogin();
-    entoncesDeberiaVerUNLAMEnElNavbar();
+    entoncesDeberiaVerPerfumARenElNavbar();
   }
 
   @Test
@@ -62,10 +62,10 @@ public class VistaLoginE2E {
   }
 
   @Test
-  void deberiaNavegarAlHomeSiElUsuarioExiste() throws MalformedURLException {
+  void deberiaNavegarABienvenidaSiElUsuarioExiste() throws MalformedURLException {
     dadoQueElUsuarioCargaSusDatosDeLoginCon("test@unlam.edu.ar", "test");
     cuandoElUsuarioTocaElBotonDeLogin();
-    entoncesDeberiaSerRedirigidoALaVistaDeHome();
+    entoncesDeberiaSerRedirigidoALaVistaDeBienvenida();
   }
 
   @Test
@@ -75,26 +75,26 @@ public class VistaLoginE2E {
     dadoQueElUsuarioEstaEnLaVistaDeLogin();
     dadoQueElUsuarioCargaSusDatosDeLoginCon("juan@unlam.edu.ar", "123456");
     cuandoElUsuarioTocaElBotonDeLogin();
-    entoncesDeberiaSerRedirigidoALaVistaDeHome();
+    entoncesDeberiaSerRedirigidoALaVistaDeBienvenida();
   }
 
-  private void entoncesDeberiaVerUNLAMEnElNavbar() {
+  private void entoncesDeberiaVerPerfumARenElNavbar() {
     String texto = vistaLogin.obtenerTextoDeLaBarraDeNavegacion();
-    assertThat("UNLAM", equalToIgnoringCase(texto));
+    assertThat("PerfumAR", equalToIgnoringCase(texto));
   }
 
   private void dadoQueElUsuarioEstaEnLaVistaDeLogin() throws MalformedURLException {
     URL urlLogin = vistaLogin.obtenerURLActual();
-    assertThat(urlLogin.getPath(), matchesPattern("^//spring/login(?:;jsessionid=[^/\\s]+)?$"));
+    assertThat(urlLogin.getPath(), matchesPattern("^/spring/login(?:;jsessionid=[^/\\s]+)?$"));
   }
 
   private void cuandoElUsuarioTocaElBotonDeLogin() {
     vistaLogin.darClickEnIniciarSesion();
   }
 
-  private void entoncesDeberiaSerRedirigidoALaVistaDeHome() throws MalformedURLException {
+  private void entoncesDeberiaSerRedirigidoALaVistaDeBienvenida() throws MalformedURLException {
     URL url = vistaLogin.obtenerURLActual();
-    assertThat(url.getPath(), matchesPattern("^//spring/home(?:;jsessionid=[^/\\s]+)?$"));
+    assertThat(url.getPath(), matchesPattern("^/spring/bienvenida(?:;jsessionid=[^/\\s]+)?$"));
   }
 
   private void entoncesDeberiaVerUnMensajeDeError() {
@@ -113,8 +113,12 @@ public class VistaLoginE2E {
 
   private void dadoQueElUsuarioSeRegistraCon(String email, String clave) {
     VistaNuevoUsuario vistaNuevoUsuario = new VistaNuevoUsuario(context.pages().get(0));
+    vistaNuevoUsuario.escribirNombre("Usuario de prueba");
     vistaNuevoUsuario.escribirEMAIL(email);
     vistaNuevoUsuario.escribirClave(clave);
+    vistaNuevoUsuario.seleccionarPais("AR");
+    vistaNuevoUsuario.seleccionarCiudad("Buenos Aires");
+    vistaNuevoUsuario.seleccionarGenero("Otro");
     vistaNuevoUsuario.darClickEnRegistrarme();
   }
 }

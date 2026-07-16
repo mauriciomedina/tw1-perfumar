@@ -397,7 +397,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
     crearPerfume(
       "Coco Mademoiselle",
       Marca.CHANEL,
-      "/spring/img/coco-mademoiselle.jpg",
+      "/spring/img/coco-mademoiselle.png",
       FamiliaOlfativa.ORIENTAL,
       "Una fragancia fresca y atrevida para una mujer libre, decidida y llena de gracia moderna.",
       "Naranja, Bergamota, Rosa, Pachulí, Almizcle Blanco"
@@ -422,7 +422,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
     crearPerfume(
       "La Vie Est Belle",
       Marca.LANCOME,
-      "/spring/img/la-vie-est-belle.jpg",
+      "/spring/img/la-vie-est-belle.png",
       FamiliaOlfativa.ORIENTAL,
       "Una declaración de libertad y felicidad: la vida es bella y hay que elegir el propio camino.",
       "Grosella Negra, Pera, Jazmín, Naranja, Praliné, Vainilla"
@@ -430,7 +430,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
     crearPerfume(
       "Libre",
       Marca.YVES_SAINT_LAURENT,
-      "/spring/img/libre.jpg",
+      "/spring/img/libre.png",
       FamiliaOlfativa.AMADERADA,
       "Una fragancia de contrastes sensuales, donde la lavanda francesa se encuentra con el jazmín marroquí.",
       "Lavanda, Naranja, Jazmín Sambac, Cedro, Almizcle"
@@ -438,7 +438,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
     crearPerfume(
       "Flowerbomb",
       Marca.VIKTOR_Y_ROLF,
-      "/spring/img/flowerbomb.jpg",
+      "/spring/img/flowerbomb.png",
       FamiliaOlfativa.ORIENTAL,
       "Una explosión floral que transforma el mundo en algo más positivo y hermoso.",
       "Bergamota, Jazmín, Rosa Centifolia, Freesia, Pachulí"
@@ -446,7 +446,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
     crearPerfume(
       "Chance Eau Tendre",
       Marca.CHANEL,
-      "/spring/img/chance-eau-tendre.jpg",
+      "/spring/img/chance-eau-tendre.png",
       FamiliaOlfativa.CITRICA,
       "Una fragancia floral fresca y luminosa que captura la suavidad del azar y la ternura.",
       "Pomelo, Jacinto, Jazmín, Iris, Cedro"
@@ -454,7 +454,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
     crearPerfume(
       "Dior Homme Intense",
       Marca.DIOR,
-      "/spring/img/dior-homme-intense.jpg",
+      "/spring/img/dior-homme-intense.png",
       FamiliaOlfativa.AMADERADA,
       "Una reinterpretación profunda e intensa del icónico Dior Homme, dominada por el iris y la madera.",
       "Iris, Lavanda, Pera, Cedro, Vainilla"
@@ -462,7 +462,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
     crearPerfume(
       "Stronger With You",
       Marca.GIORGIO_ARMANI,
-      "/spring/img/stronger-with-you.jpg",
+      "/spring/img/stronger-with-you.png",
       FamiliaOlfativa.HELECHO,
       "Una fragancia moderna y cálida para un hombre que se vuelve más fuerte con cada experiencia vivida.",
       "Cardamomo, Salvia, Castaña, Vainilla, Madera"
@@ -470,47 +470,25 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
     crearPerfume(
       "Polo Blue",
       Marca.RALPH_LAUREN,
-      "/spring/img/polo-blue.jpg",
+      "/spring/img/polo-blue.png",
       FamiliaOlfativa.HELECHO,
       "Una fragancia fresca e inspirada en el cielo abierto, el agua y la libertad del espíritu aventurero.",
       "Melón, Pepino, Salvia, Suede, Almizcle"
     );
-    crearPerfume(
-      "Eternity For Men",
-      Marca.CALVIN_KLEIN,
-      "/spring/img/eternity-men.jpg",
-      FamiliaOlfativa.HELECHO,
-      "Un clásico intemporal que evoca la pureza, la frescura y los valores eternos del amor y la familia.",
-      "Lavanda, Menta, Sándalo, Musgo de Roble, Cedro"
-    );
+
     crearPerfume(
       "CK One",
       Marca.CALVIN_KLEIN,
-      "/spring/img/ck-one.jpg",
+      "/spring/img/ck-one.png",
       FamiliaOlfativa.CITRICA,
       "Un revolucionario perfume unisex que marcó una generación con su frescura limpia y desenfadada.",
       "Bergamota, Limón, Piña, Jazmín, Sándalo"
     );
-    crearPerfume(
-      "Olympéa",
-      Marca.PACO_RABANNE,
-      "/spring/img/olympea.jpg",
-      FamiliaOlfativa.ORIENTAL,
-      "Una diosa moderna: poderosa, sensual y provocadora, nacida entre el agua salada y la vainilla.",
-      "Agua de Mar, Flor de Té Verde, Jazmín, Vainilla Salada"
-    );
-    crearPerfume(
-      "Boss Bottled",
-      Marca.HUGO_BOSS,
-      "/spring/img/boss-bottled.jpg",
-      FamiliaOlfativa.AMADERADA,
-      "La fragancia del hombre con éxito: ambiciosa, elegante y con una calidez acogedora.",
-      "Manzana, Canela, Sándalo, Vainilla, Cedro"
-    );
+
     crearPerfume(
       "Acqua di Giò Profondo",
       Marca.GIORGIO_ARMANI,
-      "/spring/img/acqua-gio-profondo.jpg",
+      "/spring/img/acqua-gio-profondo.png",
       FamiliaOlfativa.HELECHO,
       "Una inmersión en las profundidades del mar: más oscuro, más misterioso e intenso que su antecesor.",
       "Menta, Pimienta de Madagascar, Salvia Marina, Algas"
@@ -518,7 +496,7 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
     crearPerfume(
       "Prada L'Homme",
       Marca.PRADA,
-      "/spring/img/prada-lhomme.jpg",
+      "/spring/img/prada-lhomme.png",
       FamiliaOlfativa.HELECHO,
       "Una composición pulida y refinada que define la masculinidad intelectual y contemporánea.",
       "Iris, Semilla de Ambrette, Cedro, Pachulí, Musgo"

@@ -15,6 +15,7 @@
   <link rel="stylesheet" th:href="@{/css/main.css}" />
 <script th:src="@{/js/components/sidebar.js}"></script>
   <script th:src="@{/js/components/header.js}" defer></script>
+  <script th:src="@{/js/components/footer.js}" defer></script>
   <script th:src="@{/js/paisesCiudades.js}" defer></script>
 
   <script th:src="@{/js/components/chat.js}" defer></script>
@@ -79,6 +80,8 @@
       inicializarSelectPaisCiudad("pais", "ciudad");
     });
   </script>
+
+  <app-footer></app-footer>
 </body>
 
 </html>

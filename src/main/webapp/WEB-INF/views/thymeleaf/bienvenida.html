@@ -16,104 +16,141 @@
     <script th:src="@{/js/components/header.js}" defer></script>
     <script th:src="@{/js/components/sidebar.js}"></script>
     <script th:src="@{/js/components/chat.js}" defer></script>
+    <script th:src="@{/js/components/footer.js}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        /* Fondo unificado con un filtro blanco al 60% para suavizar el contraste */
+        body {
+            background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('https://lh3.googleusercontent.com/aida-public/AB6AXuAonAbu0iBsFZeFg6DC3ovoMY9s9vqein4UBhjtoaj1zq9_YU_efNy-a-TBb8f1YdjjpOUF3tQFVpfHHriuor0xCj2EVVYW_eQ4PxWJwL-JP2N_c2kB2iniQgvrKAc1Gl4K_xCTD_HLkNJUoaXF2wUB3qlhY62vTMJvkSBGH5u9K5UG_16V1lxoNsXiWKpuhw6HBhWZ25mspje3HuL0hO2dbOk2Zn57kTINygjVCvkyAbuXbExni_ZnWihNi9f1ZbNl5XoPIClrFfI') !important;
+            background-size: cover !important;
+            background-position: center top !important; 
+            background-attachment: fixed !important;
+            background-repeat: no-repeat !important;
+            min-height: 100vh;
+        }
+
+        /* Limpiamos colores de fondo que puedan venir del CSS principal */
+        main, section {
+            background-color: transparent !important;
+            background: transparent !important;
+        }
+
+        /* Estilos hover para los botones de la tarjeta */
+        .btn-custom-dark {
+            background-color: #000;
+            color: #fff;
+            border: 1px solid #000;
+            transition: all 0.3s ease;
+        }
+        .btn-custom-dark:hover {
+            background-color: #2b2b2b;
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-custom-outline {
+            background-color: transparent;
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.5);
+            transition: all 0.3s ease;
+        }
+        .btn-custom-outline:hover {
+            background-color: #fff;
+            color: #000;
+            border-color: #fff;
+            box-shadow: 0 5px 15px rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+    </style>
 </head>
 
 <body>
 
-    <main>
+    <main class="main-sin-sidebar">
 
         <app-header th:attr="clima=${climaActual != null ? climaActual.textoHeader : 'Elije tu ciudad'}"></app-header>
 
-        <section class="welcome-section container-fluid" style="background-image: linear-gradient(rgba(249, 249, 249, 0.85), rgba(249, 249, 249, 0.85)), url('https://lh3.googleusercontent.com/aida-public/AB6AXuAonAbu0iBsFZeFg6DC3ovoMY9s9vqein4UBhjtoaj1zq9_YU_efNy-a-TBb8f1YdjjpOUF3tQFVpfHHriuor0xCj2EVVYW_eQ4PxWJwL-JP2N_c2kB2iniQgvrKAc1Gl4K_xCTD_HLkNJUoaXF2wUB3qlhY62vTMJvkSBGH5u9K5UG_16V1lxoNsXiWKpuhw6HBhWZ25mspje3HuL0hO2dbOk2Zn57kTINygjVCvkyAbuXbExni_ZnWihNi9f1ZbNl5XoPIClrFfI'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <!-- SECCIÓN FILOSOFÍA -->
+        <section class="welcome-section container-fluid pt-5 pb-5">
             <div class="row justify-content-center">
-                <div class="col-lg-10 welcome-text">
-                    <div class="font-label-caps text-secondary mb-4" style="letter-spacing: 0.3em;">Filosofía</div>
-                    <h2 class="font-display-lg mb-5" style="line-height: 1.3;">
-                        La perfumería es arte y contexto. Analizamos tu colección y el clima de tu ciudad para recomendarte la fragancia ideal en cada momento.
+                <div class="col-lg-10 welcome-text text-center">
+                    <div class="font-label-caps text-secondary mb-4" style="letter-spacing: 0.3em; text-transform: uppercase; font-size: 11px;">Filosofía</div>
+                    <h2 class="font-display-lg mb-4" style="line-height: 1.3;">
+                        La perfumería es arte y contexto.<br>Analizamos tu colección y el clima de tu<br>ciudad para recomendarte la fragancia<br>ideal en cada momento.
                     </h2>
-                    <p class="font-body-lg text-secondary mx-auto" style="max-width: 650px; font-size: 18px;">
-                        Deja que el tiempo, la temperatura y tu colección trabajen juntos para encontrar la fragancia
-                        perfecta para hoy.
+                    <p class="font-body-lg text-secondary mx-auto mt-4" style="max-width: 650px; font-size: 16px;">
+                        Deja que el tiempo, la temperatura y tu colección trabajen juntos para<br>encontrar la fragancia perfecta para hoy.
                     </p>
                 </div>
             </div>
         </section>
 
-        <!-- Main Section: Perfume del Día (Now Dark) -->
-        <section class="hero-section container-fluid">
-            <div class="row w-100 g-5 align-items-center">
-                <!-- Left Side: Image -->
-                <div class="col-lg-6">
-                    <div class="product-image-container">
-                        <img class="product-image img-hero-fixed" id="pddia-imagen" alt="Perfume del Día"
-                            th:src="${pddiaImagen} ?: '/spring/img/sauvage.png'"
-                            onerror="this.onerror=null; this.src='/spring/img/sauvage.png';">
+        <!-- SECCIÓN PERFUME DEL DÍA -->
+        <section class="container-fluid px-3 px-xl-5 pb-5 mb-5 w-100">
+            
+            <div class="row align-items-center mx-auto" style="background: linear-gradient(135deg, #1a1a1a 0%, #33241f 100%); border-radius: 8px; padding: 4rem 2rem; box-shadow: 0 25px 50px rgba(0,0,0,0.5);">
+                
+                <!-- Lado Izquierdo: Contenedor con Aspect Ratio Fijo (La solución mágica) -->
+                <div class="col-lg-6 mb-5 mb-lg-0 px-md-4 d-flex justify-content-center">
+                    <div style="width: 100%; max-width: 480px; aspect-ratio: 4 / 5; border-radius: 8px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.3);">
+                        <img id="pddia-imagen"
+                             th:src="${pddiaImagen} ?: '/spring/img/sauvage.png'"
+                             onerror="this.onerror=null; this.src='/spring/img/sauvage.png';"
+                             style="width: 100%; height: 100%; object-fit: cover; object-position: center;"
+                             alt="Perfume del Día">
                     </div>
                 </div>
-                <!-- Right Side: Details -->
-                <div class="col-lg-6 ps-lg-5">
-                    <div class="font-label-caps text-secondary mb-2" style="letter-spacing: 0.2em;">PERFUME DEL DÍA</div>
-                    <div id="pddia-clima-info" class="font-label-caps text-secondary mb-3" style="opacity: 0.55; letter-spacing: 0.1em; font-size: 10px;" th:text="${pddiaClimaInfo}"></div>
-                    <h1 id="pddia-nombre" class="font-display-lg spacing-y-sm text-white" th:text="${pddiaNombre}">L'Ombre Nomade</h1>
-                    <div id="pddia-marca" class="font-title-sm spacing-y-sm text-white-50" th:text="${pddiaMarca}">Louis Vuitton</div>
-                    <div class="hairline-separator"></div>
-                    <p id="pddia-descripcion" class="font-body-lg spacing-y-md text-secondary" style="max-width: 480px;" th:text="${pddiaDescripcion}">
-                        Una oda al material más preciado de la perfumería: el Oud. Una fragancia que captura el espíritu
-                        de los viajes interminables, mezclando la profundidad del incienso con la frescura de la
-                        frambuesa.
-                    </p>
-                    <div class="spacing-y-md">
-                        <div class="font-label-caps text-secondary spacing-y-sm">Familia Olfativa</div>
-                        <div id="pddia-familia" class="font-body-lg text-white" th:text="${pddiaFamilia}">Ámbar Amaderada</div>
-                        <div id="pddia-notas" class="font-label-caps text-secondary mt-1" style="font-size: 10px; letter-spacing: 0.05em;" th:text="${pddiaNotas}"></div>
-                    </div>
-                    <!-- Custom Scent Scale Component -->
-                    <div class="spacing-y-md">
-                        <div class="d-flex justify-content-between font-label-caps text-secondary mb-1">
-                            <span>Sutil</span>
-                            <span>Intenso</span>
+
+                <!-- Lado Derecho: Detalles -->
+                <div class="col-lg-6 ps-lg-5 text-white pe-md-4 d-flex flex-column justify-content-center">
+                    <div>
+                        <div class="text-uppercase mb-2" style="font-size: 11px; letter-spacing: 2px; opacity: 0.7;">Perfume del Día</div>
+                        <div id="pddia-clima-info" class="text-uppercase mb-4" style="font-size: 11px; letter-spacing: 2px; opacity: 0.5;" th:text="${pddiaClimaInfo}">Lluvia Ligera - 24°C</div>
+                        
+                        <h1 id="pddia-nombre" class="mb-2" style="font-family: 'Bodoni Moda', serif; font-size: 3.5rem; font-weight: normal; line-height: 1.1;" th:text="${pddiaNombre}">Angel</h1>
+                        <div id="pddia-marca" class="mb-4" style="font-size: 1.25rem; opacity: 0.9; letter-spacing: 1px;" th:text="${pddiaMarca}">Thierry Mugler</div>
+                        
+                        <!-- Línea separadora sutil -->
+                        <hr style="border-color: rgba(255,255,255,0.2); margin: 2rem 0; width: 100%;">
+                        
+                        <p id="pddia-descripcion" class="mb-4" style="font-size: 1.05rem; opacity: 0.9; line-height: 1.7; max-width: 95%;" th:text="${pddiaDescripcion}">
+                            Un perfume mítico y revolucionario, el primero en introducir el concepto gourmand en la perfumería.
+                        </p>
+                        
+                        <div class="mb-5">
+                            <div class="text-uppercase mb-1" style="font-size: 11px; letter-spacing: 1px; opacity: 0.7;">Familia Olfativa</div>
+                            <div id="pddia-familia" class="fw-bold mb-1" style="font-size: 1.25rem;" th:text="${pddiaFamilia}">Oriental</div>
+                            <div id="pddia-notas" class="text-uppercase" style="font-size: 10px; letter-spacing: 1.5px; opacity: 0.6;" th:text="'NOTAS: ' + ${pddiaNotas}">NOTAS: FRUTOS ROJOS, MIEL, CHOCOLATE, PACHULÍ, VAINILLA</div>
                         </div>
-                        <div class="scent-scale">
-                            <div id="pddia-punto" class="scent-dot" th:style="'left: ' + (${pddiaIntensidad} ?: '50%') + ';'"></div>
+                        
+                        <!-- Barra Sutil-Intenso -->
+                        <div class="mb-5" style="max-width: 100%;">
+                            <div class="d-flex justify-content-between mb-3 text-uppercase" style="font-size: 0.65rem; letter-spacing: 2px; opacity: 0.6;">
+                                <span>Sutil</span>
+                                <span>Intenso</span>
+                            </div>
+                            <div style="position: relative; height: 1px; background: rgba(255,255,255,0.15);">
+                                <div id="pddia-punto" th:style="'position: absolute; width: 6px; height: 6px; background: #dcdcdc; top: 50%; transform: translate(-50%, -50%); border-radius: 1px; left: ' + (${pddiaIntensidad} != null ? ${pddiaIntensidad} : '50%') + ';'"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="mt-4">
+                        
+                        <!-- Botones -->
                         <div class="d-flex flex-wrap gap-3">
-                            <form id="pddia-form" action="/spring/agregar-a-coleccion" method="POST">
+                            <form id="pddia-form" action="/spring/agregar-a-coleccion" method="POST" class="m-0">
                                 <input type="hidden" id="pddia-form-input" name="idPerfume" th:value="${pddiaIdPerfume}" />
-                                <button class="btn btn-primary-custom" type="submit">Agregar a mi colección</button>
+                                <button class="btn btn-custom-dark" type="submit" style="border-radius: 4px; padding: 0.8rem 1.8rem; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;">Agregar a mi colección</button>
                             </form>
-                            <a class="btn-luxury-outline" href="/spring/home">Todas las fragancias</a>
+                            <a class="btn btn-custom-outline" href="/spring/home" style="border-radius: 4px; padding: 0.8rem 1.8rem; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;">Todas las fragancias</a>
                         </div>
                     </div>
                 </div>
             </div>
+            
         </section>
     </main>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const luxuryButtons = document.querySelectorAll('.btn-luxury, .btn-luxury-outline');
-
-            luxuryButtons.forEach(btn => {
-                btn.addEventListener('mouseenter', () => {
-                    btn.style.letterSpacing = '0.25em';
-                });
-                btn.addEventListener('mouseleave', () => {
-                    btn.style.letterSpacing = '0.2em';
-                });
-            });
-
-            window.addEventListener('scroll', () => {
-                const scrolled = window.pageYOffset;
-                const image = document.querySelector('.perfume-image-container img');
-                if (image) {
-                    image.style.transform = `translateY(${scrolled * 0.05}px)`;
-                }
-            });
-        });
-    </script>
+    <app-footer></app-footer>
 
     <app-chat></app-chat>
 </body>

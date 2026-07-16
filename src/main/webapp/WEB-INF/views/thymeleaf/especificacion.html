@@ -39,8 +39,7 @@
         <!-- Imagen -->
         <div class="col-lg-5">
             <div class="product-image-container">
-                <img id="perfume-imagen" class="product-image" th:src="${perfume.imagenUrl}" alt="Imagen del perfume"
-             style="width: 100%; height: 500px; object-fit: cover;" />
+                <img id="perfume-imagen" class="product-image img-hero-fixed" th:src="${perfume.imagenUrl}" alt="Imagen del perfume" />
             </div>
          </div>
 
@@ -83,7 +82,7 @@
                 </div>
             </div>
             <!-- Botones de acción -->
-            <div class="d-flex gap-3 mt-3 align-items-stretch">
+            <div class="d-flex flex-wrap gap-3 mt-3 align-items-stretch">
                 <form th:action="@{/agregar-a-coleccion}" method="POST">
                     <input type="hidden" name="idPerfume" th:value="${perfume.id}" />
                     <button class="btn btn-primary-custom px-4 h-100" type="submit">Agregar a mi colección</button>

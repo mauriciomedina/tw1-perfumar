@@ -2,6 +2,9 @@ class Sidebar extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
       <aside class="sidebar">
+        <button class="sidebar-close-btn" id="sidebarCloseBtn" aria-label="Cerrar menú" type="button">
+          <span class="material-symbols-outlined">close</span>
+        </button>
         <div class="mb-5">
           <a href="/spring/bienvenida" class="text-decoration-none text-reset">
             <h1 class="brand-title" style="cursor: pointer;">PerfumAR</h1>
@@ -67,8 +70,27 @@ class Sidebar extends HTMLElement {
         } else {
           window.location.href = `/spring/home?familia=${familiaBuscada}`;
         }
+
+        document.body.classList.remove("sidebar-open");
       });
     });
+
+    // CIERRE DEL SIDEBAR EN MOBILE (backdrop + botón X)
+    if (!document.querySelector(".sidebar-backdrop")) {
+      const backdrop = document.createElement("div");
+      backdrop.className = "sidebar-backdrop";
+      document.body.appendChild(backdrop);
+      backdrop.addEventListener("click", () => {
+        document.body.classList.remove("sidebar-open");
+      });
+    }
+
+    const botonCerrar = this.querySelector("#sidebarCloseBtn");
+    if (botonCerrar) {
+      botonCerrar.addEventListener("click", () => {
+        document.body.classList.remove("sidebar-open");
+      });
+    }
 
     // CONTROL DE RUTA, si venis de otra pagina te trae denuevo
     const parametros = new URLSearchParams(window.location.search);

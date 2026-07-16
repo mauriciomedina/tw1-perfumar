@@ -436,7 +436,8 @@ h4,
 }
 
 .card-fragrance .card-img-container {
-  height: 400px;
+  aspect-ratio: 2 / 3;
+  height: auto;
   overflow: hidden;
   position: relative;
   background: #eeeeee;
@@ -877,4 +878,138 @@ footer {
 
 .spacing-y-sm {
   margin-bottom: 16px;
+}
+
+/* ==========================================================================
+   Responsive: Sidebar off-canvas (mobile/tablet)
+   ========================================================================== */
+
+.sidebar-toggle-btn {
+  background: none;
+  border: none;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: var(--primary);
+}
+
+.sidebar-close-btn {
+  display: none;
+  background: none;
+  border: none;
+  align-self: flex-end;
+  margin-bottom: 8px;
+  cursor: pointer;
+  color: var(--primary);
+}
+
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1040;
+}
+
+body.sidebar-open .sidebar-backdrop {
+  display: block;
+}
+
+@media (max-width: 991.98px) {
+  .sidebar {
+    width: min(var(--sidebar-width), 80vw);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1045;
+  }
+
+  body.sidebar-open .sidebar {
+    transform: translateX(0);
+  }
+
+  body.sidebar-open {
+    overflow: hidden;
+  }
+
+  .sidebar-close-btn {
+    display: block;
+  }
+
+  .sidebar .brand-title {
+    font-size: 36px;
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+}
+
+/* ==========================================================================
+   Responsive: Header / search / nav links
+   ========================================================================== */
+
+.header-nav {
+  flex-wrap: wrap;
+  row-gap: 12px;
+}
+
+.search-container .search-input {
+  width: 100%;
+}
+
+.search-container {
+  width: 100%;
+  max-width: 250px;
+}
+
+@media (max-width: 991.98px) {
+  .header-nav {
+    padding: 16px;
+  }
+
+  .header-nav .search-container {
+    max-width: none;
+    flex: 1;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .header-nav > div {
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
+   Responsive: Forms (login / registro)
+   ========================================================================== */
+
+@media (max-width: 575.98px) {
+  .login-container {
+    padding: 40px 16px;
+  }
+
+  .login-card {
+    padding: 32px 24px;
+  }
+
+  .registration-card {
+    padding: 2rem 1.5rem;
+  }
+}
+
+/* ==========================================================================
+   Responsive: Hero images with fixed height on desktop
+   ========================================================================== */
+
+.img-hero-fixed {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+}
+
+@media (max-width: 767.98px) {
+  .img-hero-fixed {
+    height: 320px;
+  }
 }

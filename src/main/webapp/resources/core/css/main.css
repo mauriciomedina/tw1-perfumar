@@ -200,6 +200,9 @@ h4,
   right: 0;
   z-index: 999;
 }
+#currentWeather {
+    white-space: nowrap;
+}
 
 .top-navbar {
   position: sticky;
@@ -983,12 +986,16 @@ body.sidebar-open .sidebar-backdrop {
 @media (max-width: 991.98px) {
   .header-nav {
     padding: 16px;
+    margin-left: 0;
   }
 
   .header-nav .search-container {
     max-width: none;
     flex: 1;
   }
+  .main-content .header-nav {
+  left: 0;
+}
 }
 
 @media (max-width: 575.98px) {
@@ -1029,4 +1036,9 @@ body.sidebar-open .sidebar-backdrop {
   .img-hero-fixed {
     height: 320px;
   }
+}
+@media (max-width: 767.98px) {
+  .p-4 {
+    padding: 2rem !important;
+}
 }

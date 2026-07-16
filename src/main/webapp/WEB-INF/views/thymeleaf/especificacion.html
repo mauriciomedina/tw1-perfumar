@@ -147,7 +147,7 @@
 
                 <div class="mb-3">
                     <label for="comentario" class="form-label fw-bold">Tu comentario</label>
-                    <textarea class="form-control" id="comentario" name="comentario" rows="3" maxlength="1000"
+                    <textarea class="form-control p-2" id="comentario" name="comentario" rows="3" maxlength="1000"
                         placeholder="Contanos qué te pareció esta fragancia..." required></textarea>
                 </div>
 
@@ -162,10 +162,9 @@
             <div th:unless="${#lists.isEmpty(resenas)}">
                 <div th:each="resena : ${resenas}" class="mb-4 pb-3 border-bottom">
                     <div class="d-flex justify-content-between align-items-center mb-1">
-                        <span class="fw-bold" th:text="${resena.usuario != null ? resena.usuario.nombre : 'Usuario'}">Nombre Usuario</span>
+                        <span class="fw-bold" th:text="${resena.usuario != null and !#strings.isEmpty(resena.usuario.nombre) ? resena.usuario.nombre : 'Usuario'}">Nombre Usuario</span>
                         <span class="text-warning" style="letter-spacing: 2px;">
-                            <span th:each="i : ${#numbers.sequence(1, resena.puntuacion)}">★</span><span
-                                th:each="i : ${#numbers.sequence(resena.puntuacion + 1, 5)}">☆</span>
+                            <span th:each="i : ${#numbers.sequence(1, 5)}" th:text="${i <= resena.puntuacion} ? '★' : '☆'"></span>
                         </span>
                     </div>
                     <p class="text-secondary-custom mb-1" th:text="${resena.comentario}">Comentario de la reseña.</p>

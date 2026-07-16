@@ -4,6 +4,13 @@ import com.tallerwebi.dominio.FamiliaOlfativa;
 import com.tallerwebi.dominio.Marca;
 import com.tallerwebi.dominio.Perfume;
 import com.tallerwebi.dominio.RepositorioColeccion;
+import com.tallerwebi.dominio.RepositorioResena;
+import com.tallerwebi.dominio.RepositorioUsuario;
+import com.tallerwebi.dominio.Resena;
+import com.tallerwebi.dominio.Usuario;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -13,11 +20,43 @@ import org.springframework.stereotype.Component;
 @Component
 public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEvent> {
 
-  private RepositorioColeccion repositorioColeccion;
+  private static final String[][] RESENADORES = {
+    { "Martina Gómez", "martina.gomez@perfumar-demo.com" },
+    { "Lucas Fernández", "lucas.fernandez@perfumar-demo.com" },
+    { "Valentina Ríos", "valentina.rios@perfumar-demo.com" },
+  };
+
+  private static final String[] PLANTILLAS_RESENA = {
+    "Compré %s hace poco y ya se convirtió en mi fragancia favorita, dura muchísimo en la piel.",
+    "La proyección de %s es excelente, recibí varios cumplidos apenas me la puse.",
+    "Me encantó %s, es ideal para el uso diario.",
+    "%s tiene una salida increíble, aunque se suaviza un poco rápido igual lo recomiendo.",
+    "Un clásico. %s nunca falla para una salida de noche.",
+    "Esperaba un poco más de %s, la duración no es la mejor pero el aroma es agradable.",
+    "Excelente relación calidad-precio, %s es de los que más uso.",
+    "El frasco de %s es hermoso y el aroma dura todo el día.",
+    "Regalé %s y fue un éxito total, quedaron todos encantados.",
+    "Para mi gusto %s es un poco fuerte al principio, pero se asienta muy bien después de un rato.",
+  };
+
+  // Alineado índice a índice con PLANTILLAS_RESENA para que el puntaje sea coherente con el comentario.
+  private static final int[] PUNTUACIONES = { 5, 5, 5, 4, 5, 3, 4, 5, 5, 4 };
+
+  private final RepositorioColeccion repositorioColeccion;
+  private final RepositorioResena repositorioResena;
+  private final RepositorioUsuario repositorioUsuario;
+  private final List<Perfume> perfumesCreados = new ArrayList<>();
+  private List<Usuario> resenadores;
 
   @Autowired
-  public CargadorDeDatos(RepositorioColeccion repositorioColeccion) {
+  public CargadorDeDatos(
+    RepositorioColeccion repositorioColeccion,
+    RepositorioResena repositorioResena,
+    RepositorioUsuario repositorioUsuario
+  ) {
     this.repositorioColeccion = repositorioColeccion;
+    this.repositorioResena = repositorioResena;
+    this.repositorioUsuario = repositorioUsuario;
   }
 
   @Override
@@ -501,6 +540,8 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
       "Ylang Ylang, Rosa de Damasco, Jazmín, Sándalo"
     );
     /*seguir aca */
+
+    sembrarResenas();
   }
 
   private void crearPerfume(
@@ -520,5 +561,73 @@ public class CargadorDeDatos implements ApplicationListener<ContextRefreshedEven
     perfume.setNotas(notas);
 
     this.repositorioColeccion.guardarPerfume(perfume);
+    this.perfumesCreados.add(perfume);
+  }
+
+  private void sembrarResenas() {
+    this.resenadores = obtenerOCrearResenadores();
+
+    for (int i = 0; i < perfumesCreados.size(); i++) {
+      sembrarResenasDePerfume(perfumesCreados.get(i), i);
+    }
+  }
+
+  private void sembrarResenasDePerfume(Perfume perfume, int indice) {
+    if (!repositorioResena.listarPorPerfume(perfume.getId()).isEmpty()) {
+      return;
+    }
+
+    crearResena(
+      resenadores.get(indice % resenadores.size()),
+      perfume,
+      String.format(PLANTILLAS_RESENA[indice % PLANTILLAS_RESENA.length], perfume.getNombre()),
+      PUNTUACIONES[indice % PUNTUACIONES.length],
+      LocalDate.now().minusDays((indice * 3 + 5) % 60)
+    );
+
+    int segundaPlantilla = (indice + 4) % PLANTILLAS_RESENA.length;
+    crearResena(
+      resenadores.get((indice + 1) % resenadores.size()),
+      perfume,
+      String.format(PLANTILLAS_RESENA[segundaPlantilla], perfume.getNombre()),
+      PUNTUACIONES[segundaPlantilla],
+      LocalDate.now().minusDays((indice * 5 + 11) % 45)
+    );
+  }
+
+  private List<Usuario> obtenerOCrearResenadores() {
+    List<Usuario> resenadores = new ArrayList<>();
+    for (String[] datos : RESENADORES) {
+      Usuario existente = repositorioUsuario.buscar(datos[1]);
+      if (existente != null) {
+        resenadores.add(existente);
+        continue;
+      }
+
+      Usuario nuevo = new Usuario();
+      nuevo.setNombre(datos[0]);
+      nuevo.setEmail(datos[1]);
+      nuevo.setRol("USUARIO");
+      nuevo.setActivo(true);
+      repositorioUsuario.guardar(nuevo);
+      resenadores.add(nuevo);
+    }
+    return resenadores;
+  }
+
+  private void crearResena(
+    Usuario usuario,
+    Perfume perfume,
+    String comentario,
+    Integer puntuacion,
+    LocalDate fecha
+  ) {
+    Resena resena = new Resena();
+    resena.setUsuario(usuario);
+    resena.setPerfume(perfume);
+    resena.setComentario(comentario);
+    resena.setPuntuacion(puntuacion);
+    resena.setFecha(fecha);
+    repositorioResena.guardar(resena);
   }
 }
